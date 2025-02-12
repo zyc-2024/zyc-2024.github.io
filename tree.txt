@@ -61,6 +61,55 @@ F:\DESKTOP\ALL_IN_1\GITHUB\ZYC-2024.GITHUB.IO
 |               ClearSans-Regular-webfont.svg
 |               ClearSans-Regular-webfont.woff
 |               
++---h2o
+|       index.html
+|       
++---ms
+|       index.html
+|       
++---wj
+|   |   1.png
+|   |   20250129.mscz
+|   |   20250210_1.docx
+|   |   20250210_2.docx
+|   |   20250211_1.docx
+|   |   20250212_1.docx
+|   |   break.png
+|   |   disable-update.reg
+|   |   dream.jpg
+|   |   hlm.txt
+|   |   index.html
+|   |   mccur.7z
+|   |   pip.txt
+|   |   README.md
+|   |   rick.png
+|   |   userscript.rar
+|   |   Win…Ë÷√.rar
+|   |   world-political-map.jpg
+|   |   ≥‡±⁄∏≥.txt
+|   |   
+|   \---9860apps
+|           ALGEBRA.g1a
+|           BMPREAD.g1a
+|           CAS.g1a
+|           CASIOPY.g1a
+|           CLOCK.g1a
+|           DIGWATCH.g1a
+|           EDITNEW.g1a
+|           EIGEN.g1a
+|           EIGENMAT.g1a
+|           FTUNE.g1a
+|           GEOMETRY.g1a
+|           HELP.g1a
+|           INSIGHT.g1a
+|           MARIO.g1a
+|           PHYSIUM.g1a
+|           PROB.g1a
+|           SUDOKU.g1a
+|           SYMBOLIX.g1a
+|           TXTREAD.g1a
+|           UNITS.g1a
+|           
 \---wordle
         del.svg
         dict_l.js
