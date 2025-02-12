@@ -1,0 +1,74 @@
+卷 other 的文件夹 PATH 列表
+卷序列号为 561A-FE62
+F:\DESKTOP\ALL_IN_1\GITHUB\ZYC-2024.GITHUB.IO
+|   CNAME
+|   commit.bat
+|   favicon.ico
+|   fpush.bat
+|   gentree.bat
+|   index.html
+|   push.bat
+|   rick.png
+|   tree.txt
+|   
++---ansget
+|       index.html
+|       
++---fe26
+|   |   index.html
+|   |   index_en.html
+|   |   LICENSE.txt
+|   |   
+|   +---images
+|   |       sensorfyi.png
+|   |       stars_bg.jpg
+|   |       stars_bg2.jpg
+|   |       
+|   +---js
+|   |       animframe_polyfill.js
+|   |       application.js
+|   |       bind_polyfill.js
+|   |       classlist_polyfill.js
+|   |       game_manager.js
+|   |       game_manager_zh_CN.js
+|   |       grid.js
+|   |       guide.js
+|   |       html_actuator.js
+|   |       html_actuator_zh_CN.js
+|   |       jquery-1.11.0.min.js
+|   |       keyboard_input_manager.js
+|   |       local_storage_manager.js
+|   |       tile.js
+|   |       
+|   +---meta
+|   |       apple-touch-icon.png
+|   |       
+|   \---style
+|       |   bootstrap.css
+|       |   helpers.scss
+|       |   main.css
+|       |   main.scss
+|       |   
+|       \---fonts
+|               clear-sans.css
+|               ClearSans-Bold-webfont.eot
+|               ClearSans-Bold-webfont.svg
+|               ClearSans-Bold-webfont.woff
+|               ClearSans-Light-webfont.eot
+|               ClearSans-Light-webfont.svg
+|               ClearSans-Light-webfont.woff
+|               ClearSans-Regular-webfont.eot
+|               ClearSans-Regular-webfont.svg
+|               ClearSans-Regular-webfont.woff
+|               
+\---wordle
+        del.svg
+        dict_l.js
+        dict_ml.js
+        dict_s.js
+        enter.svg
+        index.html
+        placeholder
+        script.js
+        style.css
+        
