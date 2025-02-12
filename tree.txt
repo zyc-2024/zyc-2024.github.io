@@ -80,6 +80,7 @@ F:\DESKTOP\ALL_IN_1\GITHUB\ZYC-2024.GITHUB.IO
 |   |   hlm.txt
 |   |   index.html
 |   |   mccur.7z
+|   |   mcpacks.rar
 |   |   pip.txt
 |   |   README.md
 |   |   rick.png
@@ -88,27 +89,105 @@ F:\DESKTOP\ALL_IN_1\GITHUB\ZYC-2024.GITHUB.IO
 |   |   world-political-map.jpg
 |   |   ³à±Ú¸³.txt
 |   |   
-|   \---9860apps
-|           ALGEBRA.g1a
-|           BMPREAD.g1a
-|           CAS.g1a
-|           CASIOPY.g1a
-|           CLOCK.g1a
-|           DIGWATCH.g1a
-|           EDITNEW.g1a
-|           EIGEN.g1a
-|           EIGENMAT.g1a
-|           FTUNE.g1a
-|           GEOMETRY.g1a
-|           HELP.g1a
-|           INSIGHT.g1a
-|           MARIO.g1a
-|           PHYSIUM.g1a
-|           PROB.g1a
-|           SUDOKU.g1a
-|           SYMBOLIX.g1a
-|           TXTREAD.g1a
-|           UNITS.g1a
+|   +---9860apps
+|   |       ALGEBRA.g1a
+|   |       BMPREAD.g1a
+|   |       CAS.g1a
+|   |       CASIOPY.g1a
+|   |       CLOCK.g1a
+|   |       DIGWATCH.g1a
+|   |       EDITNEW.g1a
+|   |       EIGEN.g1a
+|   |       EIGENMAT.g1a
+|   |       FTUNE.g1a
+|   |       GEOMETRY.g1a
+|   |       HELP.g1a
+|   |       INSIGHT.g1a
+|   |       MARIO.g1a
+|   |       PHYSIUM.g1a
+|   |       PROB.g1a
+|   |       SUDOKU.g1a
+|   |       SYMBOLIX.g1a
+|   |       TXTREAD.g1a
+|   |       UNITS.g1a
+|   |       
+|   +---bat
+|   |       cmcp.bat
+|   |       compile c++14 O2.bat
+|   |       HASHSUM.bat
+|   |       hhhhot.bat
+|   |       zycedge.bat
+|   |       
+|   +---cpp
+|   |       a.cpp
+|   |       base64.cpp
+|   |       beep.cpp
+|   |       bizzardv1.7.0.cpp
+|   |       chenbal.cpp
+|   |       cpolite.cpp
+|   |       dgncx v1.0.11.5 release (2).cpp
+|   |       dgncx v1.0.11.5 release.cpp
+|   |       dgncx_fixed (1).cpp
+|   |       dgncx_fixed.cpp
+|   |       dgncx_v1.0.9.cpp
+|   |       FJVirusGame.cpp
+|   |       game.cpp
+|   |       game2.cpp
+|   |       hhhhot.cpp
+|   |       line.cpp
+|   |       main.cpp
+|   |       mc.cpp
+|   |       read.cpp
+|   |       realease_CN.cpp
+|   |       run.cpp
+|   |       running.cpp
+|   |       RussianBlocks_v1.1.cpp
+|   |       SCPS1-16.cpp
+|   |       SCPS1-22.cpp
+|   |       SCPS1-24.cpp
+|   |       SCPS1-28.cpp
+|   |       Snake_v1.3.1.cpp
+|   |       std (1).cpp
+|   |       std (2).cpp
+|   |       std (3).cpp
+|   |       std (4).cpp
+|   |       std (5).cpp
+|   |       std (6).cpp
+|   |       std (7).cpp
+|   |       std (8).cpp
+|   |       std.cpp
+|   |       Untitled-1 (2).cpp
+|   |       Untitled-1.cpp
+|   |       Untitled-1.txt
+|   |       Untitled-1ÎÒ.cpp
+|   |       Untitled-2.cpp
+|   |       Untitled-2.exe
+|   |       Untitled-3.cpp
+|   |       Untitled-3.exe
+|   |       Untitled-4.cpp
+|   |       Untitled-4.exe
+|   |       Untitled1.cpp
+|   |       ÎªÃñ³ýº¦[×ªÔØ+¸Ä±à(Ä§¸ÄÍæ¹£°æ)].cpp
+|   |       Î´ÃüÃû1.cpp
+|   |       
+|   \---python
+|           2.py
+|           4c03.py
+|           7.py
+|           apple.py
+|           lg.py
+|           main.py
+|           meatpi_bisr_v1A (2).py
+|           meatpi_bisr_v1A.py
+|           meat¦Ð.py
+|           P1177.py
+|           s501.py
+|           T432587.py
+|           T464218.py
+|           T464220py.py
+|           test (2).py
+|           test.py
+|           u1.py
 |           
 \---wordle
         del.svg
