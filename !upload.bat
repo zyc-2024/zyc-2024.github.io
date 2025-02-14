@@ -6,5 +6,6 @@ git commit -m "Add files via git"
 echo ---------------------- [AutoUpload] Pushing ----------------------
 git push | set ifSussess = %1
 echo [AutoUpload] Successfully executed "git push"
+timeout /t 3
 cls
 goto f
