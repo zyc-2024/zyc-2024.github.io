@@ -1,1 +1,0 @@
-tree /f /a F:\Desktop\all_in_1\github\zyc-2024.github.io > tree.txt
