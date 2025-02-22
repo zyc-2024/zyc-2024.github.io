@@ -981,22 +981,15 @@ if (获取网址参数('主题')) {
 }
 
 &lt;/script&gt;
-&lt;div id="主体"&gt;
-      &lt;div id="标题"&gt;文章生成器&lt;a href="https://github.com/zyc-2024/zyc-2024.github.io/issues/new" rel="nofollow"&gt;
-        &lt;img src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1" alt="链接挂了点我修复"
-            style="max-width: 100%;"&gt;
-    &lt;/a&gt;&lt;/div&gt;
-      &lt;div id="主题"&gt;
-        &lt;span&gt;主题&lt;/span&gt;
-        &lt;input id="文章主题"&gt;&lt;/input&gt;
-        &lt;br&gt;
-        &lt;span&gt;长度&lt;/span&gt;
-        &lt;input id="长度"&gt;&lt;/input&gt;
-        &lt;br&gt;
-        &lt;button onclick="生成文章()"&gt;生成&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div id="文章"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;声明&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;声明文字&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;strong&amp;gt;&lt;/span&gt;请勿将生成的文章用于正规用途&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;p&amp;gt;&amp;lt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;链接&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;声明.txt&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;声明&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="tool"></category></entry><entry><title></title><link href="https://zyc2024.com.cn/b/20240101/000000.html" rel="alternate"></link><published>2024-01-01T00:00:00+01:00</published><updated>2024-01-01T00:00:00+01:00</updated><author><name>zyc</name></author><id>tag:zyc2024.com.cn,2024-01-01:/b/20240101/000000.html</id><summary type="html">&lt;SUMMARY&gt;</summary><content type="html">&lt;p&gt;&lt;PASSAGE&gt;&lt;/p&gt;</content><category term="&lt;CATEGORY&gt;"></category><category term="&lt;TAG1&gt;"></category><category term="&lt;TAG2&gt;"></category></entry></feed>
+&lt;div id="主体"&gt;&lt;/div&gt;
+
+&lt;h2&gt;文章生成器 &lt;a href="https://github.com/zyc-2024/zyc-2024.github.io/issues/new"&gt;&lt;img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;h3&gt;主题&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;主题&lt;/strong&gt; &lt;input id="文章主题"&gt;&lt;/input&gt;&lt;br&gt;
+&lt;strong&gt;长度&lt;/strong&gt; &lt;input id="长度"&gt;&lt;/input&gt;&lt;br&gt;
+&lt;button onclick="生成文章()"&gt;生成&lt;/button&gt;&lt;/p&gt;
+&lt;div id="文章"&gt;&lt;/div&gt;
+
+&lt;h3&gt;声明&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;请勿将生成的文章用于正规用途&lt;/strong&gt;&lt;br&gt;
+&lt;a href="声明.txt"&gt;声明&lt;/a&gt;&lt;/p&gt;</content><category term="tool"></category></entry><entry><title></title><link href="https://zyc2024.com.cn/b/20240101/000000.html" rel="alternate"></link><published>2024-01-01T00:00:00+01:00</published><updated>2024-01-01T00:00:00+01:00</updated><author><name>zyc</name></author><id>tag:zyc2024.com.cn,2024-01-01:/b/20240101/000000.html</id><summary type="html">&lt;SUMMARY&gt;</summary><content type="html">&lt;p&gt;&lt;PASSAGE&gt;&lt;/p&gt;</content><category term="&lt;CATEGORY&gt;"></category><category term="&lt;TAG1&gt;"></category><category term="&lt;TAG2&gt;"></category></entry></feed>
