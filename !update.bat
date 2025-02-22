@@ -1,10 +1,8 @@
 @echo off
 :f
-echo ------------------[AutoUpload] Generating Blogs ------------------
-pelican content -s publishconf.py -t Flex --ignore-cache
 echo ----------------------[AutoUpload] Commiting----------------------
 git add -A
-git commit -m "Updated some blogs"
+git commit -m "Updated or added some blogs"
 echo -----------------------[AutoUpload] Pushing-----------------------
 git push
 echo [AutoUpload] Successfully executed "git push"
