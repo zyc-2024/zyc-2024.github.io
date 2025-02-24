@@ -6,7 +6,8 @@ Author: zyc2024 --&gt;
 
 &lt;!-- &lt;PASSAGE&gt; --&gt;
 
-&lt;p&gt;简介：给E听说的题目获取答案，妈妈再也不用担心我看不见“answer”了！&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/zyc-2024/zyc-2024.github.io/issues/new"&gt;&lt;img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"&gt;&lt;/a&gt;
+简介：给E听说的题目获取答案，妈妈再也不用担心我看不见“answer”了！&lt;/p&gt;
 &lt;p&gt;使用步骤：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -45,6 +46,7 @@ Author: zyc2024 --&gt;
 &lt;/script&gt;</content><category term="tool"></category></entry><entry><title>狗屁不通文章生成器</title><link href="https://zyc2024.com.cn/b/20240101/000001.html" rel="alternate"></link><published>2024-01-01T00:00:01+01:00</published><updated>2024-01-01T00:00:01+01:00</updated><author><name>zyc</name></author><id>tag:zyc2024.com.cn,2024-01-01:/b/20240101/000001.html</id><summary type="html"></summary><content type="html">&lt;!-- Tags: &lt;TAG1&gt;,&lt;TAG2&gt; --&gt;
 &lt;!-- Summary: &lt;SUMMARY&gt; --&gt;
 
+&lt;p&gt;&lt;a href="https://github.com/zyc-2024/zyc-2024.github.io/issues/new"&gt;&lt;img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;!-- &lt;PASSAGE&gt; --&gt;
 &lt;script&gt;
 let _hmt = window._hmt || [];
@@ -317,14 +319,19 @@ if (获取网址参数('主题')) {
 
 &lt;/script&gt;
 &lt;div id="主体"&gt;&lt;/div&gt;
+&lt;div id="标题"&gt;文章生成器 [链接挂了点我修复](https://github.com/zyc-2024/zyc-2024.github.io/issues/new)&lt;/div&gt;
+&lt;p&gt;&lt;img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"&gt;&lt;/p&gt;
+&lt;div id="主题"&gt;
+**主题**  
+&lt;input id="文章主题"&gt;&lt;/input&gt;  
+**长度**  
+&lt;input id="长度"&gt;&lt;/input&gt;  
+&lt;button onclick="生成文章()"&gt;生成&lt;/button&gt;
+&lt;/div&gt;
 
-&lt;h2&gt;文章生成器 &lt;a href="https://github.com/zyc-2024/zyc-2024.github.io/issues/new"&gt;&lt;img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;h3&gt;主题&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;主题&lt;/strong&gt; &lt;input id="文章主题"&gt;&lt;/input&gt;&lt;br&gt;
-&lt;strong&gt;长度&lt;/strong&gt; &lt;input id="长度"&gt;&lt;/input&gt;&lt;br&gt;
-&lt;button onclick="生成文章()"&gt;生成&lt;/button&gt;&lt;/p&gt;
 &lt;div id="文章"&gt;&lt;/div&gt;
 
-&lt;h3&gt;声明&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;请勿将生成的文章用于正规用途&lt;/strong&gt;&lt;br&gt;
-&lt;a href="声明.txt"&gt;声明&lt;/a&gt;&lt;/p&gt;</content><category term="tool"></category></entry></feed>
+&lt;div id="声明"&gt;
+## 请勿将生成的文章用于正规用途
+[声明](声明.txt)
+&lt;/div&gt;</content><category term="tool"></category></entry></feed>
