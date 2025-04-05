@@ -112,7 +112,6 @@
     <!-- Tags: <TAG1>,<TAG2> -->
 <!-- Summary: <SUMMARY> -->
 
-<p><a href="https://github.com/zyc-2024/zyc-2024.github.io/issues/new"><img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"></a></p>
 <!-- <PASSAGE> -->
 <script>
 let _hmt = window._hmt || [];
@@ -375,7 +374,7 @@ function 生成文章(){
 
     let 排版 = '<div>' + 文章.join('</div><div>') + '</div>';
     $('#文章').innerHTML = 排版;
-    $('#声明文字').style.display = 'block'
+    $('#声明文字').style.display = 'block';
 }
 
 if (获取网址参数('主题')) {
@@ -385,22 +384,16 @@ if (获取网址参数('主题')) {
 
 </script>
 <div id="主体"></div>
-<div id="标题">文章生成器 [链接挂了点我修复](https://github.com/zyc-2024/zyc-2024.github.io/issues/new)</div>
 <p><img alt="链接挂了点我修复" src="https://badges.toozhao.com/badges/01HBT1ZG0CHC2SXQACKQ1Y5DXK/blue.svg?i=1"></p>
-<div id="主题">
-**主题**  
-<input id="文章主题"></input>  
-**长度**  
-<input id="长度"></input>  
-<button onclick="生成文章()">生成</button>
-</div>
-
+<p><strong>主题</strong><br>
+<input id="文章主题"></input>  </p>
+<p><strong>长度</strong><br>
+<input id="长度"></input>  </p>
+<p><button onclick="生成文章()">生成</button></p>
 <div id="文章"></div>
 
-<div id="声明">
-## 请勿将生成的文章用于正规用途
-[声明](声明.txt)
-</div>
+<h2>请勿将生成的文章用于正规用途</h2>
+<p><a href="声明.txt">声明</a></p>
   </div>
   <div class="tag-cloud">
     <p>
