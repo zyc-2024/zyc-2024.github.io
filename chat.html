@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>chat</title>
+</head>
+
+<body>
+    <button onclick="reload()">reload</button>
+    <table>
+        <thead>
+            <tr>
+                <th>user</th>
+                <th>time</th>
+                <th>content</th>
+            </tr>
+        </thead>
+        <tbody id="chat"></tbody>
+    </table>
+    <script>
+        function getsha() {
+            $.ajax({
+  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/data.json',
+  crossDomain: true,
+  contentType: 'application/json;charset=UTF-8'
+}).done(function(response) {
+  console.log(response);
+});
+            return d.sha;
+        }
+        function upload(user, time, content) {
+            fetch('https://gitee.com/api/v5/repos/zyc-2024/chat/contents/data.json', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    'access_token': '19f7b43872c256d52d1bc71cbd2d0ffa',
+                    'content': getb64(user, time, content),
+                    'sha': getsha(),
+                    'message': 'chat autoupdate'
+                })
+            });
+        }
+        function getb64(user, time, content) {
+            //I'll write this function later
+        }
+
+        function reload() {
+            var content;
+            fetch('https://gitee.com/api/v5/repos/zyc-2024/chat/git/blobs/' + getsha(), {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            }).then((response) => response.json()).then((data) => (content = data));
+            document.getElementById('chat').innerHTML = '';
+            var msg = JSON.parse(atob(content.content)).msg;
+            for (let i in msg) {
+                document.getElementById("chat").innerHTML += ("<tr><td>" + msg[i].name + "</td><td>" + msg[i].time + "</td><td>" + msg[i].content + "</td></tr>")
+            }
+        }
+        reload();
+        //chatkey 19f7b43872c256d52d1bc71cbd2d0ffa
+        //sha     ee9f2dcfd1b7840c2a483727566ea60ac11e5b74
+    </script>
+    </body>
+
+</html>
