@@ -1,8 +1,11 @@
 var eee;
-function upload(
-	ucontent = '{"msg":[{"name":"zyc2024","time":"20250504","content":"test3"},{"name":"zyc2024","time":"20250505","content":"test4mc"}]}'
-) {
+var name=prompt("请输入你的名字");
+
+function upload() {
 	var sha;
+	document.getElementById("button").disabled = true;
+	setTimeout(function () {
+		document.getElementById("button").disabled = false;},5000);
 	$.ajax({
 		url: "https://gitee.com/api/v5/repos/zyc-2024/chat/raw/data.json",
 		crossDomain: true,
@@ -80,7 +83,6 @@ function reload() {
 		document.getElementById("chat").innerHTML = "";
 		if (content.msg) {
 			var msg = content.msg;
-			// 处理 msg
 		} else {
 			console.error("response 中没有 msg 属性");
 			var msg=[];
@@ -101,4 +103,3 @@ function reload() {
 reload();
 
 //chatkey 19f7b43872c256d52d1bc71cbd2d0ffa
-//samples {"msg":[{"name":"zyc2024","time":"20250504","content":"test3"},{"name":"zyc2024","time":"20250505","content":"test4mc"}]}
