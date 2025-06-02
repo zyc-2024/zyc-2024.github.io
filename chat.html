@@ -39,7 +39,7 @@
 		<meta name="author" content="zyc2024" />
 		<meta name="description" content="chatting website by zyc2024" />
 
-		<title>zyc2024的聊天网页 V1.4.8</title>
+		<title>zyc2024的聊天网页 V1.5.1</title>
 	</head>
 	<body class="light-theme">
 		<aside>
@@ -159,6 +159,12 @@
 						var ch = getch();
 
 						function upload() {
+							let c;
+							const iframe = document.getElementsByClassName('mde')[0];
+							iframe.contentWindow.postMessage('message to iframe', 'https://zyc2024.com.cn');
+							window.addEventListener('message', function (e) {
+    							c=e.data;
+							});
 							var sha;
 							document.getElementById("button").disabled = true;
 							setTimeout(function () {
@@ -182,7 +188,7 @@
 								r.msg[r.msg.length] = {
 									name: namee,
 									time: gettime(),
-									content: $(".content")[0].value,
+									content: c
 								};
 								$.get(
 									"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
@@ -350,16 +356,8 @@
 						</thead>
 						<tbody id="chat"></tbody>
 					</table>
-					<p>
-						<textarea
-							class="content"
-							placeholder="content"
-							required
-							style="height: 65px; width: 337px"
-							onkeydown="javascript:enter(key);"
-						></textarea>
-					</p>
-					<p>
+					<p><!--从洛谷云剪上抄过来的awa-->
+						<iframe class="mde" src="https://zyc2024.com.cn/md/md.html" width="1158px" height="502px" frameborder="0" scrolling="no"></iframe>
 						<br />
 						<button id="button" onclick="upload()">发送</button>
 						<button onclick="reload()">刷新</button>
