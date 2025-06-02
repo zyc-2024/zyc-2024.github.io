@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>zyc's website - tool</title><link href="https://zyc2024.com.cn/" rel="alternate"></link><link href="https://zyc2024.com.cn/feeds/tool.atom.xml" rel="self"></link><id>https://zyc2024.com.cn/</id><updated>2025-02-16T18:04:29+01:00</updated><entry><title>E听说答案获取器（2024年10月）</title><link href="https://zyc2024.com.cn/b/20250216/180429.html" rel="alternate"></link><published>2025-02-16T18:04:29+01:00</published><updated>2025-02-16T18:04:29+01:00</updated><author><name>zyc</name></author><id>tag:zyc2024.com.cn,2025-02-16:/b/20250216/180429.html</id><summary type="html"></summary><content type="html">&lt;!-- Tags: &lt;TAG1&gt;,&lt;TAG2&gt; --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>zyc2024的网站^_^ - tool</title><link href="https://zyc2024.com.cn/" rel="alternate"></link><link href="https://zyc2024.com.cn/feeds/tool.atom.xml" rel="self"></link><id>https://zyc2024.com.cn/</id><updated>2025-02-16T18:04:29+01:00</updated><entry><title>E听说答案获取器（2024年10月）</title><link href="https://zyc2024.com.cn/b/20250216/180429.html" rel="alternate"></link><published>2025-02-16T18:04:29+01:00</published><updated>2025-02-16T18:04:29+01:00</updated><author><name>zyc2024</name></author><id>tag:zyc2024.com.cn,2025-02-16:/b/20250216/180429.html</id><summary type="html"></summary><content type="html">&lt;!-- Tags: &lt;TAG1&gt;,&lt;TAG2&gt; --&gt;
 &lt;!-- Slug: ansget
 Author: zyc2024 --&gt;
 &lt;!-- Summary: &lt;SUMMARY&gt; --&gt;
@@ -43,7 +43,7 @@ Author: zyc2024 --&gt;
     function a(d) {
         document.getElementById("tj").innerText = ("The answer is " + d + " !");
     }
-&lt;/script&gt;</content><category term="tool"></category></entry><entry><title>狗屁不通文章生成器</title><link href="https://zyc2024.com.cn/b/20240101/000001.html" rel="alternate"></link><published>2024-01-01T00:00:01+01:00</published><updated>2024-01-01T00:00:01+01:00</updated><author><name>zyc</name></author><id>tag:zyc2024.com.cn,2024-01-01:/b/20240101/000001.html</id><summary type="html"></summary><content type="html">&lt;!-- Tags: &lt;TAG1&gt;,&lt;TAG2&gt; --&gt;
+&lt;/script&gt;</content><category term="tool"></category></entry><entry><title>狗屁不通文章生成器</title><link href="https://zyc2024.com.cn/b/20240101/000001.html" rel="alternate"></link><published>2024-01-01T00:00:01+01:00</published><updated>2024-01-01T00:00:01+01:00</updated><author><name>zyc2024</name></author><id>tag:zyc2024.com.cn,2024-01-01:/b/20240101/000001.html</id><summary type="html"></summary><content type="html">&lt;!-- Tags: &lt;TAG1&gt;,&lt;TAG2&gt; --&gt;
 &lt;!-- Summary: &lt;SUMMARY&gt; --&gt;
 
 &lt;!-- &lt;PASSAGE&gt; --&gt;
