@@ -2,25 +2,33 @@
 <html>
 	<head>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script src="bast64.min.js"></script>
+		<script src="base64.min.js"></script>
+		<title>chat</title>
+	</head>
+
+	<body>
 		<script>
-			function dset(key,val){
-    localStorage.setItem(key,val);
-}
-function dget(key){
-    var data=localStorage.getItem(key);
-    var dataObj=JSON.parse(data);
-        return data;
-}
-			// function getname(){
-			// 		if(document.cookie==""){
-			// 			document.cookie="n="+prompt("请输入你的名字")+";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=2147483647";
-			// 		}
-			// 	return document.cookie.split('=')[1]
-			// 	}
+			function dset(key, val) {
+				localStorage.setItem(key, val);
+			}
+			function dget(key) {
+				var data = localStorage.getItem(key);
+				var dataObj = JSON.parse(data);
+				return data;
+			}
+			function getname() {
+				if (document.cookie == "") {
+					document.cookie =
+						"n=" +
+						prompt("请输入你的名字") +
+						";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=9223372036854775807";
+				}
+				return document.cookie.split("=")[1].split(";")[0];
+			}
+
 			var eee;
-			let name0 =localStorage.getItem("n");
-			var namee = name0 == "" ? prompt("请输入你的名字") : name0;
+			// let name0 = localStorage.getItem("n");
+			// var namee = name0 == "" ? prompt("请输入你的名字") : name0;
 			function gettime(time = +new Date()) {
 				var date = new Date(time + 8 * 3600 * 1000);
 				return date
@@ -34,13 +42,19 @@ function dget(key){
 				document.cookie = a = prompt("请输入你的新名字");
 				document.getElementById("nname").innerText =
 					"现在的用户名：" + a;
-					localStorage.setItem("n",a);
-					// document.cookie="n="+a+";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=2147483647";
-				namee=a;
+				localStorage.setItem("n", a);
+				// document.cookie="n="+a+";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=2147483647";
+				namee = a;
 			}
 			function getch() {
 				let c = window.location.search.substring(1);
 				return c == "" ? "main" : c;
+			}
+			let namee = (name0 = "Anonymous");
+			if (document.location.protocol == "file:") {
+				namee = name0 = prompt("请输入你的名字");
+			} else {
+				namee = name0 = getname();
 			}
 			var ch = getch();
 			function upload() {
@@ -97,6 +111,7 @@ function dget(key){
 						});
 					});
 				});
+				document.getElementsByClassName("content").innerText = "";
 			}
 			var rrrr;
 			function reload() {
@@ -178,32 +193,36 @@ function dget(key){
 					reload();
 				});
 			});
-
 			//chatkey 19f7b43872c256d52d1bc71cbd2d0ffa
 			/*$.ajax({
-  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/xxx.json',
-  crossDomain: true,access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
-  method: 'post',
-  contentType: 'application/json;charset=UTF-8',
-  data: JSON.stringify({
-	'content': 'xxx',
-	'message': 'xxx'
-  })
-}).done(function(response) {
-  console.log(response);
-});*/
+			  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/xxx.json',
+			  crossDomain: true,access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+			  method: 'post',
+			  contentType: 'application/json;charset=UTF-8',
+			  data: JSON.stringify({
+				'content': 'xxx',
+				'message': 'xxx'
+			  })
+			}).done(function(response) {
+			  console.log(response);
+			});*/
 			/*$.ajax({
-  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/xxx.json',
-  crossDomain: true,access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
-  contentType: 'application/json;charset=UTF-8'
-}).done(function(response) {
-  console.log(response);
-});*/
+			  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/xxx.json',
+			  crossDomain: true,access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+			  contentType: 'application/json;charset=UTF-8'
+			}).done(function(response) {
+			  console.log(response);
+			});*/
+			function cch(event, m = 0) {
+				if (event == "") {
+				} else {
+					event.preventDefault();
+				}
+				let v = m ? "" : document.getElementById("ch").value;
+				document.location.href =
+					document.location.href.split("?")[0] + "?" + v;
+			}
 		</script>
-		<title>chat</title>
-	</head>
-
-	<body>
 		<table>
 			<thead>
 				<tr>
@@ -219,11 +238,20 @@ function dget(key){
 			placeholder="content"
 			required
 			style="height: 65px; width: 337px"
+			onkeydown="javascript:enter(key);"
 		></textarea>
 		<br />
 		<button id="button" onclick="upload()">发送</button>
 		<button onclick="reload()">刷新</button>
 		<button onclick="cname()">改名</button>
+		<button onclick="cch(0,1)">回到主页</button>
+		<form onsubmit="cch(event)">
+			<input id="ch" placeholder="输入你想去的频道" /><button
+				onclick="javascript:document.location.href=document.location.href.split('?')[0]+'?'+document.getElementById('ch').value;"
+			>
+				go!
+			</button>
+		</form>
 		<div id="nname"></div>
 		<script>
 			document.getElementById("nname").innerText =
