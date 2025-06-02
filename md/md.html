@@ -6,7 +6,7 @@
     // 收到父页面请求时，主动将内容发回去
     if (e.data === 'message to iframe') {
             var content = document.getElementsByClassName("mp-preview-content")[0]?.innerHTML || "";
-            window.parent.postMessage(content.replaceAll("\n","<br>").replaceAll(/ data-line="[0-9]+"/g, '').slice(3,-4), '*');
+            window.parent.postMessage(content.replaceAll("\n","<br>").replaceAll(/ data-line="[0-9]+"/g, ''), '*');
     }
 });
     </script>
