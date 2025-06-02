@@ -111,42 +111,251 @@
   <div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://zyc2024.com.cn/chat/base64.min.js"></script>
-<script>function dset(key,val){localStorage.setItem(key,val)}function dget(key){var data=localStorage.getItem(key);var dataObj=JSON.parse(data);return data}function getname(){if(document.cookie==""){document.cookie="n="+prompt("请输入你的名字")+";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=9223372036854775807"}return document.cookie.split("=")[1].split(";")[0]}var eee;function gettime(time=+new Date()){var date=new Date(time+8*3600*1000);return date.toJSON().substr(0,19).replace("T"," ").replaceAll("-","")}function cname(){let a;document.cookie=a=prompt("请输入你的新名字");document.getElementById("nname").innerText="现在的用户名："+a;localStorage.setItem("n",a);namee=a}function getch(){let c=window.location.search.substring(1);return c==""?"main":c}let namee=(name0="Anonymous");if(document.location.protocol=="file:"){namee=name0=prompt("请输入你的名字")}else{namee=name0=getname()}var ch=getch();function upload(){var sha;document.getElementById("button").disabled=true;setTimeout(function(){document.getElementById("button").disabled=false},5000);$.ajax({url:"https://gitee.com/api/v5/repos/zyc-2024/chat/raw/"+ch+".json",crossDomain:true,contentType:"application/json;charset=UTF-8",data:{access_token:"19f7b43872c256d52d1bc71cbd2d0ffa",},}).done(function(response){r=JSON.parse(response);r.msg[r.msg.length]={name:namee,time:gettime(),content:$(".content")[0].value,};$.get("https://gitee.com/api/v5/repos/zyc-2024/chat/contents/"+ch+".json",{access_token:"19f7b43872c256d52d1bc71cbd2d0ffa",}).done(function(response){eee=response.sha;sha=response.sha;var t=new Date();$.ajax({url:"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/"+ch+".json",crossDomain:true,method:"PUT",contentType:"application/json;charset=UTF-8",data:JSON.stringify({access_token:"19f7b43872c256d52d1bc71cbd2d0ffa",content:Base64.encode(JSON.stringify(r)),sha:sha,message:namee+" @ "+t.getTime(),}),}).done(function(response){reload()})})});document.getElementsByClassName("content").innerText=""}var rrrr;function reload(){var content;$.ajax({url:"https://gitee.com/api/v5/repos/zyc-2024/chat/raw/"+ch+".json",crossDomain:true,contentType:"application/json;charset=UTF-8",data:{access_token:"19f7b43872c256d52d1bc71cbd2d0ffa",},}).done(function(response){content=rrrr=JSON.parse(response);document.getElementById("chat").innerHTML="";if(content.msg){var msg=content.msg}else{console.error("response 中没有 msg 属性");var msg=[]}for(let i in msg){document.getElementById("chat").innerHTML+="<tr><td>"+msg[i].name+"</td><td>"+msg[i].time+"</td><td>"+msg[i].content+"</td></tr>"}})}setTimeout(reload(),200);$.ajax({url:"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/"+ch+".json",crossDomain:true,data:{access_token:"19f7b43872c256d52d1bc71cbd2d0ffa",},contentType:"application/json;charset=UTF-8",}).done(function(response){let cnt=Base64.encode(JSON.stringify({msg:[{name:namee,time:new Date().toISOString().replace("T"," ").replace("Z","").split(".")[0].replaceAll("-",""),content:"created "+ch,},],}));console.log("create");$.ajax({url:"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/"+ch+".json",crossDomain:true,method:"post",contentType:"application/json;charset=UTF-8",data:JSON.stringify({content:cnt,access_token:"19f7b43872c256d52d1bc71cbd2d0ffa",message:namee+" created "+ch,}),}).done(function(response){reload()})});function cch(event,m=0){if(event==""){}else{event.preventDefault()}let v=m?"":document.getElementById("ch").value;document.location.href=document.location.href.split("?")[0]+"?"+v}</script>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;table&gt;</span>
-<span class="w">        </span><span class="nt">&lt;thead&gt;</span>
-<span class="w">            </span><span class="nt">&lt;tr&gt;</span>
-<span class="w">                </span><span class="nt">&lt;th&gt;</span>name<span class="nt">&lt;/th&gt;</span>
-<span class="w">                </span><span class="nt">&lt;th&gt;</span>time<span class="nt">&lt;/th&gt;</span>
-<span class="w">                </span><span class="nt">&lt;th&gt;</span>content<span class="nt">&lt;/th&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/tr&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/thead&gt;</span>
-<span class="w">        </span><span class="nt">&lt;tbody</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;chat&quot;</span><span class="nt">&gt;&lt;/tbody&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/table&gt;</span>
-<span class="w">    </span><span class="nt">&lt;textarea</span>
-<span class="w">        </span><span class="na">class=</span><span class="s">&quot;content&quot;</span>
-<span class="w">        </span><span class="na">placeholder=</span><span class="s">&quot;content&quot;</span>
-<span class="w">        </span><span class="err">required</span>
-<span class="w">        </span><span class="na">style=</span><span class="s">&quot;height: 65px; width: 337px&quot;</span>
-<span class="w">        </span><span class="na">onkeydown=</span><span class="s">&quot;javascript:enter(key);&quot;</span>
-<span class="w">    </span><span class="nt">&gt;&lt;/textarea&gt;</span>
-<span class="w">    </span><span class="nt">&lt;br</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;button</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;button&quot;</span><span class="w"> </span><span class="na">onclick=</span><span class="s">&quot;upload()&quot;</span><span class="nt">&gt;</span>发送<span class="nt">&lt;/button&gt;</span>
-<span class="w">    </span><span class="nt">&lt;button</span><span class="w"> </span><span class="na">onclick=</span><span class="s">&quot;reload()&quot;</span><span class="nt">&gt;</span>刷新<span class="nt">&lt;/button&gt;</span>
-<span class="w">    </span><span class="nt">&lt;button</span><span class="w"> </span><span class="na">onclick=</span><span class="s">&quot;cname()&quot;</span><span class="nt">&gt;</span>改名<span class="nt">&lt;/button&gt;</span>
-<span class="w">    </span><span class="nt">&lt;button</span><span class="w"> </span><span class="na">onclick=</span><span class="s">&quot;cch(0,1)&quot;</span><span class="nt">&gt;</span>回到主页<span class="nt">&lt;/button&gt;</span>
-<span class="w">    </span><span class="nt">&lt;form</span><span class="w"> </span><span class="na">onsubmit=</span><span class="s">&quot;cch(event)&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;input</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;ch&quot;</span><span class="w"> </span><span class="na">placeholder=</span><span class="s">&quot;输入你想去的频道&quot;</span><span class="w"> </span><span class="nt">/&gt;&lt;button</span>
-<span class="w">            </span><span class="na">onclick=</span><span class="s">&quot;javascript:document.location.href=document.location.href.split(&#39;?&#39;)[0]+&#39;?&#39;+document.getElementById(&#39;ch&#39;).value;&quot;</span>
-<span class="w">        </span><span class="nt">&gt;</span>
-<span class="w">            </span>go!
-<span class="w">        </span><span class="nt">&lt;/button&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/form&gt;</span>
-<span class="w">    </span><span class="nt">&lt;div</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;nname&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-<span class="w">    </span><span class="nt">&lt;script&gt;</span>
-<span class="w">        </span>document.getElementById(&quot;nname&quot;).innerText<span class="w"> </span>=
-<span class="w">            </span>&quot;现在的用户名：&quot;<span class="w"> </span>+<span class="w"> </span>namee;
-<span class="w">    </span><span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+<script>
+function dset(key, val) {
+    localStorage.setItem(key, val);
+}
+
+function dget(key) {
+    var data = localStorage.getItem(key);
+    var dataObj = JSON.parse(data);
+    return data;
+}
+
+function getname() {
+    if (document.cookie == "") {
+        document.cookie =
+            "n=" +
+            prompt("请输入你的名字") +
+            ";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=9223372036854775807";
+    }
+    return document.cookie.split("=")[1].split(";")[0];
+}
+
+var eee;
+// let name0 = localStorage.getItem("n");
+// var namee = name0 == "" ? prompt("请输入你的名字") : name0;
+function gettime(time = +new Date()) {
+    var date = new Date(time + 8 * 3600 * 1000);
+    return date
+        .toJSON()
+        .substr(0, 19)
+        .replace("T", " ")
+        .replaceAll("-", "");
+}
+
+function cname() {
+    let a;
+    document.cookie = a = prompt("请输入你的新名字");
+    document.getElementById("nname").innerText =
+        "现在的用户名：" + a;
+    localStorage.setItem("n", a);
+    // document.cookie="n="+a+";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=2147483647";
+    namee = a;
+}
+
+function getch() {
+    let c = window.location.search.substring(1);
+    return c == "" ? "main" : c;
+}
+let namee = (name0 = "Anonymous");
+if (document.location.protocol == "file:") {
+    namee = name0 = prompt("请输入你的名字");
+} else {
+    namee = name0 = getname();
+}
+var ch = getch();
+
+function upload() {
+    var sha;
+    document.getElementById("button").disabled = true;
+    setTimeout(function() {
+        document.getElementById("button").disabled = false;
+    }, 5000);
+    $.ajax({
+        url: "https://gitee.com/api/v5/repos/zyc-2024/chat/raw/" +
+            ch +
+            ".json",
+        crossDomain: true,
+        contentType: "application/json;charset=UTF-8",
+        data: {
+            access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+        },
+    }).done(function(response) {
+        r = JSON.parse(response);
+        r.msg[r.msg.length] = {
+            name: namee,
+            time: gettime(),
+            content: $(".content")[0].value,
+        };
+        $.get(
+            "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+            ch +
+            ".json", {
+                access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+            }
+        ).done(function(response) {
+            eee = response.sha;
+            sha = response.sha;
+            var t = new Date();
+            $.ajax({
+                url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+                    ch +
+                    ".json",
+                crossDomain: true,
+                method: "PUT",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify({
+                    access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+                    content: Base64.encode(JSON.stringify(r)),
+                    sha: sha,
+                    message: namee + " @ " + t.getTime(),
+                }),
+            }).done(function(response) {
+                reload();
+            });
+        });
+    });
+    document.getElementsByClassName("content").innerText = "";
+}
+var rrrr;
+
+function reload() {
+    var content;
+    $.ajax({
+        url: "https://gitee.com/api/v5/repos/zyc-2024/chat/raw/" +
+            ch +
+            ".json",
+        crossDomain: true,
+        contentType: "application/json;charset=UTF-8",
+        data: {
+            access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+        },
+    }).done(function(response) {
+        content = rrrr = JSON.parse(response);
+        document.getElementById("chat").innerHTML = "";
+        if (content.msg) {
+            var msg = content.msg;
+        } else {
+            console.error("response 中没有 msg 属性");
+            var msg = [];
+        }
+        for (let i in msg) {
+            document.getElementById("chat").innerHTML +=
+                "<tr><td>" +
+                msg[i].name +
+                "</td><td>" +
+                msg[i].time +
+                "</td><td>" +
+                msg[i].content +
+                "</td></tr>";
+        }
+    });
+}
+setTimeout(reload(), 200);
+$.ajax({
+    url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+        ch +
+        ".json",
+    crossDomain: true,
+    data: {
+        access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+    },
+    contentType: "application/json;charset=UTF-8",
+}).done(function(response) {
+    let cnt = Base64.encode(
+        JSON.stringify({
+            msg: [{
+                name: namee,
+                time: new Date()
+                    .toISOString()
+                    .replace("T", " ")
+                    .replace("Z", "")
+                    .split(".")[0]
+                    .replaceAll("-", ""),
+                content: "created " + ch,
+            }, ],
+        })
+    );
+    console.log("create");
+    $.ajax({
+        url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+            ch +
+            ".json",
+        crossDomain: true,
+        method: "post",
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify({
+            content: cnt,
+            access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+            message: namee + " created " + ch,
+        }),
+    }).done(function(response) {
+        reload();
+    });
+});
+//chatkey 19f7b43872c256d52d1bc71cbd2d0ffa
+/*$.ajax({
+  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/xxx.json',
+  crossDomain: true,access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+  method: 'post',
+  contentType: 'application/json;charset=UTF-8',
+  data: JSON.stringify({
+    'content': 'xxx',
+    'message': 'xxx'
+  })
+}).done(function(response) {
+  console.log(response);
+});*/
+/*$.ajax({
+  url: 'https://gitee.com/api/v5/repos/zyc-2024/chat/contents/xxx.json',
+  crossDomain: true,access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+  contentType: 'application/json;charset=UTF-8'
+}).done(function(response) {
+  console.log(response);
+});*/
+function cch(event, m = 0) {
+    if (event == "") {} else {
+        event.preventDefault();
+    }
+    let v = m ? "" : document.getElementById("ch").value;
+    document.location.href =
+        document.location.href.split("?")[0] + "?" + v;
+}</script>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>time</th>
+<th>content</th>
+</tr>
+</thead>
+<tbody id="chat"></tbody>
+</table>
+<p><textarea
+class="content"
+placeholder="content"
+required
+style="height: 65px; width: 337px"
+onkeydown="javascript:enter(key);"
+></textarea></p>
+<p><br />
+<button id="button" onclick="upload()">发送</button>
+<button onclick="reload()">刷新</button>
+<button onclick="cname()">改名</button>
+<button onclick="cch(0,1)">回到主页</button></p>
+<form onsubmit="cch(event)">
+<input id="ch" placeholder="输入你想去的频道" /><button
+onclick="javascript:document.location.href=document.location.href.split('?')[0]+'?'+document.getElementById('ch').value;"
+>
+go!
+</button>
+</form>
+<div id="nname"></div>
+<script>
+document.getElementById("nname").innerText =
+"现在的用户名：" + namee;
+</script>
   </div>
   <div class="tag-cloud">
     <p>
