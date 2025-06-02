@@ -89,13 +89,7 @@
 		<main>
 			<article class="single">
 				<header>
-					<h1 id="zhi-ding-liao-tian-v148">[置顶]聊天 V1.4.8</h1>
-					<p>
-						Posted on 周三 01 一月 3000 in
-						<a href="https://zyc2024.com.cn/category/misc.html"
-							>misc</a
-						>
-					</p>
+					<h1 id="zhi-ding-liao-tian-v148">聊天 V1.5.1</h1>
 				</header>
 
 				<div>
@@ -158,77 +152,93 @@
 						}
 						var ch = getch();
 
+						window.mdeContent = "";
+						function receiveMdeContent(e) {
+							// 只接受来自本地md.html的消息
+							if (
+								e.origin === window.location.origin ||
+								e.origin === "null"
+							) {
+								window.mdeContent = e.data;
+								if (window._uploadCallback) {
+									window._uploadCallback();
+									window._uploadCallback = null;
+								}
+							}
+						}
+						window.addEventListener('message', receiveMdeContent);
+
 						function upload() {
-							let c;
-							const iframe = document.getElementsByClassName('mde')[0];
-							iframe.contentWindow.postMessage('message to iframe', 'https://zyc2024.com.cn');
-							window.addEventListener('message', function (e) {
-    							c=e.data;
-							});
-							var sha;
+							let iframe = document.getElementsByClassName('mde')[0];
 							document.getElementById("button").disabled = true;
 							setTimeout(function () {
-								document.getElementById(
-									"button"
-								).disabled = false;
+								document.getElementById("button").disabled = false;
 							}, 5000);
-							$.ajax({
-								url:
-									"https://gitee.com/api/v5/repos/zyc-2024/chat/raw/" +
-									ch +
-									".json",
-								crossDomain: true,
-								contentType: "application/json;charset=UTF-8",
-								data: {
-									access_token:
-										"19f7b43872c256d52d1bc71cbd2d0ffa",
-								},
-							}).done(function (response) {
-								r = JSON.parse(response);
-								r.msg[r.msg.length] = {
-									name: namee,
-									time: gettime(),
-									content: c
-								};
-								$.get(
-									"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+
+							// 通过postMessage请求iframe内容
+							window._uploadCallback = function () {
+								let c = window.mdeContent;
+								var sha;
+								$.ajax({
+									url:
+										"https://gitee.com/api/v5/repos/zyc-2024/chat/raw/" +
 										ch +
 										".json",
-									{
+									crossDomain: true,
+									contentType: "application/json;charset=UTF-8",
+									data: {
 										access_token:
 											"19f7b43872c256d52d1bc71cbd2d0ffa",
-									}
-								).done(function (response) {
-									eee = response.sha;
-									sha = response.sha;
-									var t = new Date();
-									$.ajax({
-										url:
-											"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+									},
+								}).done(function (response) {
+									r = JSON.parse(response);
+									r.msg[r.msg.length] = {
+										name: namee,
+										time: gettime(),
+										content: c
+									};
+									$.get(
+										"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
 											ch +
 											".json",
-										crossDomain: true,
-										method: "PUT",
-										contentType:
-											"application/json;charset=UTF-8",
-										data: JSON.stringify({
+										{
 											access_token:
 												"19f7b43872c256d52d1bc71cbd2d0ffa",
-											content: Base64.encode(
-												JSON.stringify(r)
-											),
-											sha: sha,
-											message:
-												namee + " @ " + t.getTime(),
-										}),
-									}).done(function (response) {
-										reload();
+										}
+									).done(function (response) {
+										eee = response.sha;
+										sha = response.sha;
+										var t = new Date();
+										$.ajax({
+											url:
+												"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
+												ch +
+												".json",
+											crossDomain: true,
+											method: "PUT",
+											contentType:
+												"application/json;charset=UTF-8",
+											data: JSON.stringify({
+												access_token:
+													"19f7b43872c256d52d1bc71cbd2d0ffa",
+												content: Base64.encode(
+													JSON.stringify(r)
+												),
+												sha: sha,
+												message:
+													namee + " @ " + t.getTime(),
+											}),
+										}).done(function (response) {
+											reload();
+										});
 									});
 								});
-							});
-							document.getElementsByClassName(
-								"content"
-							).innerText = "";
+								document.getElementsByClassName(
+									"content"
+								).innerText = "";
+							};
+							// 发送请求到iframe
+							iframe.contentWindow.postMessage('message to iframe', '*');
 						}
 						var rrrr;
 
@@ -357,7 +367,7 @@
 						<tbody id="chat"></tbody>
 					</table>
 					<p><!--从洛谷云剪上抄过来的awa-->
-						<iframe class="mde" src="https://zyc2024.com.cn/md/md.html" width="1158px" height="502px" frameborder="0" scrolling="no"></iframe>
+						<iframe class="mde" src="content/md/md.html" width="1158px" height="502px" frameborder="0" scrolling="no"></iframe>
 						<br />
 						<button id="button" onclick="upload()">发送</button>
 						<button onclick="reload()">刷新</button>
@@ -384,3 +394,4 @@
 		</main>
 	</body>
 </html>
+<!--V1.5.1 用了洛谷的Markdown，真好用！-->
