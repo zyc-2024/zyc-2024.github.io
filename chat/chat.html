@@ -89,19 +89,16 @@
 				</header>
 
 				<div>
-					<script src="https://zyc2024.com.cn/chat/jquery.min.js"></script>
-					<script src="https://zyc2024.com.cn/chat/base64.min.js"></script>
-					<script src="https://zyc2024.com.cn/chat/marked.min.js"></script>
-					<script src="https://zyc2024.com.cn/chat/MarkdownPalettes.css"></script>
-					<script src="https://zyc2024.com.cn/chat/MarkdownPalettes.common.js"></script>
-					<script src="https://zyc2024.com.cn/chat/markdown-palettes.js"></script>
-					<script src="https://zyc2024.com.cn/chat/Markdown-palettes.min.js"></script>
-					<script src="https://zyc2024.com.cn/chat/markdown-palettes.css"></script>
+					<script src="jquery.min.js"></script>
+					<script src="base64.min.js"></script>
+					<script src="marked.min.js"></script>
+					<script src="MarkdownPalettes.css"></script>
+					<script src="MarkdownPalettes.common.js"></script>
+					<script src="markdown-palettes.js"></script>
+					<script src="Markdown-palettes.min.js"></script>
+					<script src="markdown-palettes.css"></script>
 					<script>
-						function tick() {
-							reload();
-							setTimeout(tick, 1000);
-						}
+						
 						function dset(key, val) {
 							localStorage.setItem(key, val);
 						}
@@ -120,8 +117,6 @@
 						}
 
 						var eee;
-						// let name0 = localStorage.getItem("n");
-						// var namee = name0 == "" ? prompt("请输入你的名字") : name0;
 						function gettime(time = +new Date()) {
 							var date = new Date(time + 8 * 3600 * 1000);
 							return date.toJSON().substr(0, 19).replace("T", " ").replaceAll("-", "");
@@ -132,7 +127,6 @@
 							document.cookie = a = prompt("请输入你的新名字");
 							document.getElementById("nname").innerText = "现在的用户名：" + a;
 							localStorage.setItem("n", a);
-							// document.cookie="n="+a+";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=2147483647";
 							namee = a;
 						}
 
@@ -147,19 +141,6 @@
 							namee = name0 = getname();
 						}
 						var ch = getch();
-
-						window.mdeContent = "";
-						function receiveMdeContent(e) {
-							// 只接受来自本地md.html的消息
-							if (e.origin === window.location.origin || e.origin === "null" || 1 == 1) {
-								window.mdeContent = e.data;
-								if (window._uploadCallback) {
-									window._uploadCallback();
-									window._uploadCallback = null;
-								}
-							}
-						}
-						window.addEventListener("message", receiveMdeContent);
 
 						function upload() {
 							document.getElementById("button").disabled = true;
@@ -216,7 +197,6 @@
 							document.getElementsByClassName("content").innerText = "";
 						}
 						var rrrr;
-
 						function reload() {
 							var content;
 							$.ajax({
@@ -241,10 +221,7 @@
 									document.getElementById("chat").innerHTML += "<br><div class='cr'><span><div class='cn'>" + msg[i].name + "</div><div class='ct'>" + msg[i].time + "</div></span><div class='cc'><p>" + msg[i].content + "</p></div></div>";
 								}
 								// document.getElementById("chat").innerHTML += "</table>";
-								window.scroll({
-									top: document.body.scrollHeight,
-									behavior: "smooth",
-								});
+								
 							});
 						}
 						setTimeout(reload(), 200);
@@ -256,6 +233,10 @@
 							},
 							contentType: "application/json;charset=UTF-8",
 						}).done(function (response) {
+							window.scroll({
+									top: document.body.scrollHeight,
+									behavior: "smooth",
+								});
 							let cnt = Base64.encode(
 								JSON.stringify({
 									msg: [
@@ -309,7 +290,10 @@
 							}
 							let v = m ? "" : document.getElementById("ch").value;
 							document.location.href = document.location.href.split("?")[0] + "?" + v;
-						}
+						}function tick() {
+							reload();
+							setTimeout(tick, 1000);
+						}tick();
 					</script>
 					<div id="chat"></div>
 					<!--从洛谷云剪上抄过来的awa-->
