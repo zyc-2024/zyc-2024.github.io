@@ -11,11 +11,7 @@ function uf() {
 	reader.onload = function () {
 		console.log("ok");
 		$.ajax({
-			url:
-				"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/f/" +
-				m5 +
-				"/" +
-				name,
+			url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/f/" + m5 + "/" + name,
 			crossDomain: true,
 			method: "post",
 			contentType: "application/json;charset=UTF-8",
@@ -25,6 +21,7 @@ function uf() {
 				message: namee + " uploaded " + name,
 			}),
 		}).done(function (response) {
+			console.log("m5"+m5+"   na"+name);
 			upload((ff = 1), (m5 = m5), (na = name));
 		});
 	};
@@ -41,10 +38,7 @@ function dget(key) {
 
 function getname() {
 	if (document.cookie == "") {
-		document.cookie =
-			"n=" +
-			prompt("请输入你的名字") +
-			";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=9223372036854775807";
+		document.cookie = "n=" + prompt("请输入你的名字") + ";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT;max-age=9223372036854775807";
 	}
 	return document.cookie.split("=")[1].split(";")[0];
 }
@@ -76,11 +70,7 @@ if (document.location.protocol == "file:") {
 var ch = getch();
 
 function upload(ff = 0, m5 = undefined, na = undefined) {
-	if (
-		document.getElementById("f").files.length === 0 &&
-		document.getElementsByClassName("mp-preview-content")[0].innerText ===
-			""
-	) {
+	if (document.getElementById("f").files.length === 0 && document.getElementsByClassName("mp-preview-content")[0].innerText === "") {
 		alert("内容不能为空！");
 		return;
 	}
@@ -89,18 +79,11 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 			?.innerHTML.replaceAll(">\n<", "><")
 			.replaceAll("\n", "<br>")
 			.replaceAll(/ data-line="[0-9]+"/g, "") || "";
-	if (document.getElementById("f").files.length !== 0) {
-		uf();
+	if (document.getElementById("f").files.length !== 0 && ff === 0) {
+		uf();return 0;
 	}
 	if (ff) {
-		c =
-			"发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" +
-			m5 +
-			"%2F" +
-			na +
-			"?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" +
-			na +
-			"</a>";
+		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
 	}
 	document.getElementById("button").disabled = true;
 	setTimeout(function () {
@@ -116,34 +99,22 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 			access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
 		},
 	}).done(function (response) {
+		console.log(c);
+		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
 		r = JSON.parse(response);
 		r.msg[r.msg.length] = {
 			name: namee,
 			time: gettime(),
-			content: ff?"发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" +
-			m5 +
-			"%2F" +
-			na +
-			"?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" +
-			na +
-			"</a>":c,
+			content: c,
 		};
-		$.get(
-			"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
-				ch +
-				".json",
-			{
-				access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
-			}
-		).done(function (response) {
+		$.get("https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" + ch + ".json", {
+			access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
+		}).done(function (response) {
 			eee = response.sha;
 			sha = response.sha;
 			var t = new Date();
 			$.ajax({
-				url:
-					"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
-					ch +
-					".json",
+				url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" + ch + ".json",
 				crossDomain: true,
 				method: "PUT",
 				contentType: "application/json;charset=UTF-8",
@@ -183,22 +154,14 @@ function reload() {
 		// document.getElementById("chat").innerHTML +=
 		// 	"<table><tr><th>用户名</th><th>时间</th><th>内容</th></tr>";
 		for (let i in msg) {
-			document.getElementById("chat").innerHTML +=
-				"<br><div class='cr'><span><div class='cn'>" +
-				msg[i].name +
-				"</div><div class='ct'>" +
-				msg[i].time +
-				"</div></span><div class='cc'><p>" +
-				msg[i].content +
-				"</p></div></div>";
+			document.getElementById("chat").innerHTML += "<br><div class='cr'><span class='ca'><div class='cn'>" + msg[i].name + "</div><div class='ct'>" + msg[i].time + "</div></span><div class='cc'><p>" + msg[i].content + "</p></div></div>";
 		}
 		// document.getElementById("chat").innerHTML += "</table>";
 	});
 }
 setTimeout(reload(), 200);
 $.ajax({
-	url:
-		"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" + ch + ".json",
+	url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" + ch + ".json",
 	crossDomain: true,
 	data: {
 		access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
@@ -214,12 +177,7 @@ $.ajax({
 			msg: [
 				{
 					name: namee,
-					time: new Date()
-						.toISOString()
-						.replace("T", " ")
-						.replace("Z", "")
-						.split(".")[0]
-						.replaceAll("-", ""),
+					time: new Date().toISOString().replace("T", " ").replace("Z", "").split(".")[0].replaceAll("-", ""),
 					content: "created " + ch,
 				},
 			],
@@ -227,10 +185,7 @@ $.ajax({
 	);
 	console.log("create");
 	$.ajax({
-		url:
-			"https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" +
-			ch +
-			".json",
+		url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/" + ch + ".json",
 		crossDomain: true,
 		method: "post",
 		contentType: "application/json;charset=UTF-8",
@@ -270,10 +225,11 @@ function cch(event, m = 0) {
 	}
 	let v = m ? "main" : document.getElementById("ch").value;
 	document.location.href = document.location.href.split("#")[0] + "#" + v;
-    document.location.reload();
+	document.location.reload();
 }
 function tick() {
 	reload();
 	setTimeout(tick, 5000);
 }
 tick();
+
