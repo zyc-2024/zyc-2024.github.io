@@ -82,7 +82,7 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 	if (document.getElementById("f").files.length !== 0 && ff === 0) {
 		uf();return 0;
 	}
-	if (ff) {
+	if (ff || document.getElementById("f").files.length !== 0) {
 		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
 	}
 	document.getElementById("button").disabled = true;
@@ -99,8 +99,9 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 			access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
 		},
 	}).done(function (response) {
+		if(document.getElementById("f").files.length !== 0){
 		console.log(c);
-		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
+		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";}
 		r = JSON.parse(response);
 		r.msg[r.msg.length] = {
 			name: namee,
