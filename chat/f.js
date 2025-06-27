@@ -1,31 +1,3 @@
-function uf() {
-	var selectedFile = document.getElementById("f").files[0]; //获取读取的File对象
-	var name = selectedFile.name; //读取选中文件的文件名
-	var size = selectedFile.size; //读取选中文件的大小
-	console.log("文件名:" + name + "  大小：" + size);
-
-	var reader = new FileReader(); //这里是核心！！！读取操作就是由它完成的。
-	FileReader.readAsDataURL(selectedFile); //读取文件的内容
-	//this.result
-	let m5 = md5(reader.result).substring(0, 8);
-	reader.onload = function () {
-		console.log("ok");
-		$.ajax({
-			url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/f/" + m5 + "/" + name,
-			crossDomain: true,
-			method: "post",
-			contentType: "application/json;charset=UTF-8",
-			data: JSON.stringify({
-				content: Base64.encode(reader.result),
-				access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
-				message: namee + " uploaded " + name,
-			}),
-		}).done(function (response) {
-			console.log("m5" + m5 + "   na" + name);
-			upload((ff = 1), (m5 = m5), (na = name));
-		});
-	};
-}
 function dset(key, val) {
 	localStorage.setItem(key, val);
 }
@@ -69,7 +41,7 @@ if (document.location.protocol == "file:") {
 }
 var ch = getch();
 
-function upload(ff = 0, m5 = undefined, na = undefined) {
+function upload() {
 	if (document.getElementById("f").files.length === 0 && document.getElementsByClassName("mp-preview-content")[0].innerText === "") {
 		alert("内容不能为空！");
 		return;
@@ -80,13 +52,13 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 			.replaceAll("\n", "<br>")
 			.replaceAll(/ data-line="[0-9]+"/g, "")
 			.replaceAll("</p><br>", "</p>") || "";
-	if (document.getElementById("f").files.length !== 0 && ff === 0) {
-		uf();
-		return 0;
-	}
-	if (ff || document.getElementById("f").files.length !== 0) {
-		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
-	}
+	// if (document.getElementById("f").files.length !== 0 && ff === 0) {
+	// 	uf();
+	// 	return 0;
+	// }
+	// if (ff || document.getElementById("f").files.length !== 0) {
+	// 	c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
+	// }
 	document.getElementById("button").disabled = true;
 	setTimeout(function () {
 		document.getElementById("button").disabled = false;
@@ -101,10 +73,10 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 			access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
 		},
 	}).done(function (response) {
-		if (document.getElementById("f").files.length !== 0) {
-			console.log(c);
-			c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
-		}
+		// if (document.getElementById("f").files.length !== 0) {
+		// 	console.log(c);
+		// 	c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
+		// }
 		r = JSON.parse(response);
 		r.msg[r.msg.length] = {
 			name: namee,
