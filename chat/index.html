@@ -9,7 +9,12 @@
 			body {
 				background-color: rgb(239, 239, 239);
 			}
-			.cr {
+			.crow {
+				vertical-align: middle;
+				scroll-margin-top: 3.5rem;
+
+				--left-side-offset: 64px;
+				width: 768px;
 				background-color: rgb(255, 255, 255);
 				border-bottom: 1.4px solid rgb(52, 152, 219);
 				border-bottom-left-radius: 4px;
@@ -27,23 +32,23 @@
 				scroll-margin-top: 56px;
 				text-size-adjust: 100%;
 			}
-			.cn {
+			.cname {
 				margin-left: 20px;
 				margin-top: 5px;
 				font-size: x-large;
 				font-weight: bold;
 				color: #595959;
 			}
-			.ct {
+			.ctime {
 				font-size: small + 3px;
 				color: #bcbcbc;
 			}
-			.cc {
+			.ccontent {
 				margin-left: 30px;
 				/* text-align: center; */
 				vertical-align: middle;
 			}
-			.ca {
+			.call {
 				background-color: rgb(251, 251, 251);
 			}
 		</style>
@@ -57,19 +62,16 @@
 		<div>
 			<script src="jquery.min.js"></script>
 			<script src="base64.min.js"></script>
-<!-- 			<script src="marked.min.js"></script> -->
 			<script src="MarkdownPalettes.css"></script>
 			<script src="MarkdownPalettes.common.js"></script>
-<!-- 			<script src="markdown-palettes.js"></script> -->
 			<script src="markdown-palettes.min.js"></script>
-<!-- 			<script src="markdown-palettes.css"></script> -->
 			<script src="f.js"></script>
 			<script src="md5.js"></script>
 			<div id="chat"></div>
 			<!--从洛谷云剪上抄过来的awa-->
 			<br />
-<!-- 			上传文件（有文件时不会发送编辑器里的消息）： -->
-<!-- 			<input type="file" id="f" /> -->
+			上传文件（有文件时不会发送编辑器里的消息）：
+			<input type="file" id="f" />
 			<script src="markdown-palettes.js"></script>
 			<link rel="stylesheet" href="markdown-palettes.css" />
 			<div style="height: 400px">
@@ -93,4 +95,3 @@
 	</body>
 </html>
 <!--V1.5.1 用了洛谷的Markdown，真好用！-->
-

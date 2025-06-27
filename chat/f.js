@@ -5,7 +5,7 @@ function uf() {
 	console.log("文件名:" + name + "  大小：" + size);
 
 	var reader = new FileReader(); //这里是核心！！！读取操作就是由它完成的。
-	reader.readAsText(selectedFile); //读取文件的内容
+	FileReader.readAsDataURL(selectedFile); //读取文件的内容
 	//this.result
 	let m5 = md5(reader.result).substring(0, 8);
 	reader.onload = function () {
@@ -21,7 +21,7 @@ function uf() {
 				message: namee + " uploaded " + name,
 			}),
 		}).done(function (response) {
-			console.log("m5"+m5+"   na"+name);
+			console.log("m5" + m5 + "   na" + name);
 			upload((ff = 1), (m5 = m5), (na = name));
 		});
 	};
@@ -78,9 +78,11 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 		$(".mp-preview-content")[0]
 			?.innerHTML.replaceAll(">\n<", "><")
 			.replaceAll("\n", "<br>")
-			.replaceAll(/ data-line="[0-9]+"/g, "") || "";
+			.replaceAll(/ data-line="[0-9]+"/g, "")
+			.replaceAll("</p><br>", "</p>") || "";
 	if (document.getElementById("f").files.length !== 0 && ff === 0) {
-		uf();return 0;
+		uf();
+		return 0;
 	}
 	if (ff || document.getElementById("f").files.length !== 0) {
 		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
@@ -99,9 +101,10 @@ function upload(ff = 0, m5 = undefined, na = undefined) {
 			access_token: "19f7b43872c256d52d1bc71cbd2d0ffa",
 		},
 	}).done(function (response) {
-		if(document.getElementById("f").files.length !== 0){
-		console.log(c);
-		c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";}
+		if (document.getElementById("f").files.length !== 0) {
+			console.log(c);
+			c = "发送了一个文件：<a href='https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + m5 + "%2F" + na + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa'>" + na + "</a>";
+		}
 		r = JSON.parse(response);
 		r.msg[r.msg.length] = {
 			name: namee,
@@ -155,7 +158,7 @@ function reload() {
 		// document.getElementById("chat").innerHTML +=
 		// 	"<table><tr><th>用户名</th><th>时间</th><th>内容</th></tr>";
 		for (let i in msg) {
-			document.getElementById("chat").innerHTML += "<br><div class='cr'><span class='ca'><div class='cn'>" + msg[i].name + "</div><div class='ct'>" + msg[i].time + "</div></span><div class='cc'><p>" + msg[i].content + "</p></div></div>";
+			document.getElementById("chat").innerHTML += "<br><div class='crow'><span class='call'><div class='cname'>" + msg[i].name + "</div><div class='ctime'>" + msg[i].time + "</div></span><div class='ccontent'><p>" + msg[i].content + "</p></div></div>";
 		}
 		// document.getElementById("chat").innerHTML += "</table>";
 	});
