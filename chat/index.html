@@ -54,12 +54,9 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				/* height: 200px; */
-				/* width: 600px;
-				height: 100px;
-				border: 1px solid #000;
-				vertical-align: middle;
-				display: table-cell; */
+			}
+			h1 {
+				text-align: center;
 			}
 		</style>
 		<meta name="author" content="zyc2024" />
@@ -77,15 +74,27 @@
 			<script src="markdown-palettes.min.js"></script>
 			<script src="f.js"></script>
 			<script src="md5.js"></script>
-			<article class="chat">
-				<div id="chat"></div>
-				<br />
-				上传文件（有文件时不会发送编辑器里的消息）：
-				<input type="file" id="f" />
-				<div style="height: 400px">
-					<div id="editor"></div>
-				</div>
-			</article>
+			<div class="chat">
+				<article>
+					<div id="chat"></div>
+					<br />
+					上传文件（有文件时不会发送编辑器里的消息）：
+					<input type="file" id="f" />
+					<div style="height: 400px">
+						<div id="editor"></div>
+					</div>
+					<br />
+					<button id="button" onclick="javascript:getch()=='main'||getch()=='changelog'?alert('不能在这些频道里发消息awa，换个频道吧'):upload()">发送</button>
+					<button onclick="javascript:reload()">刷新</button>
+					<button onclick="javascript:cname()">改名</button>
+					<button onclick="javascript:cch(0,1)">回到主页</button>
+					<form onsubmit="cch(event)"><input id="ch" placeholder="输入你想去的频道" /><button onclick="javascript:document.location.href=document.location.href.split('#')[0]+'#'+document.getElementById('ch').value;document.location.reload();">go!</button></form>
+					<div id="nname"></div>
+					<script>
+						document.getElementById("nname").innerText = "现在的用户名：" + namee;
+					</script>
+				</article>
+			</div>
 			<!--从洛谷云剪上抄过来的awa-->
 
 			<script src="markdown-palettes.js"></script>
@@ -93,16 +102,6 @@
 
 			<script>
 				var editor = new MarkdownPalettes("#editor");
-			</script>
-			<br />
-			<button id="button" onclick="javascript:getch()=='main'||getch()=='changelog'?alert('不能在这些频道里发消息awa，换个频道吧'):upload()">发送</button>
-			<button onclick="javascript:reload()">刷新</button>
-			<button onclick="javascript:cname()">改名</button>
-			<button onclick="javascript:cch(0,1)">回到主页</button>
-			<form onsubmit="cch(event)"><input id="ch" placeholder="输入你想去的频道" /><button onclick="javascript:document.location.href=document.location.href.split('#')[0]+'#'+document.getElementById('ch').value;document.location.reload();">go!</button></form>
-			<div id="nname"></div>
-			<script>
-				document.getElementById("nname").innerText = "现在的用户名：" + namee;
 			</script>
 		</div>
 	</body>
