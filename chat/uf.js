@@ -61,9 +61,14 @@ function upf() {
 					content: b64ab,
 					message: "u[" + file.name + "]s[" + sc(file.size) + "]m[" + md5 + "]",
 				}),
-			}).success(function (response) {
-				console.log(response);
-				l.innerHTML = "上传成功！要引用这个文件，复制下面的代码到聊天框：<pre><code>[" + file.name + "https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + md5.slice(0,6) + "%2F" + encodeURIComponent(file.name) + ")</code></pre>";
+				success: function (response) {
+					console.log(response);
+					l.innerHTML = "上传成功！要引用这个文件，复制下面的代码到聊天框：<pre><code>[" + file.name + "https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + md5.slice(0,6) + "%2F" + encodeURIComponent(file.name) + ")</code></pre>";
+				},
+				error: function (xhr, status, error) {
+					console.error("上传失败：", status, error);
+					l.innerHTML = "上传失败！你再试试？<br>错误信息：" + xhr.responseText;
+				}
 			});
 		});
 	};
