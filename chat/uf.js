@@ -46,13 +46,17 @@ function upf() {
 		alert("没文件你传什么传？");
 		return;
 	}
+	if (file.size >= 104857600) {
+		// 100MB
+		alert("文件太大了，不能超过100MB！");
+	}
 	var fr = new FileReader();
 	fr.readAsArrayBuffer(file);
 	fr.onload = function () {
 		var b64ab = fb64(fr.result);
-		fmd5(file).then((md5) => {  
+		fmd5(file).then((md5) => {
 			$.ajax({
-				url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/f%2F" + md5.slice(0,6) + "%2F" + encodeURIComponent(file.name),
+				url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/f%2F" + md5.slice(0, 6) + "%2F" + encodeURIComponent(file.name),
 				crossDomain: true,
 				method: "post",
 				contentType: "application/json",
@@ -63,12 +67,12 @@ function upf() {
 				}),
 				success: function (response) {
 					console.log(response);
-					l.innerHTML = "上传成功！要引用这个文件，复制下面的代码到聊天框：<pre><code>[" + file.name + "](https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + md5.slice(0,6) + "%2F" + encodeURIComponent(file.name) + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa)</code></pre>";
+					l.innerHTML = "上传成功！要引用这个文件，复制下面的代码到聊天框：<pre><code>[" + file.name + "](https://gitee.com/api/v5/repos/zyc-2024/chat/raw/f%2F" + md5.slice(0, 6) + "%2F" + encodeURIComponent(file.name) + "?access_token=19f7b43872c256d52d1bc71cbd2d0ffa)</code></pre>";
 				},
 				error: function (xhr, status, error) {
 					console.error("上传失败：", status, error);
 					l.innerHTML = "上传失败！你再试试？<br>错误信息：" + xhr.responseText;
-				}
+				},
 			});
 		});
 	};
