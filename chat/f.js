@@ -42,7 +42,7 @@ if (document.location.protocol == "file:") {
 var ch = getch();
 
 function upload() {
-	if (document.getElementById("f").files.length === 0 && document.getElementsByClassName("mp-preview-content")[0].innerText === "") {
+	if (document.getElementsByClassName("mp-preview-content")[0].innerText === "") {
 		alert("内容不能为空！");
 		return;
 	}
