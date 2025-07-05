@@ -4,8 +4,7 @@
 		<script src="jquery.min.js"></script>
 		<script src="base64.min.js"></script>
 		<script src="md5.js"></script>
-		<script src="crypto-js.min.js"></script>
-		<script src="uf.js"></script>
+		<script src="crypto-js.js"></script>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="HandheldFriendly" content="True" />
@@ -22,6 +21,21 @@
 			h1 {
 				text-align: center;
 			}
+			.b {
+				background-color: rgb(0, 119, 255);
+				border: 1px solid rgb(0, 0, 0);
+				color: rgb(255, 255, 255);
+				font-size: large;
+				border-radius: 5px;
+				padding: 5px;
+				cursor: pointer;
+				display: block;
+				margin: 0 auto;
+			}
+			#s {
+				display: block;
+				margin: 0 auto;
+			}
 		</style>
 		<meta name="author" content="zyc2024" />
 		<meta name="description" content="file uploading website, for chatting please goto .." />
@@ -32,16 +46,16 @@
 		<h1>文件上传（供聊天使用）</h1>
 		<div>
 			<div class="a">
-				<!-- l for log; s for size; i for input; u for upload; -->
 				<article>
 					上传文件：
-					<input type="file" id="i" />
-					<br /><button id="u">上传</button>
-					<div id="s"></div>
+					<input type="file" id="i" onchange="javascript:udf();" />
 					<br />
+					<div id="s"></div>
+					<button id="u" class="b" onclick="javascript:upf()">上传</button>
 					<div id="l"></div>
 				</article>
 			</div>
 		</div>
+		<script src="uf.js"></script>
 	</body>
 </html>
