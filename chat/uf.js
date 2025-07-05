@@ -50,7 +50,7 @@ function upf() {
 	fr.readAsArrayBuffer(file);
 	fr.onload = function () {
 		var b64ab = fb64(fr.result);
-		fmd5(file).then((md5) => {
+		fmd5(file).then((md5) => {  
 			$.ajax({
 				url: "https://gitee.com/api/v5/repos/zyc-2024/chat/contents/f%2F" + md5.slice(0,6) + "%2F" + encodeURIComponent(file.name),
 				crossDomain: true,
