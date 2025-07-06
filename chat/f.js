@@ -30,7 +30,7 @@ function cname() {
 }
 
 function getch() {
-	let c = window.location.hash.substring(1);
+	let c = window.location.search.substring(1);
 	return c == "" ? "main" : c;
 }
 let namee = (name0 = "Anonymous");
@@ -200,7 +200,7 @@ function cch(event, m = 0) {
 		event.preventDefault();
 	}
 	let v = m ? "main" : document.getElementById("ch").value;
-	document.location.href = document.location.href.split("#")[0] + "#" + v;
+	document.location.href = document.location.href.split("?")[0] + "?" + v;
 	document.location.reload();
 }
 function tick() {
