@@ -36,6 +36,28 @@
 				display: block;
 				margin: 0 auto;
 			}
+			#i {
+				padding: 8px 12px;
+				border: 1px solid #0077ff;
+				border-radius: 5px;
+				background-color: #fff;
+				color: #333;
+				font-size: 16px;
+				transition: border-color 0.2s, box-shadow 0.2s;
+				box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+				outline: none;
+				margin: 10px 0;
+				width: 100%;
+				max-width: 250px;
+			}
+			.l1{
+				display: flex;
+				width:250px;
+				border: 1px solid #000;
+				word-wrap:break-word;
+				overflow: hidden;
+				word-break:break-all;
+			}
 		</style>
 		<meta name="author" content="zyc2024" />
 		<meta name="description" content="file uploading website, for chatting please goto .." />
@@ -43,7 +65,7 @@
 		<title>zyc2024的聊天网页 V1.8</title>
 	</head>
 	<body>
-		<h1>文件上传（供聊天使用）</h1>
+		<h1>文件上传</h1>
 		<div>
 			<div class="a">
 				<article>
@@ -52,7 +74,7 @@
 					<br />
 					<div id="s"></div>
 					<button id="u" class="b" onclick="javascript:upf()">上传</button>
-					<div id="l"></div>
+					<div class="l1"><div id="l"></div></div>
 				</article>
 			</div>
 		</div>
