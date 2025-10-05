@@ -1,0 +1,71 @@
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	background: #f9f9f9;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background: #222;
+	color: #fff;
+	padding: 2rem 0;
+	text-align: center;
+}
+
+nav {
+	margin: 1rem 0;
+	text-align: center;
+}
+
+nav a {
+	color: #222;
+	text-decoration: none;
+	margin: 0 1rem;
+	font-weight: bold;
+}
+
+nav a:hover {
+	color: #0078d7;
+}
+
+main {
+	max-width: 800px;
+	margin: 2rem auto;
+	background: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.post-list {
+	list-style: none;
+	padding: 0;
+}
+
+.post-list li {
+	margin-bottom: 1.5rem;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 1rem;
+}
+
+.post-list li:last-child {
+	border-bottom: none;
+}
+
+.post-title {
+	font-size: 1.25rem;
+	color: #0078d7;
+	text-decoration: none;
+}
+
+.post-date {
+	color: #888;
+	font-size: 0.9rem;
+}
+
+footer {
+	text-align: center;
+	color: #aaa;
+	padding: 2rem 0 1rem 0;
+	font-size: 0.95rem;
+}
