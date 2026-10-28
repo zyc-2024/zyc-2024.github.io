@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="青藤职伴——大学生兼职安全护航平台，提供招聘匹配、合规检测、薪资结算、快捷维权与被骗救济服务。">
+  <title>青藤职伴 · 大学生兼职助力平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></symbol>
+      <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 10v9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-9M3 10l1.6-5.2A2 2 0 0 1 6.5 3h11a2 2 0 0 1 1.9 1.8L21 10a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0Z"/><path d="M9 20v-5h6v5"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5"/><path d="M16 13h3M3 9h18"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.8 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.7 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M5 6h14M7 6l-3 7h6L7 6ZM17 6l-3 7h6l-3-7ZM8 21h8"/></symbol>
+      <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="m5.8 5.8 3.7 3.7M14.5 14.5l3.7 3.7M18.2 5.8l-3.7 3.7M9.5 14.5l-3.7 3.7"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+      <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+      <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.7 2.7L16 9"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M20 16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+      <symbol id="i-banknote" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10h.01M18 14h.01"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+      <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a2 2 0 0 0 3-3l-4-4 3-3 3 3h3M3 12h3l3-3 4 4-2 2a2 2 0 0 0 3 3l2-2M8 7 5 4 2 7l3 3"/></symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 3 1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3ZM19 17l.7 2.3L22 20l-2.3.7L19 23l-.7-2.3L16 20l2.3-.7L19 17Z"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8M15 7h6v6"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a class="brand" href="#dashboard" aria-label="青藤职伴首页">
+          <span class="brand-mark">
+            <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 24V12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M14 15C9.8 15 7 12.3 7 8c4.2 0 7 2.7 7 7Z" fill="currentColor"/><path d="M14 11c4.2 0 7-2.7 7-7-4.2 0-7 2.7-7 7Z" fill="currentColor" opacity=".55"/></svg>
+          </span>
+          <span class="brand-text"><strong>青藤职伴</strong><small>学生兼职安全平台</small></span>
+        </a>
+      </div>
+
+      <nav class="nav" aria-label="主导航">
+        <p class="nav-label">工作空间</p>
+        <a class="nav-item" data-page="dashboard" href="#dashboard"><svg class="icon"><use href="#i-grid"/></svg><span>工作台</span></a>
+        <a class="nav-item" data-page="jobs" href="#jobs"><svg class="icon"><use href="#i-briefcase"/></svg><span>招聘大厅</span><span class="nav-badge" id="jobsNavBadge">12</span></a>
+        <a class="nav-item" data-page="merchant" href="#merchant"><svg class="icon"><use href="#i-store"/></svg><span>商家中心</span></a>
+        <a class="nav-item" data-page="profile" href="#profile"><svg class="icon"><use href="#i-trend"/></svg><span>个人画像</span></a>
+
+        <p class="nav-label nav-label-spaced">权益保障</p>
+        <a class="nav-item" data-page="wallet" href="#wallet"><svg class="icon"><use href="#i-wallet"/></svg><span>薪资结算</span></a>
+        <a class="nav-item" data-page="compliance" href="#compliance"><svg class="icon"><use href="#i-shield"/></svg><span>合规检测</span><span class="nav-dot" title="新功能"></span></a>
+        <a class="nav-item" data-page="rights" href="#rights"><svg class="icon"><use href="#i-scale"/></svg><span>快捷维权</span></a>
+        <a class="nav-item" data-page="relief" href="#relief"><svg class="icon"><use href="#i-buoy"/></svg><span>被骗救济</span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="safety-card">
+          <span class="safety-card-icon"><svg class="icon"><use href="#i-cap"/></svg></span>
+          <strong>兼职安全第一课</strong>
+          <p>3 分钟识别 6 类常见兼职骗局</p>
+          <button class="text-link" data-toast="安全课堂正在准备中，敬请期待">开始学习 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></button>
+        </div>
+        <div class="sidebar-user">
+          <span class="avatar avatar-lin">林</span>
+          <span class="sidebar-user-info"><strong>林小满</strong><small>上海师范大学 · 大二</small></span>
+          <button class="icon-button" aria-label="个人设置" data-toast="个人设置入口已打开"><span class="more-dots">···</span></button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button menu-button" id="menuButton" aria-label="打开导航"><svg class="icon"><use href="#i-menu"/></svg></button>
+          <div class="breadcrumb"><span>青藤职伴</span><i>/</i><strong id="topbarTitle">工作台</strong></div>
+        </div>
+        <div class="topbar-right">
+          <span class="safe-status"><span class="pulse-dot"></span>安全护航中</span>
+          <div class="notification-wrap">
+            <button class="icon-button notification-button" id="notificationButton" aria-label="查看通知">
+              <svg class="icon"><use href="#i-bell"/></svg><span class="notification-dot"></span>
+            </button>
+            <div class="notification-popover" id="notificationPopover">
+              <div class="popover-head"><strong>消息通知</strong><button class="text-button" id="markRead">全部已读</button></div>
+              <div class="notice-item"><span class="notice-icon green"><svg class="icon"><use href="#i-banknote"/></svg></span><div><strong>薪资已到账</strong><p>「校园新媒体运营」周结薪资 ¥450 已入账</p><small>10 分钟前</small></div></div>
+              <div class="notice-item"><span class="notice-icon amber"><svg class="icon"><use href="#i-shield"/></svg></span><div><strong>招聘核验提醒</strong><p>你收藏的岗位已通过商家资质复核</p><small>2 小时前</small></div></div>
+              <div class="notice-item"><span class="notice-icon blue"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>维权进度更新</strong><p>工单 WQ20261018032 已进入平台调解</p><small>昨天</small></div></div>
+            </div>
+          </div>
+          <button class="user-chip" data-page="profile" aria-label="查看个人画像">
+            <span class="avatar avatar-lin">林</span><span class="user-chip-text"><strong>林小满</strong><small>学生账号</small></span><svg class="icon icon-sm"><use href="#i-chevron-down"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="page active" id="page-dashboard" data-title="工作台">
+          <div class="page-intro home-intro">
+            <div>
+              <p class="eyebrow">2026 年 10 月 20 日 · 星期二</p>
+              <h1>下午好，林同学</h1>
+              <p class="page-subtitle">找到一份好兼职，也守住每一份应得的回报。</p>
+            </div>
+            <div class="trust-score-mini">
+              <span class="score-ring small" style="--score:96"><b>96</b></span>
+              <div><strong>账户安全指数</strong><small>已完成实名与学生认证</small></div>
+            </div>
+          </div>
+
+          <section class="hero-card">
+            <div class="hero-copy">
+              <span class="hero-eyebrow"><svg class="icon icon-sm"><use href="#i-shield"/></svg>已护航 2,486 名大学生</span>
+              <h2>好兼职，<br><em>值得被认真对待。</em></h2>
+              <p>从招聘核验、薪资保障到维权救济，陪你把兼职的每一步走稳。</p>
+              <form class="hero-search" id="heroSearchForm">
+                <svg class="icon"><use href="#i-search"/></svg>
+                <input id="heroSearchInput" type="search" placeholder="搜索兼职岗位、商家或技能" autocomplete="off" aria-label="搜索兼职岗位">
+                <button type="submit">寻找兼职</button>
+              </form>
+              <div class="hero-tags"><span>热门：</span><button data-search-keyword="日结">日结兼职</button><button data-search-keyword="周末">周末兼职</button><button data-search-keyword="线上">线上兼职</button></div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="hero-orbit-card">
+                <span class="orbit-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
+                <div><small>本周平台安全指数</small><strong>98.6</strong></div>
+                <span class="trend-up">+2.4%</span>
+              </div>
+              <div class="floating-chip chip-one"><span class="status-dot"></span>商家已实名核验</div>
+              <div class="floating-chip chip-two"><svg class="icon"><use href="#i-banknote"/></svg>薪资担保结算</div>
+              <div class="floating-chip chip-three"><svg class="icon"><use href="#i-clock"/></svg>维权平均响应 12 分钟</div>
+              <span class="hero-globe globe-one"></span>
+              <span class="hero-globe globe-two"></span>
+            </div>
+          </section>
+
+          <section class="quick-actions" aria-label="快捷功能">
+            <a href="#jobs" class="quick-card quick-green">
+              <span class="quick-icon"><svg class="icon"><use href="#i-briefcase"/></svg></span>
+              <div><strong>找靠谱兼职</strong><p>128 个岗位今日上新</p></div>
+              <span class="quick-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            </a>
+            <a href="#compliance" class="quick-card quick-lime">
+              <span class="quick-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
+              <div><strong>招聘合规检测</strong><p>粘贴信息，识别隐藏套路</p></div>
+              <span class="quick-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            </a>
+            <a href="#rights" class="quick-card quick-sand">
+              <span class="quick-icon"><svg class="icon"><use href="#i-scale"/></svg></span>
+              <div><strong>快捷维权</strong><p>欠薪纠纷，15 分钟响应</p></div>
+              <span class="quick-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            </a>
+            <a href="#relief" class="quick-card quick-coral">
+              <span class="quick-icon"><svg class="icon"><use href="#i-buoy"/></svg></span>
+              <div><strong>被骗救济</strong><p>提交材料，启动援助流程</p></div>
+              <span class="quick-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            </a>
+          </section>
+
+          <div class="dashboard-grid">
+            <section class="section-block">
+              <div class="section-heading">
+                <div><p class="eyebrow">为你精选</p><h2>匹配你的兼职机会</h2></div>
+                <a href="#jobs" class="text-link">查看全部 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></a>
+              </div>
+              <div class="job-grid compact" id="homeJobGrid"></div>
+            </section>
+
+            <aside class="dashboard-aside">
+              <section class="aside-card protection-card">
+                <div class="section-heading mini"><div><p class="eyebrow">青藤守护</p><h3>每一次兼职，都有据可依</h3></div><span class="badge badge-green">全流程</span></div>
+                <div class="protection-steps">
+                  <div class="protection-step"><span class="step-number">01</span><div><strong>商家实名校验</strong><p>营业执照与经营场所双重审核</p></div><svg class="icon"><use href="#i-check-circle"/></svg></div>
+                  <div class="protection-step"><span class="step-number">02</span><div><strong>薪资托管结算</strong><p>约定薪资进入平台担保账户</p></div><svg class="icon"><use href="#i-check-circle"/></svg></div>
+                  <div class="protection-step"><span class="step-number">03</span><div><strong>一键取证维权</strong><p>聊天、考勤、薪资记录自动留存</p></div><svg class="icon"><use href="#i-check-circle"/></svg></div>
+                </div>
+                <a href="#compliance" class="button button-dark button-block">检测一份招聘信息</a>
+              </section>
+
+              <section class="aside-card settlement-snapshot">
+                <div class="section-heading mini"><div><p class="eyebrow">薪资账户</p><h3>本月收入</h3></div><a href="#wallet" class="circle-link" aria-label="查看薪资结算"><svg class="icon"><use href="#i-arrow-up-right"/></svg></a></div>
+                <strong class="big-money">¥ 1,840<span>.00</span></strong>
+                <div class="mini-bars" aria-hidden="true">
+                  <span style="--h:32%"></span><span style="--h:52%"></span><span style="--h:43%"></span><span style="--h:68%"></span><span style="--h:56%"></span><span style="--h:82%"></span><span class="current" style="--h:94%"></span>
+                </div>
+                <div class="mini-bar-labels"><span>9/14</span><span>9/21</span><span>9/28</span><span>10/20</span></div>
+                <div class="snapshot-row"><span>待结算</span><strong>¥450.00</strong></div>
+              </section>
+            </aside>
+          </div>
+
+          <section class="safety-strip">
+            <div class="safety-strip-main">
+              <span class="strip-icon"><svg class="icon"><use href="#i-info"/></svg></span>
+              <div><strong>今日安全提醒</strong><p>任何要求先交押金、培训费、服装费的兼职，都可能是骗局。正规招聘不会以任何名义向求职者收费。</p></div>
+            </div>
+            <a href="#compliance" class="button button-light">学会识别</a>
+          </section>
+        </section>
+
+        <section class="page" id="page-profile" data-title="个人画像">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">STUDENT INSIGHT</p>
+              <h1>个人画像</h1>
+              <p class="page-subtitle">一张图了解你的兼职偏好、能力标签与安全信用，仅作示例展示。</p>
+            </div>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-shield"/></svg>学生身份已认证</span>
+          </div>
+
+          <section class="profile-hero-card">
+            <span class="profile-orb profile-orb-one"></span>
+            <span class="profile-orb profile-orb-two"></span>
+            <div class="profile-hero-main">
+              <span class="profile-avatar">林</span>
+              <div class="profile-hero-copy">
+                <span class="profile-overline">QINGTENG MEMBER · 2026</span>
+                <h2>林小满</h2>
+                <p>上海师范大学 · 汉语言文学 · 大二</p>
+                <div class="profile-badges">
+                  <span><svg class="icon"><use href="#i-check-circle"/></svg>实名认证</span>
+                  <span><svg class="icon"><use href="#i-cap"/></svg>学生认证</span>
+                  <span><svg class="icon"><use href="#i-shield"/></svg>安全守约</span>
+                </div>
+              </div>
+            </div>
+            <div class="profile-hero-stats">
+              <div><span>平台安全信用</span><strong>96<small>/ 100</small></strong></div>
+              <div><span>岗位匹配度</span><strong>88<small>%</small></strong></div>
+              <div><span>兼职完成</span><strong>18<small>份</small></strong></div>
+            </div>
+            <div class="profile-hero-quote">
+              <svg class="icon"><use href="#i-sparkle"/></svg>
+              <p>认真完成每一份兼职，也在积累面对世界的底气。</p>
+            </div>
+          </section>
+
+          <div class="profile-metrics">
+            <div class="profile-metric">
+              <span>累计兼职时长</span>
+              <strong>142.5<small>小时</small></strong>
+              <p><i>超过 76%</i> 同校同学</p>
+            </div>
+            <div class="profile-metric">
+              <span>商家好评率</span>
+              <strong>98<small>%</small></strong>
+              <p><i>共收到 16 次好评</i></p>
+            </div>
+            <div class="profile-metric">
+              <span>按时到岗率</span>
+              <strong>100<small>%</small></strong>
+              <p><i>从未发生爽约</i></p>
+            </div>
+            <div class="profile-metric">
+              <span>维权记录</span>
+              <strong>0<small>次</small></strong>
+              <p><i>安全履约记录良好</i></p>
+            </div>
+          </div>
+
+          <div class="profile-dashboard-grid">
+            <section class="chart-card profile-radar-card">
+              <div class="chart-card-head">
+                <div><p class="eyebrow">CAPABILITY RADAR</p><h2>能力画像</h2><p>基于兼职表现、商家评价与安全行为综合生成</p></div>
+                <span class="badge badge-green">综合表现优秀</span>
+              </div>
+              <div class="radar-chart-wrap">
+                <svg class="radar-svg" viewBox="0 0 420 320" role="img" aria-label="林小满的能力雷达图：沟通表达82分，学习能力88分，专业技能74分，责任心91分，时间稳定68分，安全意识96分">
+                  <defs>
+                    <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#2d6f58" stop-opacity="0.34"/>
+                      <stop offset="100%" stop-color="#94bd64" stop-opacity="0.14"/>
+                    </linearGradient>
+                  </defs>
+                  <polygon class="radar-grid" points="210,60 296.6,110 296.6,210 210,260 123.4,210 123.4,110"/>
+                  <polygon class="radar-grid" points="210,93.3 267.7,126.7 267.7,193.3 210,226.7 152.3,193.3 152.3,126.7"/>
+                  <polygon class="radar-grid" points="210,126.7 238.9,143.3 238.9,176.7 210,193.3 181.1,176.7 181.1,143.3"/>
+                  <line class="radar-axis" x1="210" y1="160" x2="210" y2="60"/>
+                  <line class="radar-axis" x1="210" y1="160" x2="296.6" y2="110"/>
+                  <line class="radar-axis" x1="210" y1="160" x2="296.6" y2="210"/>
+                  <line class="radar-axis" x1="210" y1="160" x2="210" y2="260"/>
+                  <line class="radar-axis" x1="210" y1="160" x2="123.4" y2="210"/>
+                  <line class="radar-axis" x1="210" y1="160" x2="123.4" y2="110"/>
+                  <polygon class="radar-data" points="210,78 286.2,116 274.1,197 210,251 151.1,194 126.9,112"/>
+                  <g class="radar-points">
+                    <circle cx="210" cy="78" r="4"/>
+                    <circle cx="286.2" cy="116" r="4"/>
+                    <circle cx="274.1" cy="197" r="4"/>
+                    <circle cx="210" cy="251" r="4"/>
+                    <circle cx="151.1" cy="194" r="4"/>
+                    <circle cx="126.9" cy="112" r="4"/>
+                  </g>
+                  <text class="radar-label" x="210" y="28" text-anchor="middle">沟通表达</text>
+                  <text class="radar-value" x="210" y="43" text-anchor="middle">82</text>
+                  <text class="radar-label" x="313" y="93" text-anchor="start">学习能力</text>
+                  <text class="radar-value" x="313" y="108" text-anchor="start">88</text>
+                  <text class="radar-label" x="313" y="223" text-anchor="start">专业技能</text>
+                  <text class="radar-value" x="313" y="238" text-anchor="start">74</text>
+                  <text class="radar-label" x="210" y="283" text-anchor="middle">责任心</text>
+                  <text class="radar-value" x="210" y="298" text-anchor="middle">91</text>
+                  <text class="radar-label" x="107" y="223" text-anchor="end">时间稳定</text>
+                  <text class="radar-value" x="107" y="238" text-anchor="end">68</text>
+                  <text class="radar-label" x="107" y="93" text-anchor="end">安全意识</text>
+                  <text class="radar-value" x="107" y="108" text-anchor="end">96</text>
+                </svg>
+              </div>
+              <div class="chart-insight">
+                <span class="insight-icon"><svg class="icon"><use href="#i-sparkle"/></svg></span>
+                <p><strong>画像洞察</strong>你的安全意识与责任心高于平台 83% 的学生。若能提升时间稳定性，将更容易获得长期兼职机会。</p>
+              </div>
+            </section>
+
+            <aside class="chart-card profile-info-card">
+              <div class="chart-card-head"><div><p class="eyebrow">ABOUT ME</p><h2>基本信息</h2></div><span class="profile-mini-avatar">林</span></div>
+              <div class="profile-info-list">
+                <div><span>期望岗位</span><strong>门店服务 / 内容创作</strong></div>
+                <div><span>可兼职时间</span><strong>周末全天 · 工作日晚上</strong></div>
+                <div><span>常用校区</span><strong>徐汇校区 · 3km 内</strong></div>
+                <div><span>期望结算</span><strong>日结 / 周结</strong></div>
+                <div><span>加入平台</span><strong>2026 年 3 月</strong></div>
+              </div>
+              <div class="profile-section-label">技能标签</div>
+              <div class="profile-skill-tags"><span>文案编辑</span><span>咖啡制作</span><span>活动执行</span><span>英语口语</span><span>基础剪辑</span></div>
+              <div class="profile-section-label">求职偏好</div>
+              <div class="preference-meter"><span>稳定性</span><div><i style="width:68%"></i></div><b>68%</b></div>
+              <div class="preference-meter"><span>匹配度</span><div><i style="width:88%"></i></div><b>88%</b></div>
+            </aside>
+
+            <section class="chart-card profile-preference-card">
+              <div class="chart-card-head"><div><p class="eyebrow">JOB PREFERENCE</p><h2>兼职类型分布</h2><p>近一年完成的 18 份兼职</p></div><span class="badge badge-sand">偏好清晰</span></div>
+              <div class="donut-layout">
+                <div class="donut-chart" role="img" aria-label="兼职类型分布：门店服务45%，内容创作30%，活动执行15%，其他10%">
+                  <div><strong>18</strong><span>份兼职</span></div>
+                </div>
+                <div class="donut-legend">
+                  <div><span class="legend-dot dot-dark"></span><p>门店服务<small>8 份</small></p><strong>45%</strong></div>
+                  <div><span class="legend-dot dot-mid"></span><p>内容创作<small>5 份</small></p><strong>30%</strong></div>
+                  <div><span class="legend-dot dot-lime"></span><p>活动执行<small>3 份</small></p><strong>15%</strong></div>
+                  <div><span class="legend-dot dot-pale"></span><p>其他类型<small>2 份</small></p><strong>10%</strong></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="chart-card profile-month-card">
+              <div class="chart-card-head"><div><p class="eyebrow">MONTHLY ACTIVITY</p><h2>近 6 个月兼职时长</h2><p>每月累计工时与投入变化</p></div><span class="badge badge-green">稳步积累</span></div>
+              <div class="profile-bars" aria-label="近六个月兼职时长：5月14小时，6月22小时，7月18小时，8月28小时，9月26小时，10月16小时">
+                <div class="profile-bar-wrap"><span>14h</span><div class="profile-bar" style="--h:50%"></div><small>5月</small></div>
+                <div class="profile-bar-wrap"><span>22h</span><div class="profile-bar" style="--h:79%"></div><small>6月</small></div>
+                <div class="profile-bar-wrap"><span>18h</span><div class="profile-bar" style="--h:64%"></div><small>7月</small></div>
+                <div class="profile-bar-wrap peak"><span>28h</span><div class="profile-bar" style="--h:100%"></div><small>8月</small></div>
+                <div class="profile-bar-wrap"><span>26h</span><div class="profile-bar" style="--h:93%"></div><small>9月</small></div>
+                <div class="profile-bar-wrap current"><span>16h</span><div class="profile-bar" style="--h:57%"></div><small>10月</small></div>
+              </div>
+              <div class="profile-bar-foot"><span>累计投入 <strong>124 小时</strong></span><span>平均每月 <strong>20.7 小时</strong></span><span>最活跃月份 <strong>8 月</strong></span></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page" id="page-jobs" data-title="招聘大厅">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">JOB MARKET</p>
+              <h1>招聘大厅</h1>
+              <p class="page-subtitle">每个岗位都经过资质核验与风险扫描，放心挑选适合你的机会。</p>
+            </div>
+            <div class="heading-actions">
+              <span class="verified-note"><svg class="icon"><use href="#i-shield"/></svg>平台已核验商家</span>
+              <button class="button button-dark" data-page="merchant"><svg class="icon"><use href="#i-plus"/></svg>商家发布</button>
+            </div>
+          </div>
+
+          <div class="filter-panel">
+            <div class="filter-top">
+              <label class="filter-search"><svg class="icon"><use href="#i-search"/></svg><input id="jobSearchInput" type="search" placeholder="搜索岗位、技能或商家" autocomplete="off"></label>
+              <label class="select-wrap"><svg class="icon"><use href="#i-map-pin"/></svg><select id="jobLocationFilter" aria-label="筛选区域"><option value="all">全部区域</option><option value="徐汇">徐汇</option><option value="静安">静安</option><option value="浦东">浦东</option><option value="杨浦">杨浦</option><option value="青浦">青浦</option><option value="线上">线上</option></select><svg class="icon select-chevron"><use href="#i-chevron-down"/></svg></label>
+              <label class="select-wrap"><svg class="icon"><use href="#i-banknote"/></svg><select id="jobSettlementFilter" aria-label="筛选结算方式"><option value="all">结算方式</option><option value="日结">日结</option><option value="周结">周结</option><option value="月结">月结</option><option value="项目结">项目结</option></select><svg class="icon select-chevron"><use href="#i-chevron-down"/></svg></label>
+              <label class="select-wrap"><svg class="icon"><use href="#i-filter"/></svg><select id="jobSortFilter" aria-label="排序方式"><option value="recommend">推荐排序</option><option value="safety">安全分优先</option><option value="pay">薪资从高到低</option></select><svg class="icon select-chevron"><use href="#i-chevron-down"/></svg></label>
+            </div>
+            <div class="filter-bottom">
+              <div class="filter-chips" id="jobCategoryFilters">
+                <button class="chip active" data-category="全部">全部岗位</button>
+                <button class="chip" data-category="门店服务">门店服务</button>
+                <button class="chip" data-category="活动执行">活动执行</button>
+                <button class="chip" data-category="内容创作">内容创作</button>
+                <button class="chip" data-category="教育培训">教育培训</button>
+                <button class="chip" data-category="线上兼职">线上兼职</button>
+              </div>
+              <span class="filter-result"><strong id="jobResultCount">8</strong> 个岗位</span>
+            </div>
+          </div>
+
+          <div class="job-layout">
+            <div>
+              <div class="job-grid" id="jobGrid"></div>
+              <div class="empty-state" id="jobEmptyState">
+                <span class="empty-icon"><svg class="icon"><use href="#i-search"/></svg></span>
+                <h3>没有找到匹配岗位</h3>
+                <p>换一个关键词或筛选条件试试。</p>
+                <button class="button button-light" id="resetJobFilters">清除筛选</button>
+              </div>
+            </div>
+            <aside class="job-side">
+              <section class="side-note">
+                <span class="side-note-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
+                <p class="eyebrow">求职安全课</p>
+                <h3>兼职「三不」原则</h3>
+                <ul class="check-list">
+                  <li><span>01</span>不向任何个人账户转账</li>
+                  <li><span>02</span>不提前缴纳押金或培训费</li>
+                  <li><span>03</span>不将身份证原件交给他人</li>
+                </ul>
+                <a href="#compliance">去检测一份招聘信息 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></a>
+              </section>
+              <section class="side-note side-note-blue">
+                <p class="eyebrow">有疑问？</p>
+                <h3>平台顾问在线帮你</h3>
+                <p>对岗位有疑虑，或遇到招聘方要求私下交易，随时联系我们。</p>
+                <button class="button button-light button-block" data-toast="平台顾问将在 1 分钟内接入">联系在线顾问</button>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" id="page-merchant" data-title="商家中心">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">MERCHANT CENTER</p>
+              <h1>商家招聘中心</h1>
+              <p class="page-subtitle">发布合规岗位，触达经过实名校验的高质量学生人才。</p>
+            </div>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-check-circle"/></svg>企业已认证 · 信用优秀</span>
+          </div>
+
+          <section class="merchant-banner">
+            <div>
+              <span class="hero-eyebrow"><svg class="icon icon-sm"><use href="#i-store"/></svg>青藤优选商户</span>
+              <h2>好岗位，值得被更多年轻人看见。</h2>
+              <p>当前账号：M Stand 咖啡（徐汇店）· 招聘负责人 陈女士</p>
+              <div class="merchant-banner-actions">
+                <button class="button button-accent" data-merchant-tab="publish"><svg class="icon"><use href="#i-plus"/></svg>发布新岗位</button>
+                <button class="button button-ghost-light" data-merchant-tab="manage">管理在招职位</button>
+              </div>
+            </div>
+            <div class="merchant-stats">
+              <div><strong>12</strong><span>在招岗位</span></div>
+              <div><strong>86</strong><span>累计应聘</span></div>
+              <div><strong>4.9</strong><span>商家评分</span></div>
+              <div><strong>100<span>%</span></strong><span>结算履约率</span></div>
+            </div>
+          </section>
+
+          <div class="tabs" id="merchantTabs">
+            <button class="tab active" data-merchant-tab="publish">发布职位</button>
+            <button class="tab" data-merchant-tab="manage">职位管理 <span class="tab-count" id="manageCount">5</span></button>
+            <button class="tab" data-merchant-tab="applicants">应聘者 <span class="tab-count">3</span></button>
+          </div>
+
+          <section class="merchant-panel active" id="merchant-panel-publish">
+            <div class="panel-grid">
+              <div class="form-card">
+                <div class="form-card-head"><div><p class="eyebrow">POST A JOB</p><h2>发布兼职岗位</h2></div><span class="badge badge-green">发布前自动合规检测</span></div>
+                <form id="publishJobForm" novalidate>
+                  <div class="form-row">
+                    <label class="field"><span>职位名称 <i>*</i></span><input name="title" type="text" placeholder="例如：周末咖啡店店员" required></label>
+                    <label class="field"><span>职位类别 <i>*</i></span><select name="category" required><option value="门店服务">门店服务</option><option value="活动执行">活动执行</option><option value="内容创作">内容创作</option><option value="教育培训">教育培训</option><option value="线上兼职">线上兼职</option></select></label>
+                  </div>
+                  <div class="form-row">
+                    <label class="field"><span>薪资待遇 <i>*</i></span><input name="pay" type="text" placeholder="例如：200 元/天" required></label>
+                    <label class="field"><span>结算方式 <i>*</i></span><select name="settlement" required><option value="日结">日结</option><option value="周结">周结</option><option value="月结">月结</option><option value="项目结">项目结</option></select></label>
+                  </div>
+                  <div class="form-row">
+                    <label class="field"><span>工作地点 <i>*</i></span><input name="location" type="text" placeholder="例如：徐汇区 · 漕河泾" required></label>
+                    <label class="field"><span>工作时间 <i>*</i></span><input name="schedule" type="text" placeholder="例如：周六日 10:00-18:00" required></label>
+                  </div>
+                  <label class="field"><span>岗位描述 <i>*</i></span><textarea name="description" rows="4" placeholder="介绍工作内容、任职要求与福利。请勿填写押金、培训费等违规内容。" required></textarea></label>
+                  <div class="form-row">
+                    <label class="field"><span>招聘人数</span><input name="headcount" type="number" min="1" value="2"></label>
+                    <label class="field"><span>标签（用逗号分隔）</span><input name="tags" type="text" placeholder="日结, 包餐, 地铁周边"></label>
+                  </div>
+                  <label class="consent-line"><input type="checkbox" name="agreement" required><span>我承诺岗位信息真实、合规，并遵守平台薪资保障与用工规范。</span></label>
+                  <div class="form-actions"><button type="button" class="button button-light" data-toast="草稿已保存">保存草稿</button><button type="submit" class="button button-dark">发布并送审 <svg class="icon"><use href="#i-arrow-right"/></svg></button></div>
+                </form>
+              </div>
+              <aside class="merchant-aside">
+                <div class="side-note">
+                  <p class="eyebrow">发布指南</p>
+                  <h3>让岗位更快通过审核</h3>
+                  <ul class="guide-list">
+                    <li><span>1</span><div><strong>薪资清晰</strong><p>写明具体金额与结算周期，避免「面议」。</p></div></li>
+                    <li><span>2</span><div><strong>职责明确</strong><p>工作内容、时长与地点缺一不可。</p></div></li>
+                    <li><span>3</span><div><strong>拒绝收费</strong><p>不得以任何名义向学生收取费用。</p></div></li>
+                  </ul>
+                </div>
+                <div class="merchant-tip"><svg class="icon"><use href="#i-sparkle"/></svg><div><strong>小提示</strong><p>信息完整的岗位，平均应聘转化率提升 42%。</p></div></div>
+              </aside>
+            </div>
+          </section>
+
+          <section class="merchant-panel" id="merchant-panel-manage">
+            <div class="table-card">
+              <div class="table-head"><div><p class="eyebrow">ACTIVE JOBS</p><h2>在招职位</h2></div><button class="button button-light" data-merchant-tab="publish"><svg class="icon"><use href="#i-plus"/></svg>发布新岗位</button></div>
+              <div class="merchant-job-list" id="merchantJobList"></div>
+            </div>
+          </section>
+
+          <section class="merchant-panel" id="merchant-panel-applicants">
+            <div class="table-card">
+              <div class="table-head"><div><p class="eyebrow">CANDIDATES</p><h2>最新应聘者</h2></div><span class="badge badge-sand">3 人待处理</span></div>
+              <div class="applicant-list">
+                <div class="applicant-card" data-applicant>
+                  <span class="avatar avatar-soft">周</span>
+                  <div class="applicant-main"><strong>周雨桐 <span class="badge badge-green">学生认证</span></strong><p>上海师范大学 · 汉语言文学 · 大二</p><div class="applicant-tags"><span>有咖啡店经验</span><span>周末可到岗</span><span>距门店 2.4km</span></div></div>
+                  <div class="applicant-meta"><span>应聘：周末咖啡店店员</span><small>10 分钟前</small></div>
+                  <div class="applicant-actions"><button class="button button-light button-sm reject-applicant">婉拒</button><button class="button button-dark button-sm accept-applicant">邀请面试</button></div>
+                </div>
+                <div class="applicant-card" data-applicant>
+                  <span class="avatar avatar-soft avatar-blue">许</span>
+                  <div class="applicant-main"><strong>许嘉言 <span class="badge badge-green">学生认证</span></strong><p>华东理工大学 · 工商管理 · 大三</p><div class="applicant-tags"><span>沟通能力强</span><span>可长期</span><span>评分 4.8</span></div></div>
+                  <div class="applicant-meta"><span>应聘：品牌快闪店店员</span><small>36 分钟前</small></div>
+                  <div class="applicant-actions"><button class="button button-light button-sm reject-applicant">婉拒</button><button class="button button-dark button-sm accept-applicant">邀请面试</button></div>
+                </div>
+                <div class="applicant-card" data-applicant>
+                  <span class="avatar avatar-soft avatar-coral">沈</span>
+                  <div class="applicant-main"><strong>沈知夏 <span class="badge badge-green">学生认证</span></strong><p>上海大学 · 视觉传达 · 大四</p><div class="applicant-tags"><span>有新媒体经验</span><span>作品集已上传</span><span>可远程</span></div></div>
+                  <div class="applicant-meta"><span>应聘：校园新媒体运营</span><small>1 小时前</small></div>
+                  <div class="applicant-actions"><button class="button button-light button-sm reject-applicant">婉拒</button><button class="button button-dark button-sm accept-applicant">邀请面试</button></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="page" id="page-wallet" data-title="薪资结算">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">EARNINGS & SETTLEMENT</p>
+              <h1>薪资结算</h1>
+              <p class="page-subtitle">每一笔工时都有记录，每一份薪资都有保障。</p>
+            </div>
+            <div class="heading-actions"><button class="button button-dark" id="openWithdrawButton"><svg class="icon"><use href="#i-banknote"/></svg>申请提现</button></div>
+          </div>
+
+          <div class="wallet-top-grid">
+            <section class="balance-card">
+              <div class="balance-orb orb-a"></div><div class="balance-orb orb-b"></div>
+              <div class="balance-head"><span>可提现余额</span><span class="escrow-pill"><svg class="icon"><use href="#i-lock"/></svg>平台担保</span></div>
+              <div class="balance-amount">¥ <span id="walletBalance">3,260.00</span></div>
+              <div class="balance-foot"><span>本月已入账 <strong>¥1,840.00</strong></span><span>待结算 <strong>¥450.00</strong></span></div>
+              <button class="button button-accent button-sm" id="openWithdrawButton2">立即提现 <svg class="icon"><use href="#i-arrow-up-right"/></svg></button>
+            </section>
+
+            <section class="clock-card">
+              <div class="clock-head"><div><p class="eyebrow">WORK CLOCK</p><h2>工时打卡</h2></div><span class="badge badge-green" id="clockStatusBadge"><span class="status-dot"></span>未开始</span></div>
+              <div class="clock-job"><span class="merchant-logo logo-mstand">M</span><div><strong>M Stand 咖啡 · 徐汇店</strong><small>周末咖啡店店员 · ¥25/小时</small></div></div>
+              <div class="clock-display" id="clockDisplay">00:00:00</div>
+              <div class="clock-meta"><span>今日预计收入 <strong id="clockEarning">¥0.00</strong></span><span id="clockHint">开始打卡后自动计算工时</span></div>
+              <div class="clock-actions">
+                <button class="button button-dark button-block" id="clockButton"><svg class="icon"><use href="#i-clock"/></svg>开始工作</button>
+                <button class="button button-light" id="resetClockButton" aria-label="重置打卡" data-toast="打卡记录已重置">重置</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="stat-grid wallet-stats">
+            <div class="stat-card"><span class="stat-icon green"><svg class="icon"><use href="#i-banknote"/></svg></span><div><span>累计收入</span><strong>¥ 8,640<span>.00</span></strong><small><i class="up">+12.8%</i> 较上月</small></div></div>
+            <div class="stat-card"><span class="stat-icon amber"><svg class="icon"><use href="#i-clock"/></svg></span><div><span>累计工时</span><strong>142<span>.5h</span></strong><small>已完成 18 份兼职</small></div></div>
+            <div class="stat-card"><span class="stat-icon blue"><svg class="icon"><use href="#i-shield"/></svg></span><div><span>结算保障</span><strong>100<span>%</span></strong><small>无一笔薪资纠纷</small></div></div>
+            <div class="stat-card"><span class="stat-icon coral"><svg class="icon"><use href="#i-star"/></svg></span><div><span>商家好评率</span><strong>98<span>%</span></strong><small>共收到 16 次好评</small></div></div>
+          </div>
+
+          <div class="wallet-content-grid">
+            <section class="table-card earnings-card">
+              <div class="table-head"><div><p class="eyebrow">TRANSACTIONS</p><h2>结算明细</h2></div><button class="button button-light button-sm" data-toast="明细已导出为 PDF"><svg class="icon"><use href="#i-download"/></svg>导出明细</button></div>
+              <div class="transaction-list" id="transactionList"></div>
+            </section>
+
+            <aside class="wallet-aside">
+              <section class="aside-card trends-card">
+                <div class="section-heading mini"><div><p class="eyebrow">INCOME TREND</p><h3>近 6 个月收入</h3></div><span class="badge badge-green">稳步增长</span></div>
+                <div class="trend-chart" aria-label="近六个月收入柱状图">
+                  <div class="trend-bars">
+                    <div class="trend-bar-wrap"><span>¥820</span><div class="trend-bar" style="--h:42%"></div><small>5月</small></div>
+                    <div class="trend-bar-wrap"><span>¥1,240</span><div class="trend-bar" style="--h:58%"></div><small>6月</small></div>
+                    <div class="trend-bar-wrap"><span>¥960</span><div class="trend-bar" style="--h:48%"></div><small>7月</small></div>
+                    <div class="trend-bar-wrap"><span>¥1,680</span><div class="trend-bar" style="--h:74%"></div><small>8月</small></div>
+                    <div class="trend-bar-wrap"><span>¥2,100</span><div class="trend-bar" style="--h:88%"></div><small>9月</small></div>
+                    <div class="trend-bar-wrap current"><span>¥1,840</span><div class="trend-bar" style="--h:79%"></div><small>10月</small></div>
+                  </div>
+                </div>
+              </section>
+              <section class="aside-card escrow-card">
+                <span class="escrow-icon"><svg class="icon"><use href="#i-lock"/></svg></span>
+                <h3>薪资托管保障</h3>
+                <p>商家将约定薪资提前存入平台担保账户，工作验收后自动结算，避免拖欠。</p>
+                <div class="escrow-progress"><span style="width:100%"></span></div>
+                <div class="escrow-foot"><span>本月保障覆盖率</span><strong>100%</strong></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" id="page-compliance" data-title="合规检测">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">AI COMPLIANCE SCAN</p>
+              <h1>招聘信息合规检测</h1>
+              <p class="page-subtitle">粘贴招聘文案，快速完成合规检查，示例结果统一展示为 100 分合格。</p>
+            </div>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-shield"/></svg>示例检测模式</span>
+          </div>
+
+          <div class="scanner-grid">
+            <section class="scanner-input-card">
+              <div class="scanner-card-head"><div><span class="scanner-kicker"><svg class="icon icon-sm"><use href="#i-sparkle"/></svg>青藤风控引擎</span><h2>输入招聘信息</h2></div><span class="scanner-limit"><span id="scanCharCount">0</span>/1200</span></div>
+              <p class="scanner-desc">将招聘平台、群聊或朋友圈看到的岗位描述完整粘贴进来，点击检测即可查看合规结果。</p>
+              <textarea id="complianceInput" maxlength="1200" placeholder="例如：招聘周末门店店员，200 元/天，日结，负责顾客接待与门店整理……"></textarea>
+              <div class="sample-row"><span>试试示例：</span><button class="sample-chip" data-sample="safe">填入示例岗位</button><button class="text-button" id="clearCompliance">清空</button></div>
+              <div class="scan-actions">
+                <span class="scan-privacy"><svg class="icon icon-sm"><use href="#i-lock"/></svg>信息仅用于本次检测，不会公开</span>
+                <button class="button button-dark" id="runComplianceScan"><svg class="icon"><use href="#i-shield"/></svg>开始智能检测</button>
+              </div>
+            </section>
+
+            <section class="scan-result-card" id="scanResultCard">
+              <div class="scan-placeholder" id="scanPlaceholder">
+                <div class="radar-visual"><span class="radar-ring ring-1"></span><span class="radar-ring ring-2"></span><span class="radar-ring ring-3"></span><span class="radar-sweep"></span><span class="radar-center"><svg class="icon"><use href="#i-shield"/></svg></span><span class="radar-point p1"></span><span class="radar-point p2"></span><span class="radar-point p3"></span></div>
+                <h3>等待检测</h3>
+                <p>输入招聘信息后，点击「开始智能检测」<br>获取多维度合规评分与风险建议。</p>
+                <div class="placeholder-tags"><span>收费陷阱</span><span>虚假承诺</span><span>主体资质</span><span>合同规范</span></div>
+              </div>
+              <div class="scan-loading" id="scanLoading">
+                <div class="scan-loading-visual"><span class="scanning-line"></span><svg class="icon"><use href="#i-shield"/></svg></div>
+                <h3>正在分析招聘信息</h3>
+                <p id="scanLoadingText">识别敏感词与收费风险...</p>
+                <div class="loading-bar"><span></span></div>
+              </div>
+              <div class="scan-report" id="scanReport"></div>
+            </section>
+          </div>
+
+          <div class="scan-info-grid">
+            <section class="table-card scan-checks-card">
+              <div class="table-head"><div><p class="eyebrow">CHECK ITEMS</p><h2>六维合规检查</h2></div><span class="badge badge-sand">标准 v2.6</span></div>
+              <div class="check-dimension-grid">
+                <div class="dimension-item"><span class="dimension-icon green"><svg class="icon"><use href="#i-store"/></svg></span><div><strong>主体资质</strong><p>招聘方身份与经营信息</p></div></div>
+                <div class="dimension-item"><span class="dimension-icon blue"><svg class="icon"><use href="#i-banknote"/></svg></span><div><strong>薪资规范</strong><p>金额明确、支付周期清晰</p></div></div>
+                <div class="dimension-item"><span class="dimension-icon coral"><svg class="icon"><use href="#i-alert"/></svg></span><div><strong>收费风险</strong><p>押金、培训费、服装费识别</p></div></div>
+                <div class="dimension-item"><span class="dimension-icon amber"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>工作内容</strong><p>刷单、引流等灰产识别</p></div></div>
+                <div class="dimension-item"><span class="dimension-icon purple"><svg class="icon"><use href="#i-message"/></svg></span><div><strong>联系规范</strong><p>引导私下交易与联系风险</p></div></div>
+                <div class="dimension-item"><span class="dimension-icon dark"><svg class="icon"><use href="#i-scale"/></svg></span><div><strong>合同用工</strong><p>协议签署与权益条款</p></div></div>
+              </div>
+            </section>
+            <aside class="aside-card risk-keywords-card">
+              <div class="section-heading mini"><div><p class="eyebrow">RISK KEYWORDS</p><h3>高频风险词</h3></div><span class="badge badge-coral">务必警惕</span></div>
+              <div class="risk-keyword-cloud"><span class="hot">押金</span><span>保证金</span><span class="hot">服装费</span><span>培训费</span><span class="hot">刷单</span><span>垫付</span><span>日入过万</span><span class="hot">先交钱</span><span>无需经验</span><span>加微信私聊</span></div>
+              <p class="risk-note"><svg class="icon icon-sm"><use href="#i-info"/></svg>出现以上词汇不代表一定违规，但需要进一步核实。</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" id="page-rights" data-title="快捷维权">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">RIGHTS PROTECTION</p>
+              <h1>快捷维权</h1>
+              <p class="page-subtitle">欠薪、扣费、虚假招聘，不用一个人扛。平台陪你快速取证、协商解决。</p>
+            </div>
+            <span class="response-pill"><span class="pulse-dot"></span>平均 12 分钟响应</span>
+          </div>
+
+          <section class="emergency-banner">
+            <div class="emergency-icon"><svg class="icon"><use href="#i-phone"/></svg></div>
+            <div class="emergency-copy"><span>紧急维权通道 · 7×24 小时</span><h2>遇到人身安全威胁或大额诈骗？立即联系我们。</h2><p>保留聊天记录、转账凭证与招聘截图，不要删除任何证据。</p></div>
+            <div class="emergency-actions"><a class="button button-accent" href="tel:12333"><svg class="icon"><use href="#i-phone"/></svg>12333 人社热线</a><button class="button button-ghost-light" data-toast="平台紧急专线：400-820-5533，正在为你转接">平台紧急专线</button></div>
+          </section>
+
+          <div class="channel-grid">
+            <div class="channel-card"><span class="channel-icon green"><svg class="icon"><use href="#i-message"/></svg></span><div><strong>平台先行调解</strong><p>平台介入沟通，平均 2 个工作日反馈</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+            <div class="channel-card"><span class="channel-icon blue"><svg class="icon"><use href="#i-scale"/></svg></span><div><strong>法律援助咨询</strong><p>合作律师提供免费初步意见</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+            <div class="channel-card"><span class="channel-icon amber"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>一键证据固化</strong><p>聊天、考勤、转账记录加密存证</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+          </div>
+
+          <div class="rights-layout">
+            <section class="form-card rights-form-card">
+              <div class="form-card-head"><div><p class="eyebrow">SUBMIT A CASE</p><h2>提交维权申请</h2></div><span class="case-number" id="latestCaseNumber">工单实时受理</span></div>
+              <form id="rightsForm" novalidate>
+                <div class="form-row">
+                  <label class="field"><span>涉事商家 / 个人 <i>*</i></span><input name="merchant" type="text" placeholder="请填写招聘方名称" required></label>
+                  <label class="field"><span>维权类型 <i>*</i></span><select name="type" required><option value="">请选择维权类型</option><option>拖欠 / 拒付薪资</option><option>收取押金或培训费</option><option>虚假招聘信息</option><option>超时用工 / 强制加班</option><option>人身安全与骚扰</option><option>其他权益受损</option></select></label>
+                </div>
+                <div class="form-row">
+                  <label class="field"><span>涉及金额（元）</span><input name="amount" type="number" min="0" step="0.01" placeholder="不涉及金额可不填"></label>
+                  <label class="field"><span>发生日期</span><input name="date" type="date" value="2026-10-20"></label>
+                </div>
+                <label class="field"><span>事情经过 <i>*</i></span><textarea name="detail" rows="5" placeholder="请按时间顺序描述事情经过，包括约定内容、实际履行情况、沟通结果等。" required></textarea></label>
+                <label class="field"><span>联系电话 <i>*</i></span><input name="phone" type="tel" placeholder="用于接收处理进度" value="138****6621" required></label>
+                <div class="field"><span>证据材料</span><label class="upload-zone" for="rightsFiles"><input id="rightsFiles" type="file" multiple hidden accept="image/*,.pdf,.doc,.docx"><span class="upload-icon"><svg class="icon"><use href="#i-upload"/></svg></span><strong>点击上传或拖拽文件到这里</strong><p>支持聊天截图、考勤记录、转账凭证等，单文件不超过 20MB</p></label><div class="file-list" id="rightsFileList"></div></div>
+                <label class="consent-line"><input type="checkbox" name="truth" required><span>我承诺所填信息真实有效，并同意平台为处理纠纷使用相关信息。</span></label>
+                <button type="submit" class="button button-dark button-block">提交维权申请 <svg class="icon"><use href="#i-arrow-right"/></svg></button>
+              </form>
+            </section>
+
+            <aside class="rights-aside">
+              <section class="aside-card progress-card">
+                <div class="section-heading mini"><div><p class="eyebrow">CASE TRACKING</p><h3>我的维权进度</h3></div><span class="badge badge-green">处理中</span></div>
+                <div class="case-summary"><span>WQ20261018032</span><small>虚假招聘信息 · ¥300.00</small><div class="case-progress-bar"><span style="width:62%"></span></div></div>
+                <div class="timeline compact-timeline">
+                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>申请已受理</strong><small>10 月 18 日 14:20</small></div></div>
+                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>证据审核通过</strong><small>10 月 18 日 16:05</small></div></div>
+                  <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>平台正在调解</strong><small>预计 10 月 21 日前反馈</small></div></div>
+                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>处理完成</strong><small>等待更新</small></div></div>
+                </div>
+                <button class="text-link" data-toast="已进入工单详情页">查看完整记录 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></button>
+              </section>
+
+              <section class="aside-card knowledge-card">
+                <div class="section-heading mini"><div><p class="eyebrow">KNOW YOUR RIGHTS</p><h3>维权知识库</h3></div></div>
+                <div class="accordion">
+                  <button class="accordion-trigger" aria-expanded="false">兼职被拖欠工资怎么办？<svg class="icon"><use href="#i-chevron-down"/></svg></button>
+                  <div class="accordion-content"><p>保留考勤、聊天记录与工作成果，先与商家书面确认欠薪金额；协商无果可在平台提交维权工单，或拨打 12333 劳动保障热线。</p></div>
+                  <button class="accordion-trigger" aria-expanded="false">入职被收押金合法吗？<svg class="icon"><use href="#i-chevron-down"/></svg></button>
+                  <div class="accordion-content"><p>用人单位不得以任何名义向劳动者收取押金、保证金或扣押身份证。遇到此类情况，请保留转账凭证并立即向平台投诉。</p></div>
+                  <button class="accordion-trigger" aria-expanded="false">只有口头约定能维权吗？<svg class="icon"><use href="#i-chevron-down"/></svg></button>
+                  <div class="accordion-content"><p>可以。聊天记录、录音、排班表、同事证言等均可作为证据。建议后续兼职务必确认工作内容与薪资并保留书面记录。</p></div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" id="page-relief" data-title="被骗救济">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">RELIEF ASSISTANCE</p>
+              <h1>被骗救济申请</h1>
+              <p class="page-subtitle">如果不慎落入兼职骗局，不要自责。提交材料，平台与公益伙伴一起帮你止损。</p>
+            </div>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-handshake"/></svg>青藤安心援助计划</span>
+          </div>
+
+          <div class="relief-layout">
+            <section class="relief-form-card" id="reliefFormCard">
+              <div class="relief-form-head">
+                <div><p class="eyebrow">APPLICATION</p><h2>救济援助申请</h2><p>预计填写时间 5 分钟，带 <i>*</i> 为必填项。</p></div>
+                <span class="relief-code">AJ-2026</span>
+              </div>
+
+              <div class="stepper" id="reliefStepper">
+                <div class="step active" data-step="1"><span>1</span><div><strong>基本信息</strong><small>申请人身份</small></div></div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2"><span>2</span><div><strong>事件详情</strong><small>被骗经过</small></div></div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3"><span>3</span><div><strong>证据材料</strong><small>上传凭证</small></div></div>
+                <div class="step-line"></div>
+                <div class="step" data-step="4"><span>4</span><div><strong>确认提交</strong><small>核对信息</small></div></div>
+              </div>
+
+              <form id="reliefForm" novalidate>
+                <div class="relief-step-panel active" data-relief-panel="1">
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-users"/></svg></span><div><h3>申请人信息</h3><p>信息将严格保密，仅用于援助审核与联系。</p></div></div>
+                  <div class="form-row">
+                    <label class="field"><span>真实姓名 <i>*</i></span><input name="name" type="text" placeholder="请输入真实姓名" required></label>
+                    <label class="field"><span>就读院校 <i>*</i></span><input name="school" type="text" placeholder="例如：上海师范大学" required></label>
+                  </div>
+                  <div class="form-row">
+                    <label class="field"><span>手机号码 <i>*</i></span><input name="phone" type="tel" placeholder="请输入可联系的手机号码" required></label>
+                    <label class="field"><span>学生身份 <i>*</i></span><select name="identity" required><option value="">请选择当前身份</option><option>在校本科生</option><option>在校研究生</option><option>应届毕业生</option><option>其他</option></select></label>
+                  </div>
+                  <label class="field"><span>被骗类型 <i>*</i></span><select name="fraudType" required><option value="">请选择被骗类型</option><option>押金 / 保证金诈骗</option><option>培训费 / 服装费诈骗</option><option>刷单返利诈骗</option><option>虚假招聘与中介诈骗</option><option>贷款 / 培训贷陷阱</option><option>其他类型</option></select></label>
+                  <div class="form-tip"><svg class="icon"><use href="#i-info"/></svg>如果涉及人身安全威胁，请先报警（110），再提交本申请。</div>
+                </div>
+
+                <div class="relief-step-panel" data-relief-panel="2">
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-file"/></svg></span><div><h3>事件详情</h3><p>请尽量完整描述，帮助平台快速判断援助方案。</p></div></div>
+                  <div class="form-row">
+                    <label class="field"><span>涉事商家 / 个人 <i>*</i></span><input name="merchant" type="text" placeholder="填写招聘方名称或昵称" required></label>
+                    <label class="field"><span>被骗金额（元） <i>*</i></span><input name="amount" type="number" min="0" step="0.01" placeholder="请输入金额" required></label>
+                  </div>
+                  <div class="form-row">
+                    <label class="field"><span>被骗日期 <i>*</i></span><input name="date" type="date" required></label>
+                    <label class="field"><span>支付方式</span><select name="payment"><option>微信转账</option><option>支付宝转账</option><option>银行卡转账</option><option>现金</option><option>其他</option></select></label>
+                  </div>
+                  <label class="field"><span>事件经过 <i>*</i></span><textarea name="detail" rows="5" placeholder="请描述招聘信息来源、对方承诺、付款过程及后续沟通情况。" required></textarea></label>
+                  <div class="field"><span>目前是否已报警</span><div class="radio-group"><label class="radio-card"><input type="radio" name="police" value="已报警" checked><span><strong>已报警</strong><small>可提供报案回执</small></span></label><label class="radio-card"><input type="radio" name="police" value="未报警"><span><strong>未报警</strong><small>需要平台协助指引</small></span></label></div></div>
+                </div>
+
+                <div class="relief-step-panel" data-relief-panel="3">
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-upload"/></svg></span><div><h3>证据材料</h3><p>材料越完整，审核速度越快。所有文件均加密存储。</p></div></div>
+                  <label class="upload-zone relief-upload" for="reliefFiles"><input id="reliefFiles" type="file" multiple hidden accept="image/*,.pdf,.doc,.docx"><span class="upload-icon"><svg class="icon"><use href="#i-upload"/></svg></span><strong>上传聊天记录、转账凭证、招聘截图等</strong><p>支持 JPG、PNG、PDF、DOC，单个文件不超过 20MB</p><span class="upload-button">选择文件</span></label>
+                  <div class="file-list" id="reliefFileList"></div>
+                  <div class="evidence-checks">
+                    <p>请确认你已准备以下材料：</p>
+                    <label class="check-row"><input type="checkbox" name="evidenceChat"><span><strong>聊天记录截图</strong><small>包含对方账号、招聘承诺与付款要求</small></span></label>
+                    <label class="check-row"><input type="checkbox" name="evidencePay"><span><strong>转账 / 付款凭证</strong><small>显示收款方、金额与时间</small></span></label>
+                    <label class="check-row"><input type="checkbox" name="evidenceJob"><span><strong>招聘信息截图</strong><small>原始岗位描述或社交媒体帖子</small></span></label>
+                  </div>
+                  <div class="form-tip amber"><svg class="icon"><use href="#i-alert"/></svg>请勿删除原始聊天记录。截图仅作为辅助证据，原始记录更有法律效力。</div>
+                </div>
+
+                <div class="relief-step-panel" data-relief-panel="4">
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-check-circle"/></svg></span><div><h3>确认并提交</h3><p>请核对以下信息，提交后平台将在 1 个工作日内联系你。</p></div></div>
+                  <div class="review-card" id="reliefReview"></div>
+                  <div class="relief-policy"><strong>援助说明</strong><p>平台将根据材料完整度与事件性质评估援助方案，包括法律咨询、协商调解、证据整理及有限额应急援助。提交申请不代表承诺发放援助金。</p></div>
+                  <label class="consent-line"><input type="checkbox" name="reliefAgreement" required><span>我已阅读并同意《青藤职伴救济援助服务说明》，确认所填信息真实有效。</span></label>
+                </div>
+
+                <div class="relief-form-actions">
+                  <button type="button" class="button button-light" id="reliefPrevButton" hidden><svg class="icon"><use href="#i-arrow-left"/></svg>上一步</button>
+                  <button type="button" class="button button-dark" id="reliefNextButton">保存并继续 <svg class="icon"><use href="#i-arrow-right"/></svg></button>
+                  <button type="submit" class="button button-dark" id="reliefSubmitButton" hidden>确认提交申请 <svg class="icon"><use href="#i-check"/></svg></button>
+                </div>
+              </form>
+
+              <div class="relief-success" id="reliefSuccess">
+                <div class="success-visual"><span class="success-ring"></span><span class="success-icon"><svg class="icon"><use href="#i-check"/></svg></span></div>
+                <p class="eyebrow">APPLICATION RECEIVED</p>
+                <h2>申请已安全提交</h2>
+                <p>援助顾问将在 <strong>1 个工作日内</strong> 与你联系，请保持手机畅通。</p>
+                <div class="success-case"><span>申请编号</span><strong id="reliefCaseNumber">AJ202610200000</strong><button class="icon-button" id="copyReliefCase" aria-label="复制申请编号"><svg class="icon"><use href="#i-file"/></svg></button></div>
+                <div class="success-timeline">
+                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>申请已提交</strong><small>刚刚</small></div></div>
+                  <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>材料审核</strong><small>预计 1 个工作日内</small></div></div>
+                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>援助方案沟通</strong><small>审核通过后</small></div></div>
+                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>援助执行</strong><small>双方确认后</small></div></div>
+                </div>
+                <div class="success-actions"><button class="button button-dark" data-page="rights">同步提交维权工单</button><button class="button button-light" id="newReliefButton">返回工作台</button></div>
+                <p class="success-note"><svg class="icon icon-sm"><use href="#i-lock"/></svg>所有材料已加密保存，仅授权援助顾问查看。</p>
+              </div>
+            </section>
+
+            <aside class="relief-aside">
+              <section class="aside-card aid-card">
+                <span class="aid-icon"><svg class="icon"><use href="#i-handshake"/></svg></span>
+                <p class="eyebrow">QINGTENG CARE</p>
+                <h3>青藤安心援助计划</h3>
+                <p>由平台安全基金与公益法律伙伴共同支持，为受骗学生提供多维援助。</p>
+                <ul class="check-list">
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>免费法律咨询与材料梳理</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>平台调解与商家追责协助</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>最高 2,000 元应急援助金</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>心理支持与反诈陪伴</li>
+                </ul>
+              </section>
+              <section class="aside-card relief-contact-card">
+                <div class="section-heading mini"><div><p class="eyebrow">NEED HELP?</p><h3>申请遇到问题？</h3></div></div>
+                <p>援助顾问在线时间：每日 09:00 - 21:00</p>
+                <button class="button button-light button-block" data-toast="正在为你接入援助顾问"><svg class="icon"><use href="#i-message"/></svg>联系援助顾问</button>
+                <a class="relief-hotline" href="tel:4008205533"><svg class="icon"><use href="#i-phone"/></svg>400-820-5533</a>
+              </section>
+              <section class="aside-card relief-history-card">
+                <div class="section-heading mini"><div><p class="eyebrow">HISTORY</p><h3>最近申请</h3></div></div>
+                <div id="reliefHistoryList" class="relief-history-list"></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>© 2026 青藤职伴 · 让每一份青春劳动都被善待</span>
+        <span><a href="#rights">维权热线 400-820-5533</a><i>·</i><a href="#compliance">安全规则</a><i>·</i><a href="#dashboard">关于我们</a></span>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="jobModal" role="dialog" aria-modal="true" aria-labelledby="jobModalTitle">
+    <div class="modal job-modal-panel">
+      <button class="modal-close" data-close-modal="jobModal" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
+      <div id="jobModalContent"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="withdrawModal" role="dialog" aria-modal="true" aria-labelledby="withdrawModalTitle">
+    <div class="modal modal-sm">
+      <button class="modal-close" data-close-modal="withdrawModal" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
+      <div class="modal-head"><span class="modal-icon green"><svg class="icon"><use href="#i-banknote"/></svg></span><div><p class="eyebrow">WITHDRAW</p><h2 id="withdrawModalTitle">申请提现</h2></div></div>
+      <div class="withdraw-available"><span>可提现余额</span><strong>¥ <span id="withdrawAvailable">3,260.00</span></strong></div>
+      <form id="withdrawForm" novalidate>
+        <label class="field"><span>提现金额</span><div class="amount-input"><span>¥</span><input id="withdrawAmount" name="amount" type="number" min="1" step="0.01" placeholder="0.00" required><button type="button" class="text-button" id="withdrawAll">全部提现</button></div></label>
+        <div class="withdraw-method"><span>到账方式</span><div class="method-option"><span class="merchant-logo logo-alipay">支</span><div><strong>支付宝</strong><small>138****6621</small></div><span class="method-check"><svg class="icon"><use href="#i-check"/></svg></span></div></div>
+        <p class="withdraw-note"><svg class="icon icon-sm"><use href="#i-info"/></svg>预计 2 小时内到账，单笔最低 ¥1.00。提现不收取手续费。</p>
+        <button type="submit" class="button button-dark button-block">确认提现</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
