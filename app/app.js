@@ -20,10 +20,10 @@
 
   const pageTitles = {
     dashboard: '工作台',
-    jobs: '招聘大厅',
-    merchant: '商家中心',
+    jobs: '岗位样本',
+    merchant: '商家自检',
     profile: '个人画像',
-    wallet: '薪资结算',
+    wallet: '薪资存证',
     compliance: '合规检测',
     rights: '快捷维权',
     relief: '被骗救济'
@@ -39,20 +39,14 @@
       unit: '元/天',
       paySort: 200,
       settlement: '日结',
-      location: '徐汇 · 漕河泾',
-      area: '徐汇',
+      location: '济南 · 历下',
+      area: '历下',
       distance: '距你 2.4km',
       schedule: '周六日 10:00-18:00',
       tags: ['包午餐', '地铁周边', '可连做'],
-      safety: 96,
-      urgent: true,
-      logo: 'M',
-      logoClass: 'logo-mstand',
-      rating: '4.9',
-      applicants: 28,
       description: '负责门店点单、饮品制作辅助、取餐区整理与顾客接待。门店氛围轻松，提供完整岗前培训，无需咖啡经验。',
       requirements: ['有服务意识，沟通自然', '可连续工作 4 个周末', '持健康证或可在入职前办理'],
-      highlight: '商家已实名认证 · 薪资已进入平台担保'
+      highlight: '商家已提交认证材料 · 薪资约定可存证'
     },
     {
       id: 'job-2',
@@ -68,63 +62,45 @@
       distance: '远程办公',
       schedule: '每周 3 天 · 时间灵活',
       tags: ['远程', '作品集加分', '长期'],
-      safety: 92,
-      urgent: false,
-      logo: '知',
-      logoClass: 'logo-blue',
-      rating: '4.8',
-      applicants: 41,
       description: '运营校园新媒体账号，完成选题策划、图文编辑与社群互动。每周提交内容排期，数据表现优秀另有奖励。',
       requirements: ['熟悉小红书 / 公众号内容生态', '具备基础图片编辑能力', '每周可投入 12 小时以上'],
-      highlight: '线上签约 · 周结薪资已托管'
+      highlight: '线上签约 · 周结金额可记录存证'
     },
     {
       id: 'job-3',
       title: '展会双语引导',
-      merchant: '上海澜图会展',
+      merchant: '山东澜图会展',
       category: '活动执行',
       pay: '260',
       unit: '元/天',
       paySort: 260,
       settlement: '日结',
-      location: '青浦 · 国家会展中心',
-      area: '青浦',
-      distance: '地铁 2 号线直达',
+      location: '济南 · 山东国际会展中心',
+      area: '槐荫',
+      distance: '地铁直达会展中心',
       schedule: '11 月 12 日-14 日 08:30-17:30',
       tags: ['英语口语', '提供工作餐', '三天连做'],
-      safety: 94,
-      urgent: true,
-      logo: '澜',
-      logoClass: 'logo-coral',
-      rating: '4.9',
-      applicants: 17,
       description: '负责展会入口引导、嘉宾接待与双语咨询，协助现场秩序维护。活动前提供统一培训与工作证件。',
       requirements: ['英语口语流利，CET-6 优先', '形象大方，有展会经验优先', '可完成三天连续工作'],
-      highlight: '大型活动备案 · 每日完工即结'
+      highlight: '活动信息样本 · 结算条款待核验'
     },
     {
       id: 'job-4',
       title: '数据标注实习生',
       merchant: '云粒科技',
       category: '线上兼职',
-      pay: '25',
+      pay: '30',
       unit: '元/小时',
-      paySort: 25,
+      paySort: 30,
       settlement: '月结',
       location: '线上 · 远程',
       area: '线上',
       distance: '远程办公',
       schedule: '每周 10-15 小时 · 自由排班',
       tags: ['远程', '技能培训', '实习证明'],
-      safety: 88,
-      urgent: false,
-      logo: '云',
-      logoClass: 'logo-purple',
-      rating: '4.7',
-      applicants: 63,
       description: '根据标注规范完成图像与文本数据整理，协助质检样本。任务按批次发放，提供线上培训与答疑支持。',
       requirements: ['耐心细致，能长期参与', '自备电脑与稳定网络', '每周至少完成 10 小时'],
-      highlight: '企业实名认证 · 平台月度结算'
+      highlight: '企业已提交认证材料 · 金额与结算方式待确认'
     },
     {
       id: 'job-5',
@@ -135,20 +111,14 @@
       unit: '元/小时',
       paySort: 80,
       settlement: '周结',
-      location: '浦东 · 金桥',
-      area: '浦东',
+      location: '济南 · 高新区',
+      area: '高新区',
       distance: '距你 5.1km',
       schedule: '工作日 16:30-19:30',
       tags: ['师范优先', '周结', '提供晚餐'],
-      safety: 90,
-      urgent: false,
-      logo: '树',
-      logoClass: 'logo-sand',
-      rating: '4.8',
-      applicants: 23,
       description: '辅导小学阶段学生完成课后作业，维持课堂秩序，并与家长进行简单反馈。每班不超过 8 名学生。',
       requirements: ['本科在读，师范专业优先', '有耐心，善于与孩子沟通', '每周至少到岗 3 天'],
-      highlight: '办学资质已核验 · 一对一岗前带教'
+      highlight: '办学材料已提交 · 认证仅为形式核验'
     },
     {
       id: 'job-6',
@@ -159,20 +129,14 @@
       unit: '元/天',
       paySort: 180,
       settlement: '日结',
-      location: '静安 · 大宁',
-      area: '静安',
+      location: '济南 · 槐荫',
+      area: '槐荫',
       distance: '距你 4.8km',
       schedule: '周六日 11:00-19:00',
       tags: ['宠物友好', '日结', '可撸猫'],
-      safety: 85,
-      urgent: false,
-      logo: '毛',
-      logoClass: 'logo-coral',
-      rating: '4.7',
-      applicants: 32,
       description: '协助完成宠物洗护区清理、用品整理与顾客接待，不涉及专业洗护操作。店内有猫，需对宠物毛发不过敏。',
       requirements: ['喜欢小动物，不怕猫狗', '可接受站立工作', '周末可稳定到岗'],
-      highlight: '到店打卡 · 完工当日结算'
+      highlight: '工时记录可留痕 · 结算条款待确认'
     },
     {
       id: 'job-7',
@@ -188,15 +152,9 @@
       distance: '远程办公',
       schedule: '按项目交付 · 时间自由',
       tags: ['远程', '按条结算', '可长期合作'],
-      safety: 91,
-      urgent: false,
-      logo: '野',
-      logoClass: 'logo-purple',
-      rating: '4.9',
-      applicants: 38,
       description: '根据脚本完成 60 秒以内短视频剪辑，包含基础字幕、节奏卡点与封面制作。试稿通过后进入长期合作池。',
       requirements: ['熟练使用剪映 / PR', '有短视频作品可展示', '能在约定时间内交付'],
-      highlight: '项目合同 · 验收后平台放款'
+      highlight: '项目合同 · 验收后按约定记录结算'
     },
     {
       id: 'job-8',
@@ -207,38 +165,84 @@
       unit: '元/小时',
       paySort: 22,
       settlement: '日结',
-      location: '杨浦 · 五角场',
-      area: '杨浦',
+      location: '济南 · 长清大学城',
+      area: '长清',
       distance: '距你 3.2km',
       schedule: '可排班 · 每次 4 小时起',
       tags: ['排班灵活', '就近安排', '日结'],
-      safety: 89,
-      urgent: false,
-      logo: '邻',
-      logoClass: 'logo-blue',
-      rating: '4.6',
-      applicants: 46,
       description: '负责货架商品整理、价签核对与简单库存盘点，协助高峰时段的顾客引导。工作强度适中。',
       requirements: ['认真负责，能接受站立工作', '每周可排班 2 次以上', '可长期兼职优先'],
-      highlight: '门店直招 · 工时打卡自动结算'
+      highlight: '门店用工样本 · 工时记录可留痕'
     }
   ];
 
+  const sampleRisks = {
+    'job-1': [
+      { level: 'high', label: '薪资条款缺失' },
+      { level: 'medium', label: '无书面合同' }
+    ],
+    'job-2': [
+      { level: 'medium', label: '结算周期不明确' },
+      { level: 'medium', label: '知识产权归属缺失' }
+    ],
+    'job-3': [
+      { level: 'high', label: '无书面协议' },
+      { level: 'medium', label: '超时补偿不明' }
+    ],
+    'job-4': [
+      { level: 'high', label: '薪资计算口径不清' },
+      { level: 'medium', label: '验收标准缺失' }
+    ],
+    'job-5': [
+      { level: 'medium', label: '安全保障未约定' },
+      { level: 'medium', label: '试用期待遇缺失' }
+    ],
+    'job-6': [
+      { level: 'high', label: '意外责任未约定' },
+      { level: 'medium', label: '无书面合同' }
+    ],
+    'job-7': [
+      { level: 'medium', label: '验收标准不明确' },
+      { level: 'medium', label: '版权归属不清' }
+    ],
+    'job-8': [
+      { level: 'medium', label: '工时记录方式不明' },
+      { level: 'medium', label: '休息时间未列明' }
+    ]
+  };
+
+  const sampleMeta = {
+    'job-1': { logo: 'M', logoClass: 'logo-mstand' },
+    'job-2': { logo: '知', logoClass: 'logo-blue' },
+    'job-3': { logo: '澜', logoClass: 'logo-coral' },
+    'job-4': { logo: '云', logoClass: 'logo-purple' },
+    'job-5': { logo: '树', logoClass: 'logo-sand' },
+    'job-6': { logo: '毛', logoClass: 'logo-coral' },
+    'job-7': { logo: '野', logoClass: 'logo-purple' },
+    'job-8': { logo: '邻', logoClass: 'logo-blue' }
+  };
+
+  jobs.forEach((job, index) => {
+    Object.assign(job, sampleMeta[job.id] || {});
+    job.risks = sampleRisks[job.id] || [];
+    job.detected = `10 月 ${18 - Math.floor(index / 2)} 日`;
+  });
+
   const initialTransactions = [
-    { type: 'in', title: '校园新媒体运营 · 周结', meta: '10 月 18 日 14:32 · 支付宝到账', amount: 450 },
-    { type: 'in', title: 'M Stand 咖啡 · 日结', meta: '10 月 17 日 19:05 · 平台担保结算', amount: 200 },
-    { type: 'out', title: '提现至支付宝', meta: '10 月 15 日 11:20 · 2 小时内到账', amount: 500 },
-    { type: 'in', title: '展会双语引导 · 日结', meta: '10 月 12 日 18:40 · 平台担保结算', amount: 520 },
-    { type: 'in', title: '宠物店周末助理 · 日结', meta: '10 月 11 日 20:10 · 平台担保结算', amount: 180 },
-    { type: 'in', title: '平台安全奖励', meta: '10 月 9 日 09:30 · 合规岗位体验奖励', amount: 20 }
+    { type: 'in', title: '校园新媒体运营 · 周结', meta: '10 月 18 日 14:32 · 双方确认已线下结算', amount: 450, status: '已确认' },
+    { type: 'in', title: 'M Stand 咖啡 · 日结', meta: '10 月 17 日 19:05 · 双方确认已线下结算', amount: 200, status: '已确认' },
+    { type: 'in', title: '展会双语引导 · 日结', meta: '10 月 12 日 18:40 · 双方确认已线下结算', amount: 520, status: '已确认' },
+    { type: 'in', title: '宠物店周末助理 · 日结', meta: '10 月 11 日 20:10 · 双方确认已线下结算', amount: 180, status: '已确认' },
+    { type: 'in', title: '短视频剪辑 · 项目结', meta: '10 月 9 日 09:30 · 验收记录已存证', amount: 300, status: '待确认' },
+    { type: 'in', title: '超市理货员 · 日结', meta: '10 月 8 日 20:15 · 待商家确认结算', amount: 88, status: '待结算' }
   ];
 
   const initialMerchantJobs = [
-    { id: 'pos-1', title: '周末咖啡店店员', meta: '徐汇 · 漕河泾 · 周六日', pay: '200 元/天', settlement: '日结', applicants: 28, status: 'active', logo: 'M', logoClass: 'logo-mstand' },
-    { id: 'pos-2', title: '品牌快闪店店员', meta: '静安 · 南京西路 · 11 月档期', pay: '260 元/天', settlement: '日结', applicants: 12, status: 'active', logo: 'M', logoClass: 'logo-mstand' },
-    { id: 'pos-3', title: '咖啡师学徒', meta: '徐汇 · 漕河泾 · 每周 3 天', pay: '25 元/小时', settlement: '周结', applicants: 7, status: 'pending', logo: 'M', logoClass: 'logo-mstand' },
-    { id: 'pos-4', title: '门店社群运营', meta: '线上 · 每周 8 小时', pay: '120 元/天', settlement: '周结', applicants: 4, status: 'active', logo: 'M', logoClass: 'logo-mstand' },
-    { id: 'pos-5', title: '秋季校园大使', meta: '多校区 · 项目制', pay: '150 元/天', settlement: '项目结', applicants: 19, status: 'closed', logo: 'M', logoClass: 'logo-mstand' }
+    { id: 'pos-1', title: '周末咖啡店店员', meta: '济南 · 历下 · 周六日', pay: '200 元/天', settlement: '日结', riskCount: 2, status: 'active', logo: 'M', logoClass: 'logo-mstand' },
+    { id: 'pos-2', title: '品牌快闪店店员', meta: '济南 · 槐荫 · 11 月档期', pay: '260 元/天', settlement: '日结', riskCount: 1, status: 'active', logo: 'M', logoClass: 'logo-mstand' },
+    { id: 'pos-3', title: '咖啡师学徒', meta: '济南 · 历下 · 每周 3 天', pay: '30 元/小时', settlement: '周结', riskCount: 2, status: 'pending', logo: 'M', logoClass: 'logo-mstand' },
+    { id: 'pos-4', title: '门店社群运营', meta: '线上 · 每周 8 小时', pay: '120 元/天', settlement: '周结', riskCount: 0, status: 'active', logo: 'M', logoClass: 'logo-mstand' },
+    { id: 'pos-5', title: '秋季校园大使', meta: '多校区 · 项目制', pay: '150 元/天', settlement: '项目结', riskCount: 1, status: 'closed', logo: 'M', logoClass: 'logo-mstand' }
   ];
 
   const initialReliefHistory = [
@@ -249,9 +253,8 @@
     category: '全部',
     search: '',
     location: 'all',
-    settlement: 'all',
     sort: 'recommend',
-    walletBalance: 3260,
+    walletBalance: 1840,
     transactions: initialTransactions.slice(),
     merchantJobs: initialMerchantJobs.slice(),
     reliefStep: 1,
@@ -272,32 +275,35 @@
   }
 
   function renderJobCard(job) {
+    const highCount = job.risks.filter((risk) => risk.level === 'high').length;
     return `
-      <article class="job-card" data-job-id="${escapeHTML(job.id)}" tabindex="0" role="button" aria-label="查看岗位：${escapeHTML(job.title)}">
+      <article class="job-card sample-card" data-job-id="${escapeHTML(job.id)}" tabindex="0" role="button" aria-label="查看岗位风险样本：${escapeHTML(job.title)}">
         <div class="job-card-head">
           <div class="merchant-line">
             <span class="merchant-logo ${escapeHTML(job.logoClass || '')}">${escapeHTML(job.logo || job.merchant.slice(0, 1))}</span>
             <div>
               <strong>${escapeHTML(job.merchant)}</strong>
-              <span class="merchant-verified" title="商家认证仅为提交材料的形式核验展示，不代表平台担保岗位真实可靠">${icon('check-circle')}已认证商家 · 材料形式核验</span>
+              <span class="merchant-verified">${icon('check-circle')}已核验</span>
             </div>
           </div>
-          <button class="save-button" data-save-job="${escapeHTML(job.id)}" aria-label="收藏岗位" aria-pressed="false">${icon('bookmark')}</button>
+          <span class="sample-badge">待检岗位示例</span>
         </div>
         <div class="job-card-body">
           <div class="job-title-row">
             <h3>${escapeHTML(job.title)}</h3>
-            ${job.urgent ? '<span class="urgent-tag">急招</span>' : ''}
+            <span class="sample-risk-count">风险项 ${job.risks.length} 个</span>
           </div>
-          <div class="job-tags">${job.tags.slice(0, 3).map((tag) => `<span>${escapeHTML(tag)}</span>`).join('')}</div>
+          <div class="job-risk-chips">
+            ${job.risks.map((risk) => `<span class="risk-chip ${risk.level}"><i></i>${escapeHTML(risk.label)}</span>`).join('')}
+          </div>
         </div>
         <div class="job-meta">
           <span>${icon('map-pin')}${escapeHTML(job.location)}</span>
-          <span>${icon('clock')}${escapeHTML(job.schedule)}</span>
+          <span>${icon('file')}检测于 ${escapeHTML(job.detected)}</span>
         </div>
         <div class="job-card-foot">
-          <div class="job-pay"><strong>${escapeHTML(job.pay)}</strong><span>${escapeHTML(job.unit)}</span><small>${escapeHTML(job.settlement)}</small></div>
-          <span class="job-cert-note">认证仅为材料形式核验</span>
+          <span class="sample-footnote">${highCount ? `${highCount} 项高风险提示` : '暂无高风险提示'} · 仅展示检测结果</span>
+          <span class="sample-report-link">查看风险报告 ${icon('arrow-right')}</span>
         </div>
       </article>
     `;
@@ -306,22 +312,18 @@
   function filteredJobs() {
     let list = jobs.filter((job) => {
       const keyword = state.search.trim().toLowerCase();
-      const matchesKeyword = !keyword || [job.title, job.merchant, job.category, job.location, job.schedule, job.settlement, job.description, ...job.tags]
+      const matchesKeyword = !keyword || [job.title, job.merchant, job.category, job.location, job.description, ...job.tags, ...job.risks.map((risk) => risk.label)]
         .join(' ')
         .toLowerCase()
         .includes(keyword);
       const matchesCategory = state.category === '全部' || job.category === state.category;
       const matchesLocation = state.location === 'all' || job.area === state.location;
-      const matchesSettlement = state.settlement === 'all' || job.settlement === state.settlement;
-      return matchesKeyword && matchesCategory && matchesLocation && matchesSettlement;
+      return matchesKeyword && matchesCategory && matchesLocation;
     });
 
-    if (state.sort === 'safety') {
-      list = list.slice().sort((a, b) => b.safety - a.safety);
-    } else if (state.sort === 'pay') {
-      list = list.slice().sort((a, b) => b.paySort - a.paySort);
-    } else {
-      list = list.slice().sort((a, b) => Number(b.urgent) - Number(a.urgent));
+    if (state.sort === 'risk') {
+      const highRiskCount = (job) => job.risks.filter((risk) => risk.level === 'high').length;
+      list = list.slice().sort((a, b) => highRiskCount(b) - highRiskCount(a) || b.risks.length - a.risks.length);
     }
     return list;
   }
@@ -369,66 +371,58 @@
           <span class="merchant-logo ${escapeHTML(job.logoClass || '')}">${escapeHTML(job.logo)}</span>
           <div class="job-modal-title">
             <div class="merchant-line">
-              <div><strong>${escapeHTML(job.merchant)}</strong><span class="merchant-verified">${icon('check-circle')}已提交认证材料 · 材料形式核验</span></div>
+              <div><strong>${escapeHTML(job.merchant)}</strong><span class="merchant-verified">${icon('check-circle')}资质材料已提交 · 形式核验</span></div>
             </div>
             <h2 id="jobModalTitle">${escapeHTML(job.title)}</h2>
             <div class="job-meta">
               <span>${icon('map-pin')}${escapeHTML(job.location)}</span>
-              <span>${icon('clock')}${escapeHTML(job.schedule)}</span>
-              <span>${icon('users')}${job.applicants} 人已申请</span>
+              <span>${icon('file')}检测于 ${escapeHTML(job.detected)}</span>
+              <span>${icon('alert')}风险项 ${job.risks.length} 个</span>
             </div>
           </div>
-          <div class="job-modal-pay">
-            <strong>${escapeHTML(job.pay)}</strong>
-            <span>${escapeHTML(job.unit)} · ${escapeHTML(job.settlement)}</span>
-          </div>
+          <span class="sample-badge modal-sample-badge">待检岗位示例</span>
         </div>
         <div class="job-modal-badges">
-          <span>${icon('file')}商家已提交认证材料</span>
-          <span>${icon('info')}认证不代表岗位担保</span>
-          <span>${icon('lock')}薪资记录可留痕</span>
+          <span>${icon('file')}仅展示检测结果</span>
+          <span>${icon('info')}不提供联系方式</span>
+          <span>${icon('lock')}不提供报名或交易入口</span>
         </div>
         <p class="certification-boundary">认证说明：商家认证仅为提交材料的形式核验展示，不代表平台担保岗位真实可靠，请学生自行甄别风险。</p>
       </div>
       <div class="job-modal-body">
         <div>
           <section class="job-modal-section">
-            <h3>工作内容</h3>
+            <h3>样本岗位内容</h3>
             <p>${escapeHTML(job.description)}</p>
           </section>
           <section class="job-modal-section">
-            <h3>任职要求</h3>
+            <h3>样本中的约定要求</h3>
             <ul>${job.requirements.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
           </section>
           <section class="job-modal-section">
-            <h3>结算与记录</h3>
-            <p>岗位信息与薪资结算约定由商家提供，平台保留沟通与打卡记录。如遇欠薪或收费纠纷，可提交维权工单，平台将协助调解。认证展示不代表平台对岗位真实性提供担保。</p>
+            <h3>检测出的风险项</h3>
+            <div class="modal-risk-list">
+              ${job.risks.map((risk) => `<div class="modal-risk-item ${risk.level}"><span>${risk.level === 'high' ? '高风险隐患' : '中等风险隐患'}</span><strong>${escapeHTML(risk.label)}</strong></div>`).join('')}
+            </div>
           </section>
-          <div class="apply-panel" id="applyPanel">
-            <h3>投递这份兼职</h3>
-            <p>投递后商家将通过平台与你联系，请勿脱离平台进行转账。</p>
-            <form id="jobApplyForm">
-              <textarea id="applyNote" placeholder="向商家简单介绍自己，例如可到岗时间、相关经验……"></textarea>
-              <div class="form-actions">
-                <button type="button" class="button button-light button-sm" data-cancel-apply>取消</button>
-                <button type="submit" class="button button-dark button-sm">确认投递</button>
-              </div>
-            </form>
+          <div class="sample-disclaimer-inline">
+            ${icon('info')}
+            <p>本样本仅用于展示岗位风险检测结果，不包含联系方式，也不提供报名、申请或交易入口。</p>
           </div>
         </div>
         <aside class="job-modal-side">
           <div class="job-safety-score">
-            <div><span>认证状态</span><strong style="font-size:12px">已提交材料</strong></div>
-            <p>平台仅对商家提交的认证材料进行形式核验，不对岗位真实性和可靠性作出担保。</p>
+            <div><span>样本说明</span><strong style="font-size:12px">仅展示检测结果</strong></div>
+            <p>平台不对岗位真实性和可靠性作出担保，请自行核实工作内容与结算约定。</p>
           </div>
           <div class="job-safe-checks">
-            <span>${icon('file')}商家已提交认证材料</span>
-            <span>${icon('info')}岗位信息由商家自行发布</span>
-            <span>${icon('alert')}请自行核实工作内容与结算约定</span>
+            <span>${icon('file')}商家认证材料仅作形式核验</span>
+            <span>${icon('info')}样本不提供任何联系方式</span>
+            <span>${icon('alert')}如遇类似风险可提交维权工单</span>
           </div>
-          <button class="button button-dark" data-apply-job="${escapeHTML(job.id)}">立即申请</button>
-          <button class="button button-light" data-save-job="${escapeHTML(job.id)}">${icon('bookmark')}收藏岗位</button>
-          <button class="job-modal-footnote" style="background:none;border:0;padding:0;cursor:pointer;text-align:left" data-report-job="${escapeHTML(job.id)}">${icon('alert')}举报此岗位 / 我有疑问</button>
+          <button class="button button-dark" data-page="compliance">检测我的合同</button>
+          <button class="button button-light" data-close-modal="jobModal">返回样本库</button>
+          <button class="job-modal-footnote" style="background:none;border:0;padding:0;cursor:pointer;text-align:left" data-toast="如遇权益受损，请前往快捷维权提交工单">${icon('alert')}我有类似问题</button>
         </aside>
       </div>
     `;
@@ -451,7 +445,7 @@
     $$('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.page === page));
     const title = $('#topbarTitle');
     if (title) title.textContent = pageTitles[page];
-    document.title = `${pageTitles[page]} · 青藤职伴`;
+    document.title = `${pageTitles[page]} · 青薪盾`;
     closeSidebar();
     if (page === 'wallet') renderWallet();
     if (page === 'merchant') {
@@ -481,28 +475,18 @@
 
   function renderWallet() {
     const balanceEl = $('#walletBalance');
-    const availableEl = $('#withdrawAvailable');
     const balanceText = formatMoney(state.walletBalance);
     if (balanceEl) balanceEl.textContent = balanceText;
-    if (availableEl) availableEl.textContent = balanceText;
     const list = $('#transactionList');
     if (list) {
       list.innerHTML = state.transactions.map((transaction) => `
         <div class="transaction-row">
           <span class="transaction-icon ${transaction.type === 'out' ? 'out' : ''}">${icon(transaction.type === 'out' ? 'arrow-up-right' : 'banknote')}</span>
           <div class="transaction-info"><strong>${escapeHTML(transaction.title)}</strong><span>${escapeHTML(transaction.meta)}</span></div>
-          <div class="transaction-amount ${transaction.type === 'out' ? 'out' : ''}">${transaction.type === 'out' ? '-' : '+'}¥${formatMoney(transaction.amount)}<small>${transaction.status || (transaction.type === 'out' ? '已到账' : '已入账')}</small></div>
+          <div class="transaction-amount ${transaction.type === 'out' ? 'out' : ''}">${transaction.type === 'out' ? '-' : '+'}¥${formatMoney(transaction.amount)}<small>${transaction.status || '已确认'}</small></div>
         </div>
       `).join('');
     }
-  }
-
-  function openWithdraw() {
-    renderWallet();
-    const amount = $('#withdrawAmount');
-    if (amount) amount.value = '';
-    openModal('withdrawModal');
-    window.setTimeout(() => amount?.focus(), 150);
   }
 
   function updateClockUI() {
@@ -532,9 +516,9 @@
     if (list) {
       list.innerHTML = state.merchantJobs.map((position) => {
         const statusMap = {
-          active: ['招聘中', ''],
-          pending: ['审核中', 'pending'],
-          closed: ['已下架', 'closed']
+          active: ['检测完成', ''],
+          pending: ['检测中', 'pending'],
+          closed: ['已归档', 'closed']
         };
         const [statusText, statusClass] = statusMap[position.status] || statusMap.active;
         return `
@@ -544,11 +528,10 @@
               <div><strong>${escapeHTML(position.title)}</strong><span>${escapeHTML(position.meta)}</span></div>
             </div>
             <div class="merchant-job-cell"><strong>${escapeHTML(position.pay)}</strong><span>${escapeHTML(position.settlement)}</span></div>
-            <div class="merchant-job-cell"><strong>${position.applicants} 人</strong><span>累计应聘</span></div>
+            <div class="merchant-job-cell"><strong>${position.riskCount || 0} 项</strong><span>风险提示</span></div>
             <div><span class="status-label ${statusClass}">${statusText}</span></div>
             <div class="row-actions">
-              <button class="button button-light button-sm" data-row-action="edit" data-position-id="${escapeHTML(position.id)}">编辑</button>
-              <button class="button button-light button-sm" data-row-action="toggle" data-position-id="${escapeHTML(position.id)}">${position.status === 'closed' ? '上架' : '下架'}</button>
+              <button class="button button-light button-sm" data-toast="示例模式：检测报告暂不展开">查看报告</button>
             </div>
           </div>
         `;
@@ -612,11 +595,11 @@
 
     const checks = [];
     if (matched.sensitive) {
-      checks.push({ status: 'fail', name: '主体资质', detail: '招聘文本索取身份证、银行卡等敏感信息，存在身份盗用风险。' });
+      checks.push({ status: 'fail', name: '主体资质', detail: '岗位文本索取身份证、银行卡等敏感信息，存在身份盗用风险。' });
     } else if (hasSubject) {
-      checks.push({ status: 'pass', name: '主体资质', detail: '识别到招聘主体信息，建议仍核验营业执照或门店地址。' });
+      checks.push({ status: 'pass', name: '主体资质', detail: '识别到岗位主体信息，建议仍核验营业执照或门店地址。' });
     } else {
-      checks.push({ status: 'warn', name: '主体资质', detail: '未识别到明确的招聘主体，无法确认发布方真实身份。' });
+      checks.push({ status: 'warn', name: '主体资质', detail: '未识别到明确的岗位主体，无法确认发布方真实身份。' });
     }
 
     if (matched.promise || !hasAmount) {
@@ -642,7 +625,7 @@
     }
 
     if (matched.contact) {
-      checks.push({ status: 'warn', name: '联系规范', detail: '招聘方引导添加私人微信或站外私聊，脱离平台保障后维权难度较高。' });
+      checks.push({ status: 'warn', name: '联系规范', detail: '岗位方引导添加私人微信或站外私聊，脱离平台保障后维权难度较高。' });
     } else {
       checks.push({ status: 'pass', name: '联系规范', detail: '未发现明显的站外私下联系引导。' });
     }
@@ -673,12 +656,12 @@
     }
 
     const advice = [];
-    if (matched.fee) advice.push('拒绝任何形式的入职前收费，正规招聘不会向求职者收取押金、服装费或培训费。');
+    if (matched.fee) advice.push('拒绝任何形式的入职前收费，正规岗位不会向求职者收取押金、服装费或培训费。');
     if (matched.gray) advice.push('刷单、返利、代注册等均可能涉及违法活动，请立即停止沟通并向平台举报。');
     if (matched.contact) advice.push('坚持在平台内沟通与交易，不要添加私人微信或向个人账户转账。');
     if (matched.noContract) advice.push('要求签订书面兼职协议，明确工作内容、薪资标准与结算时间。');
     if (!hasAmount) advice.push('主动询问并按「金额 + 计价单位 + 结算周期」确认薪资，截图留存。');
-    if (!advice.length) advice.push('通过平台官方渠道投递，入职前确认协议内容，并保存聊天、考勤与薪资记录。');
+    if (!advice.length) advice.push('通过平台官方渠道沟通，入职前确认协议内容，并保存聊天、考勤与薪资记录。');
     advice.push('如已发生转账或纠纷，立即在平台发起快捷维权，并拨打 12333 咨询。');
 
     return {
@@ -695,7 +678,7 @@
 
   const contractSample = `兼职合作协议
 甲方：星启文化传媒有限公司
-乙方：林小满
+乙方：马小满
 
 一、乙方入职前需一次性缴纳服装费、培训费共 198 元，工作满 30 天后退还。
 二、兼职工资统一于次月 30 日发放，若乙方中途离职，未结算工资不予支付。
@@ -718,7 +701,7 @@
       explanation: '“中途离职不结算”属于变相克扣劳动报酬。即使提前结束兼职，已经完成的工作也应当按约定支付工资。',
       law: '《劳动法》第五十条：工资应当以货币形式按月支付给劳动者本人，不得克扣或者无故拖欠劳动者的工资。',
       advice: '要求改为按实际完成工时结算，并在协议中写明具体结算节点。',
-      script: '“如果我只做了一部分，已完成的工时还是需要按约定结算，能把结算方式改成按实际工时计算吗？”'
+      script: '“如果我只做了一部分，已完成的工时还是需要按约定结算，请把结算方式改成按实际工时计算。”'
     },
     {
       level: 'medium',
@@ -734,7 +717,7 @@
       explanation: '此类“意外免责”并不能当然免除用工方责任，发生伤害时仍可能涉及赔偿责任，签署前应要求补充安全保障。',
       law: '《民法典》第一千一百九十二条：个人之间形成劳务关系，提供劳务一方因劳务受到损害的，根据双方各自的过错承担相应的责任。',
       advice: '要求明确工作场所安全责任，并确认商家是否购买相关保险。',
-      script: '“工作期间的安全保障需要在协议里写清楚，能否补充意外险或明确安全责任？”'
+      script: '“工作期间的安全保障需要在协议里写清楚，请补充意外险或明确安全责任。”'
     },
     {
       level: 'medium',
@@ -742,7 +725,7 @@
       explanation: '“最终解释权归甲方”会削弱你的协商和维权空间，格式条款的解释不应由单方决定。',
       law: '《民法典》第四百九十六条：采用格式条款订立合同的，应当遵循公平原则确定当事人之间的权利和义务。',
       advice: '删除单方解释权条款，改为双方协商或依法处理。',
-      script: '“这条单方解释的约定不太公平，能否改成双方协商解决？”'
+      script: '“这条单方解释的约定不太公平，请改成双方协商解决。”'
     }
   ];
 
@@ -951,13 +934,6 @@
     }, true);
 
     document.addEventListener('click', (event) => {
-      const saveButton = event.target.closest('[data-save-job]');
-      if (saveButton) {
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
-
       const jobCard = event.target.closest('.job-card');
       if (jobCard) {
         openJobModal(jobCard.dataset.jobId);
@@ -967,6 +943,9 @@
       const pageTrigger = event.target.closest('[data-page]');
       if (pageTrigger) {
         event.preventDefault();
+        $$('.modal-backdrop.open').forEach((modal) => {
+          if (modal.id !== 'complianceGate') closeModal(modal.id);
+        });
         navigate(pageTrigger.dataset.page);
         if (pageTrigger.dataset.toast) showToast(pageTrigger.dataset.toast, 'info');
         return;
@@ -987,48 +966,6 @@
       const merchantTab = event.target.closest('[data-merchant-tab]');
       if (merchantTab) {
         switchMerchantTab(merchantTab.dataset.merchantTab);
-        return;
-      }
-
-      const applyTrigger = event.target.closest('[data-apply-job]');
-      if (applyTrigger && !applyTrigger.disabled) {
-        const panel = $('#applyPanel');
-        panel?.classList.add('visible');
-        panel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        $('#applyNote')?.focus();
-        return;
-      }
-
-      const cancelApply = event.target.closest('[data-cancel-apply]');
-      if (cancelApply) {
-        $('#applyPanel')?.classList.remove('visible');
-        return;
-      }
-
-      const reportJob = event.target.closest('[data-report-job]');
-      if (reportJob) {
-        const job = jobs.find((item) => item.id === reportJob.dataset.reportJob);
-        closeModal('jobModal');
-        navigate('rights');
-        window.setTimeout(() => {
-          const merchantField = $('#rightsForm [name="merchant"]');
-          const detailField = $('#rightsForm [name="detail"]');
-          const typeField = $('#rightsForm [name="type"]');
-          if (merchantField) merchantField.value = job?.merchant || '';
-          if (detailField) detailField.value = `我对「${job?.title || '该岗位'}」的招聘信息存在疑问，希望平台协助核实：`;
-          if (typeField) typeField.value = '虚假招聘信息';
-          showToast('已为你带入岗位信息，请补充具体情况', 'info');
-        }, 120);
-        return;
-      }
-
-      const applicantAction = event.target.closest('.accept-applicant, .reject-applicant');
-      if (applicantAction) {
-        return;
-      }
-
-      const rowAction = event.target.closest('[data-row-action]');
-      if (rowAction) {
         return;
       }
 
@@ -1068,7 +1005,7 @@
         window.setTimeout(() => {
           const detail = $('#rightsForm [name="detail"]');
           const input = $('#complianceInput');
-          if (detail && input?.value) detail.value = `我看到一条疑似违规的招聘信息，希望平台核实：\n${input.value.slice(0, 500)}`;
+          if (detail && input?.value) detail.value = `我看到一条疑似违规的岗位信息，希望平台核实：\n${input.value.slice(0, 500)}`;
         }, 120);
         showToast('已带你进入维权申请，请补充联系方式', 'info');
         return;
@@ -1153,11 +1090,6 @@
       renderJobGrids();
     });
 
-    $('#jobSettlementFilter')?.addEventListener('change', (event) => {
-      state.settlement = event.target.value;
-      renderJobGrids();
-    });
-
     $('#jobSortFilter')?.addEventListener('change', (event) => {
       state.sort = event.target.value;
       renderJobGrids();
@@ -1175,21 +1107,12 @@
       state.category = '全部';
       state.search = '';
       state.location = 'all';
-      state.settlement = 'all';
       state.sort = 'recommend';
       if ($('#jobSearchInput')) $('#jobSearchInput').value = '';
       if ($('#jobLocationFilter')) $('#jobLocationFilter').value = 'all';
-      if ($('#jobSettlementFilter')) $('#jobSettlementFilter').value = 'all';
       if ($('#jobSortFilter')) $('#jobSortFilter').value = 'recommend';
       $$('#jobCategoryFilters .chip').forEach((item) => item.classList.toggle('active', item.dataset.category === '全部'));
       renderJobGrids();
-    });
-
-    $('#openWithdrawButton')?.addEventListener('click', openWithdraw);
-    $('#openWithdrawButton2')?.addEventListener('click', openWithdraw);
-    $('#withdrawAll')?.addEventListener('click', () => {
-      const input = $('#withdrawAmount');
-      if (input) input.value = Number(state.walletBalance).toFixed(2);
     });
 
     $('#complianceInput')?.addEventListener('input', (event) => {
