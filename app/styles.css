@@ -703,6 +703,23 @@ ul {
   color: var(--muted);
 }
 
+.trust-status-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  color: var(--ink);
+  background: #eaf5e6;
+  border: 1px solid #dcebd6;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.trust-status-icon .icon {
+  width: 21px;
+  height: 21px;
+}
+
 .score-ring {
   position: relative;
   display: grid;
@@ -1425,6 +1442,14 @@ ul {
   color: #6a826f;
   background: #edf5e9;
   border-radius: 4px;
+}
+
+.job-cert-note {
+  padding-bottom: 3px;
+  font-size: 7.5px;
+  line-height: 1.5;
+  color: #93a098;
+  text-align: right;
 }
 
 .job-safe {
@@ -3115,7 +3140,7 @@ ul {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
   gap: 18px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .scanner-input-card,
@@ -5966,6 +5991,439 @@ ul {
   color: var(--ink-soft);
 }
 
+.verification-actions {
+  align-items: flex-start;
+}
+
+.verified-stack {
+  display: flex;
+  max-width: 300px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.verified-stack small {
+  font-size: 8px;
+  line-height: 1.55;
+  color: #8d9a93;
+  text-align: right;
+}
+
+.roadmap-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  background: #fffaf0;
+  border: 1px solid #f1e5cf;
+  border-radius: 11px;
+}
+
+.roadmap-label {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  font-size: 8px;
+  font-weight: 700;
+  color: #8d6a2f;
+  background: #fff;
+  border: 1px solid #eddfc7;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.roadmap-notice strong {
+  display: block;
+  font-size: 10px;
+  color: #70592f;
+}
+
+.roadmap-notice p {
+  margin-top: 2px;
+  font-size: 8.5px;
+  line-height: 1.65;
+  color: #978154;
+}
+
+.certification-boundary {
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-size: 8.5px;
+  line-height: 1.65;
+  color: #8a754e;
+  background: #fdf8ed;
+  border: 1px solid #f1e7d3;
+  border-radius: 7px;
+}
+
+.ai-disclaimer-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  background: #fbf6ea;
+  border: 1px solid #f0e4ca;
+  border-radius: 11px;
+}
+
+.ai-disclaimer-note strong {
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  font-size: 8px;
+  color: #876a34;
+  background: #fff;
+  border: 1px solid #eee0c5;
+  border-radius: 4px;
+}
+
+.ai-disclaimer-note p {
+  font-size: 8.5px;
+  line-height: 1.7;
+  color: #978157;
+}
+
+.contract-report-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e8eee2;
+}
+
+.contract-report-head h3 {
+  margin-top: 3px;
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  color: var(--ink-deep);
+}
+
+.contract-report-head p:not(.eyebrow) {
+  margin-top: 3px;
+  font-size: 8.5px;
+  line-height: 1.6;
+  color: #919e96;
+}
+
+.contract-risk-list {
+  display: flex;
+  max-height: 620px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 13px 4px 5px 0;
+  overflow-y: auto;
+}
+
+.contract-risk-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.contract-risk-list::-webkit-scrollbar-thumb {
+  background: #dce4d7;
+  border-radius: 5px;
+}
+
+.contract-risk-item {
+  padding: 13px;
+  background: #fbfcf9;
+  border: 1px solid #e9eee3;
+  border-radius: 11px;
+}
+
+.contract-risk-item.high {
+  background: #fffbf9;
+  border-color: #f0ddd5;
+}
+
+.contract-risk-item.medium {
+  background: #fffdf7;
+  border-color: #f0e5cd;
+}
+
+.contract-risk-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.risk-level-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px;
+  font-size: 8.5px;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.risk-level-pill i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.risk-level-pill.high {
+  color: #ae4f37;
+  background: #fdece6;
+}
+
+.risk-level-pill.high i {
+  background: #cf5b40;
+}
+
+.risk-level-pill.medium {
+  color: #94702c;
+  background: #fcf2df;
+}
+
+.risk-level-pill.medium i {
+  background: #d4a63d;
+}
+
+.risk-index {
+  font-size: 7.5px;
+  color: #a4ada7;
+  letter-spacing: 0.08em;
+}
+
+.risk-clause-label {
+  margin-top: 10px;
+  font-size: 7.5px;
+  color: #9ca7a0;
+  letter-spacing: 0.06em;
+}
+
+.risk-clause {
+  padding: 8px 10px;
+  margin: 4px 0 10px;
+  font-size: 9px;
+  line-height: 1.7;
+  color: #607067;
+  background: #fff;
+  border-left: 2px solid #d7e0d2;
+  border-radius: 4px;
+}
+
+.contract-risk-item.high .risk-clause {
+  border-left-color: #e0a08e;
+}
+
+.contract-risk-item.medium .risk-clause {
+  border-left-color: #e4c987;
+}
+
+.risk-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.risk-field {
+  padding: 8px 9px;
+  background: #f5f8f1;
+  border-radius: 7px;
+}
+
+.contract-risk-item.high .risk-field {
+  background: #fdf5f1;
+}
+
+.contract-risk-item.medium .risk-field {
+  background: #fcf8ef;
+}
+
+.risk-field.script {
+  grid-column: 1 / -1;
+  background: #eff6e9;
+}
+
+.risk-field > span {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #769083;
+}
+
+.risk-field p {
+  font-size: 8.5px;
+  line-height: 1.7;
+  color: #697a70;
+}
+
+.risk-field.script p {
+  color: #536b5b;
+}
+
+.report-disclaimer {
+  flex: 0 0 auto;
+  padding: 11px 12px;
+  margin-top: 12px;
+  background: #fff8e9;
+  border: 1px solid #f0e3c9;
+  border-radius: 9px;
+}
+
+.report-disclaimer strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 8.5px;
+  color: #896b33;
+  letter-spacing: 0.04em;
+}
+
+.report-disclaimer p {
+  font-size: 8.5px;
+  line-height: 1.7;
+  color: #988157;
+}
+
+.compliance-gate-modal {
+  padding: 31px;
+}
+
+.gate-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #af513a;
+  background: #fdeae4;
+  border-radius: 14px;
+  place-items: center;
+}
+
+.gate-icon .icon {
+  width: 23px;
+  height: 23px;
+}
+
+.compliance-gate-modal h2 {
+  margin: 4px 0 8px;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+  color: var(--ink-deep);
+}
+
+.compliance-gate-modal > p:not(.eyebrow) {
+  padding: 12px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #6e7d75;
+  background: #f9faf7;
+  border: 1px solid #e9ede4;
+  border-radius: 9px;
+}
+
+.compliance-gate-modal .button {
+  margin-top: 18px;
+}
+
+.hours-breakdown {
+  display: flex;
+  flex-direction: column;
+  padding-top: 6px;
+}
+
+.hours-row {
+  display: grid;
+  grid-template-columns: minmax(125px, 0.95fr) minmax(110px, 1.1fr) 42px;
+  gap: 15px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #eff2eb;
+}
+
+.hours-row:last-child {
+  border-bottom: 0;
+}
+
+.hours-label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.hours-label strong {
+  font-size: 10px;
+  color: var(--ink-deep);
+}
+
+.hours-label span {
+  margin-top: 2px;
+  overflow: hidden;
+  font-size: 8px;
+  color: #97a29b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hours-track {
+  height: 8px;
+  overflow: hidden;
+  background: #edf1e7;
+  border-radius: 7px;
+}
+
+.hours-track i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #b8d59f, var(--ink));
+  border-radius: inherit;
+}
+
+.hours-row > b {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+.profile-record-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-record-list > div {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f2ed;
+}
+
+.profile-record-list > div:last-child {
+  border-bottom: 0;
+}
+
+.profile-record-list > div > span {
+  font-size: 7.5px;
+  color: #9aa59f;
+}
+
+.profile-record-list p {
+  display: flex;
+  flex-direction: column;
+  font-size: 9px;
+  line-height: 1.35;
+  color: #52665b;
+}
+
+.profile-record-list small {
+  margin-top: 1px;
+  font-size: 7.5px;
+  color: #9aa59f;
+}
+
+.profile-record-list strong {
+  font-size: 9px;
+  color: #5f7b69;
+}
+
 @media (max-width: 1240px) {
   .main-content {
     padding-right: 28px;
@@ -6345,6 +6803,47 @@ ul {
   .profile-bar-foot {
     flex-wrap: wrap;
     gap: 5px 15px;
+  }
+
+  .hours-row {
+    grid-template-columns: minmax(102px, 0.9fr) minmax(70px, 1fr) 34px;
+    gap: 9px;
+    padding: 12px 0;
+  }
+
+  .hours-label span {
+    white-space: normal;
+  }
+
+  .verified-stack {
+    max-width: 100%;
+    align-items: flex-start;
+  }
+
+  .verified-stack small {
+    text-align: left;
+  }
+
+  .roadmap-notice {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .contract-risk-list {
+    max-height: 540px;
+  }
+
+  .risk-field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contract-report-head {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .compliance-gate-modal {
+    padding: 25px 22px;
   }
 
   .topbar {

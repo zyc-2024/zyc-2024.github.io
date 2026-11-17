@@ -279,7 +279,7 @@
             <span class="merchant-logo ${escapeHTML(job.logoClass || '')}">${escapeHTML(job.logo || job.merchant.slice(0, 1))}</span>
             <div>
               <strong>${escapeHTML(job.merchant)}</strong>
-              <span class="merchant-verified">${icon('check-circle')}已实名认证</span>
+              <span class="merchant-verified" title="商家认证仅为提交材料的形式核验展示，不代表平台担保岗位真实可靠">${icon('check-circle')}已认证商家 · 材料形式核验</span>
             </div>
           </div>
           <button class="save-button" data-save-job="${escapeHTML(job.id)}" aria-label="收藏岗位" aria-pressed="false">${icon('bookmark')}</button>
@@ -297,7 +297,7 @@
         </div>
         <div class="job-card-foot">
           <div class="job-pay"><strong>${escapeHTML(job.pay)}</strong><span>${escapeHTML(job.unit)}</span><small>${escapeHTML(job.settlement)}</small></div>
-          <div class="job-safe ${job.safety >= 92 ? 'high' : ''}"><span>安全分</span><b>${job.safety}</b></div>
+          <span class="job-cert-note">认证仅为材料形式核验</span>
         </div>
       </article>
     `;
@@ -369,7 +369,7 @@
           <span class="merchant-logo ${escapeHTML(job.logoClass || '')}">${escapeHTML(job.logo)}</span>
           <div class="job-modal-title">
             <div class="merchant-line">
-              <div><strong>${escapeHTML(job.merchant)}</strong><span class="merchant-verified">${icon('check-circle')}企业资质已核验 · 评分 ${escapeHTML(job.rating)}</span></div>
+              <div><strong>${escapeHTML(job.merchant)}</strong><span class="merchant-verified">${icon('check-circle')}已提交认证材料 · 材料形式核验</span></div>
             </div>
             <h2 id="jobModalTitle">${escapeHTML(job.title)}</h2>
             <div class="job-meta">
@@ -384,11 +384,11 @@
           </div>
         </div>
         <div class="job-modal-badges">
-          <span>${icon('shield')}安全分 ${job.safety}</span>
-          <span>${icon('lock')}薪资平台担保</span>
-          <span>${icon('check-circle')}商家实名认证</span>
-          <span>${icon('star')}好评率 98%</span>
+          <span>${icon('file')}商家已提交认证材料</span>
+          <span>${icon('info')}认证不代表岗位担保</span>
+          <span>${icon('lock')}薪资记录可留痕</span>
         </div>
+        <p class="certification-boundary">认证说明：商家认证仅为提交材料的形式核验展示，不代表平台担保岗位真实可靠，请学生自行甄别风险。</p>
       </div>
       <div class="job-modal-body">
         <div>
@@ -401,8 +401,8 @@
             <ul>${job.requirements.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
           </section>
           <section class="job-modal-section">
-            <h3>结算与保障</h3>
-            <p>${escapeHTML(job.highlight)}。薪资由平台担保账户托管，工作完成并确认后自动结算，如遇欠薪可由平台先行介入调解。</p>
+            <h3>结算与记录</h3>
+            <p>岗位信息与薪资结算约定由商家提供，平台保留沟通与打卡记录。如遇欠薪或收费纠纷，可提交维权工单，平台将协助调解。认证展示不代表平台对岗位真实性提供担保。</p>
           </section>
           <div class="apply-panel" id="applyPanel">
             <h3>投递这份兼职</h3>
@@ -418,13 +418,13 @@
         </div>
         <aside class="job-modal-side">
           <div class="job-safety-score">
-            <div><span>平台安全评估</span><strong>${job.safety}<small> / 100</small></strong></div>
-            <p>该岗位已通过主体资质、薪资规范与招聘内容三重核验。</p>
+            <div><span>认证状态</span><strong style="font-size:12px">已提交材料</strong></div>
+            <p>平台仅对商家提交的认证材料进行形式核验，不对岗位真实性和可靠性作出担保。</p>
           </div>
           <div class="job-safe-checks">
-            <span>${icon('check-circle')}商家营业执照已核验</span>
-            <span>${icon('check-circle')}薪资已进入担保账户</span>
-            <span>${icon('check-circle')}招聘文案未发现风险</span>
+            <span>${icon('file')}商家已提交认证材料</span>
+            <span>${icon('info')}岗位信息由商家自行发布</span>
+            <span>${icon('alert')}请自行核实工作内容与结算约定</span>
           </div>
           <button class="button button-dark" data-apply-job="${escapeHTML(job.id)}">立即申请</button>
           <button class="button button-light" data-save-job="${escapeHTML(job.id)}">${icon('bookmark')}收藏岗位</button>
@@ -459,6 +459,14 @@
       switchMerchantTab($('.merchant-panel.active')?.id.replace('merchant-panel-', '') || 'publish');
     }
     if (page === 'relief') renderReliefHistory();
+    if (page === 'compliance') {
+      window.setTimeout(() => {
+        if (!$('#complianceGate')?.classList.contains('open')) openModal('complianceGate');
+        $('#acceptComplianceGate')?.focus();
+      }, 80);
+    } else {
+      closeModal('complianceGate');
+    }
   }
 
   function openSidebar() {
@@ -565,10 +573,6 @@
       </div>
     `).join('');
   }
-
-  const safeSample = 'M Stand 咖啡徐汇店招聘周末店员，200 元/天，日结。工作内容：负责点单、制作咖啡饮品辅助与门店整理。工作时间：周六日 10:00-18:00。要求有服务意识，可连续工作 4 周。入职签订兼职协议，薪资由平台担保结算。工作地点：徐汇区漕河泾。';
-
-  const riskySample = '【高薪急招】校园兼职，日入 300-800 元，无需经验，动动手指就能赚钱！工作内容简单，帮忙刷单冲销量。入职需先交 99 元服装费、199 元培训费，完成任务后全额退还。名额有限，添加微信 vx12345 私聊，先到先得，不签合同。';
 
   const riskRules = [
     { key: 'fee', words: ['押金', '保证金', '服装费', '培训费', '平台费', '中介费', '先交', '先付', '垫付', '收费'], penalty: 35, label: '收费风险' },
@@ -689,6 +693,59 @@
     };
   }
 
+  const contractSample = `兼职合作协议
+甲方：星启文化传媒有限公司
+乙方：林小满
+
+一、乙方入职前需一次性缴纳服装费、培训费共 198 元，工作满 30 天后退还。
+二、兼职工资统一于次月 30 日发放，若乙方中途离职，未结算工资不予支付。
+三、甲方可根据经营需要随时调整乙方的工作内容和工作时长，乙方应无条件配合。
+四、兼职期间如发生意外伤害，由乙方自行承担，甲方不承担任何责任。
+五、本协议最终解释权归甲方所有，双方如有争议，以甲方认定为准。`;
+
+  const contractRisks = [
+    {
+      level: 'high',
+      clause: '乙方入职前需一次性缴纳服装费、培训费共 198 元，工作满 30 天后退还。',
+      explanation: '这是典型的入职前收费。很多兼职骗局会用“工作满一定天数后退还”诱导先付款，后续常以考核不合格等理由拒绝退款。',
+      law: '《劳动合同法》第九条：用人单位招用劳动者，不得要求劳动者提供担保或者以其他名义向劳动者收取财物。',
+      advice: '拒绝先行支付任何费用，并要求对方删除该项收费条款。',
+      script: '“我可以先确认工作内容和薪资，但入职前不缴纳任何服装费或培训费，我们按正规兼职协议执行。”'
+    },
+    {
+      level: 'high',
+      clause: '兼职工资统一于次月 30 日发放，若乙方中途离职，未结算工资不予支付。',
+      explanation: '“中途离职不结算”属于变相克扣劳动报酬。即使提前结束兼职，已经完成的工作也应当按约定支付工资。',
+      law: '《劳动法》第五十条：工资应当以货币形式按月支付给劳动者本人，不得克扣或者无故拖欠劳动者的工资。',
+      advice: '要求改为按实际完成工时结算，并在协议中写明具体结算节点。',
+      script: '“如果我只做了一部分，已完成的工时还是需要按约定结算，能把结算方式改成按实际工时计算吗？”'
+    },
+    {
+      level: 'medium',
+      clause: '甲方可根据经营需要随时调整乙方的工作内容和工作时长，乙方应无条件配合。',
+      explanation: '“随时调整、无条件配合”会让实际工作内容和时长与最初约定不一致，可能变相增加工作量。',
+      law: '《劳动合同法》第三十五条：用人单位与劳动者协商一致，可以变更劳动合同约定的内容。',
+      advice: '要求涉及工作内容和时长的调整需双方书面确认，删除“无条件配合”表述。',
+      script: '“工作内容或时间如果需要调整，我们可以提前沟通并书面确认，但不太能接受无条件变更。”'
+    },
+    {
+      level: 'high',
+      clause: '兼职期间如发生意外伤害，由乙方自行承担，甲方不承担任何责任。',
+      explanation: '此类“意外免责”并不能当然免除用工方责任，发生伤害时仍可能涉及赔偿责任，签署前应要求补充安全保障。',
+      law: '《民法典》第一千一百九十二条：个人之间形成劳务关系，提供劳务一方因劳务受到损害的，根据双方各自的过错承担相应的责任。',
+      advice: '要求明确工作场所安全责任，并确认商家是否购买相关保险。',
+      script: '“工作期间的安全保障需要在协议里写清楚，能否补充意外险或明确安全责任？”'
+    },
+    {
+      level: 'medium',
+      clause: '本协议最终解释权归甲方所有，双方如有争议，以甲方认定为准。',
+      explanation: '“最终解释权归甲方”会削弱你的协商和维权空间，格式条款的解释不应由单方决定。',
+      law: '《民法典》第四百九十六条：采用格式条款订立合同的，应当遵循公平原则确定当事人之间的权利和义务。',
+      advice: '删除单方解释权条款，改为双方协商或依法处理。',
+      script: '“这条单方解释的约定不太公平，能否改成双方协商解决？”'
+    }
+  ];
+
   function runComplianceScan() {
     const input = $('#complianceInput');
     const placeholder = $('#scanPlaceholder');
@@ -697,7 +754,7 @@
     const button = $('#runComplianceScan');
     const text = input?.value.trim() || '';
     if (text.length < 10) {
-      showToast('请先粘贴至少 10 个字的招聘信息', 'error');
+      showToast('请先粘贴至少 10 个字的合同内容', 'error');
       input?.focus();
       return;
     }
@@ -715,9 +772,9 @@
     }
 
     const phases = [
-      '识别敏感词与收费风险...',
-      '核验薪资与结算规范...',
-      '生成多维度合规报告...'
+      '扫描收费与押金相关表述...',
+      '识别结算、免责与解除条款...',
+      '整理风险依据与沟通建议...'
     ];
     phases.forEach((phase, index) => {
       const timer = window.setTimeout(() => {
@@ -728,66 +785,42 @@
     });
 
     const finish = window.setTimeout(() => {
-      const result = {
-        score: 100,
-        level: {
-          label: '合格',
-          badge: 'badge-green',
-          color: '#3f7d57',
-          verdict: '检测合格',
-          copy: '该招聘信息未发现明显违规风险，可放心申请。'
-        },
-        checks: [
-          { status: 'pass', name: '主体资质', detail: '招聘主体信息清晰，商家资质核验通过。' },
-          { status: 'pass', name: '薪资规范', detail: '薪资金额与结算方式表述明确。' },
-          { status: 'pass', name: '收费风险', detail: '未发现押金、培训费、服装费等前置收费表述。' },
-          { status: 'pass', name: '工作内容', detail: '岗位职责描述清晰，未发现违规或灰产内容。' },
-          { status: 'pass', name: '联系规范', detail: '未发现引导站外私下联系的行为。' },
-          { status: 'pass', name: '合同用工', detail: '用工与兼职协议信息符合平台规范。' }
-        ],
-        riskWords: [],
-        failCount: 0,
-        warnCount: 0,
-        passCount: 6,
-        advice: ['该招聘信息符合平台规范，建议通过平台官方渠道沟通并保留相关记录。']
-      };
       loading?.classList.remove('visible');
       if (report) {
         report.innerHTML = `
-          <div class="report-top">
-            <div class="score-gauge" style="--score:${result.score};--gauge-color:${result.level.color}">
-              <div><strong>${result.score}</strong><span>/ 100</span></div>
+          <div class="contract-report-head">
+            <div>
+              <p class="eyebrow">CLAUSE RISK LIST</p>
+              <h3>合同风险逐条提示</h3>
+              <p>以下仅对识别出的条款作风险展示，不对整份合同作安全性判断。</p>
             </div>
-            <div class="report-verdict">
-              <span class="badge ${result.level.badge}">${result.level.label}</span>
-              <h3>${result.level.verdict}</h3>
-              <p>${result.level.copy}</p>
-            </div>
+            <span class="badge badge-sand">演示样例</span>
           </div>
-          <div class="report-stats">
-            <div class="report-stat"><span>严重风险</span><strong style="color:#b3543f">${result.failCount} 项</strong></div>
-            <div class="report-stat"><span>需要留意</span><strong style="color:#a4772f">${result.warnCount} 项</strong></div>
-            <div class="report-stat"><span>检查通过</span><strong style="color:#4f7f5e">${result.passCount} 项</strong></div>
-          </div>
-          <div class="report-checks">
-            ${result.checks.map((check) => `
-              <div class="report-check ${check.status}">
-                <span class="report-check-icon">${icon(check.status === 'pass' ? 'check' : check.status === 'warn' ? 'alert' : 'x')}</span>
-                <div>
-                  <strong>${check.name}<em>${check.status === 'pass' ? '通过' : check.status === 'warn' ? '提醒' : '风险'}</em></strong>
-                  <p>${escapeHTML(check.detail)}</p>
+          <div class="contract-risk-list">
+            ${contractRisks.map((risk, index) => `
+              <article class="contract-risk-item ${risk.level}">
+                <div class="contract-risk-head">
+                  <span class="risk-level-pill ${risk.level}"><i></i>${risk.level === 'high' ? '高风险隐患' : '中等风险隐患'}</span>
+                  <span class="risk-index">风险 ${String(index + 1).padStart(2, '0')}</span>
                 </div>
-              </div>
+                <div class="risk-clause-label">原文片段</div>
+                <blockquote class="risk-clause">${escapeHTML(risk.clause)}</blockquote>
+                <div class="risk-field-grid">
+                  <div class="risk-field"><span>大白话解读</span><p>${escapeHTML(risk.explanation)}</p></div>
+                  <div class="risk-field"><span>法条提示</span><p>${escapeHTML(risk.law)}</p></div>
+                  <div class="risk-field"><span>应对建议</span><p>${escapeHTML(risk.advice)}</p></div>
+                  <div class="risk-field script"><span>沟通话术</span><p>${escapeHTML(risk.script)}</p></div>
+                </div>
+              </article>
             `).join('')}
-          </div>
-          ${result.riskWords.length ? `<div class="report-keywords">${result.riskWords.map((word) => `<span>${escapeHTML(word)}</span>`).join('')}</div>` : ''}
-          <div class="report-advice">
-            <strong>给你的安全建议</strong>
-            <ul>${result.advice.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
           </div>
           <div class="report-actions">
             <button class="button button-light" data-rescan>重新检测</button>
-            <button class="button button-dark" ${result.score < 65 ? 'data-scan-rights' : 'data-page="jobs"'}>${result.score < 65 ? '立即维权举报' : '查看相似岗位'}</button>
+            <button class="button button-dark" data-toast="示例模式：可带着合同问题咨询平台顾问">咨询平台顾问</button>
+          </div>
+          <div class="report-disclaimer">
+            <strong>【免责提示】</strong>
+            <p>本工具仅识别展示合同风险隐患，仅作参考；不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。</p>
           </div>
         `;
         report.classList.add('visible');
@@ -795,12 +828,12 @@
       if (button) {
         button.disabled = false;
         button.style.opacity = '';
-        button.innerHTML = `${icon('shield')}开始智能检测`;
+        button.innerHTML = `${icon('shield')}开始风险检测`;
       }
       if (window.innerWidth < 700) {
         $('#scanResultCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 1750);
+    }, 1650);
     state.scanTimers.push(finish);
   }
 
@@ -946,6 +979,7 @@
       }
 
       if (event.target.classList.contains('modal-backdrop')) {
+        if (event.target.dataset.locked === 'true') return;
         closeModal(event.target.id);
         return;
       }
@@ -1017,7 +1051,7 @@
       if (sample) {
         const input = $('#complianceInput');
         if (input) {
-          input.value = sample.dataset.sample === 'risky' ? riskySample : safeSample;
+          input.value = contractSample;
           input.dispatchEvent(new Event('input'));
           input.focus();
         }
@@ -1059,7 +1093,9 @@
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
-        $$('.modal-backdrop.open').forEach((modal) => closeModal(modal.id));
+        $$('.modal-backdrop.open').forEach((modal) => {
+          if (modal.dataset.locked !== 'true') closeModal(modal.id);
+        });
         closeSidebar();
         $('#notificationPopover')?.classList.remove('open');
       }
@@ -1091,6 +1127,11 @@
       $('.notification-dot')?.remove();
       $('#notificationPopover')?.classList.remove('open');
       showToast('所有消息已标记为已读');
+    });
+
+    $('#acceptComplianceGate')?.addEventListener('click', () => {
+      closeModal('complianceGate');
+      window.setTimeout(() => $('#complianceInput')?.focus(), 120);
     });
 
     $('#heroSearchForm')?.addEventListener('submit', (event) => {
