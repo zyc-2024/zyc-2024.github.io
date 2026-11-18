@@ -559,7 +559,7 @@
               <h1>薪资记录与存证</h1>
               <p class="page-subtitle">记录约定金额与结算节点，平台不接触资金，仅保留双方确认的记录。</p>
             </div>
-            <div class="heading-actions"><button class="button button-light" data-toast="存证记录已导出为 PDF"><svg class="icon"><use href="#i-download"/></svg>导出记录</button></div>
+            <div class="heading-actions"><button class="button button-light" data-export-records><svg class="icon"><use href="#i-download"/></svg>导出记录</button></div>
           </div>
 
           <div class="wallet-top-grid">
@@ -577,7 +577,7 @@
               <div class="clock-meta"><span>今日预计收入 <strong id="clockEarning">¥0.00</strong></span><span id="clockHint">开始打卡后自动计算工时</span></div>
               <div class="clock-actions">
                 <button class="button button-dark button-block" id="clockButton"><svg class="icon"><use href="#i-clock"/></svg>开始工作</button>
-                <button class="button button-light" id="resetClockButton" aria-label="重置打卡" data-toast="打卡记录已重置">重置</button>
+                <button class="button button-light" id="resetClockButton" aria-label="重置打卡">重置</button>
               </div>
             </section>
           </div>
@@ -591,7 +591,7 @@
 
           <div class="wallet-content-grid">
             <section class="table-card earnings-card">
-              <div class="table-head"><div><p class="eyebrow">RECORDS</p><h2>薪资存证记录</h2></div><button class="button button-light button-sm" data-toast="存证记录已导出为 PDF"><svg class="icon"><use href="#i-download"/></svg>导出记录</button></div>
+              <div class="table-head"><div><p class="eyebrow">RECORDS</p><h2>薪资存证记录</h2></div><button class="button button-light button-sm" data-export-records><svg class="icon"><use href="#i-download"/></svg>导出记录</button></div>
               <div class="transaction-list" id="transactionList"></div>
             </section>
 
@@ -637,8 +637,8 @@
               <textarea id="complianceInput" maxlength="1200" placeholder="例如：乙方入职前需一次性缴纳服装费、培训费共 198 元；工资于次月 30 日发放，中途离职不予结算……"></textarea>
               <div class="sample-row"><span>试试示例：</span><button class="sample-chip" data-sample="contract">填入风险合同示例</button><button class="text-button" id="clearCompliance">清空</button></div>
               <div class="scan-actions">
-                <span class="scan-privacy"><svg class="icon icon-sm"><use href="#i-lock"/></svg>信息仅用于本次检测，不会公开</span>
-                <button class="button button-dark" id="runComplianceScan"><svg class="icon"><use href="#i-shield"/></svg>开始风险检测</button>
+                <span class="scan-privacy"><svg class="icon icon-sm"><use href="#i-lock"/></svg>文本将发送至 AI 模型检测，仅用于本次分析</span>
+                <button class="button button-dark" id="runComplianceScan"><svg class="icon"><use href="#i-sparkle"/></svg>开始 AI 风险检测</button>
               </div>
             </section>
 
@@ -646,7 +646,7 @@
               <div class="scan-placeholder" id="scanPlaceholder">
                 <div class="radar-visual"><span class="radar-ring ring-1"></span><span class="radar-ring ring-2"></span><span class="radar-ring ring-3"></span><span class="radar-sweep"></span><span class="radar-center"><svg class="icon"><use href="#i-shield"/></svg></span><span class="radar-point p1"></span><span class="radar-point p2"></span><span class="radar-point p3"></span></div>
                 <h3>等待检测</h3>
-                <p>粘贴合同条款后，点击「开始风险检测」<br>逐条查看风险提示与沟通建议。</p>
+                <p>粘贴合同条款后，点击「开始 AI 风险检测」<br>逐条查看风险提示与沟通建议。</p>
                 <div class="placeholder-tags"><span>收费条款</span><span>薪资结算</span><span>免责条款</span><span>争议解决</span></div>
               </div>
               <div class="scan-loading" id="scanLoading">
@@ -661,7 +661,7 @@
 
           <div class="ai-disclaimer-note">
             <strong>免责提示</strong>
-            <p>本工具仅识别展示合同风险隐患，仅作参考；不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。</p>
+            <p>本工具使用 AI 大模型（DeepSeek）对粘贴文本进行辅助检测，仅识别并展示合同风险隐患，仅作参考；AI 输出可能存在遗漏或误差，不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。</p>
           </div>
 
           <div class="scan-info-grid">
@@ -697,7 +697,7 @@
           <section class="emergency-banner">
             <div class="emergency-icon"><svg class="icon"><use href="#i-phone"/></svg></div>
             <div class="emergency-copy"><span>紧急维权通道 · 7×24 小时</span><h2>遇到人身安全威胁或大额诈骗，请立即联系我们。</h2><p>保留聊天记录、转账凭证与岗位信息截图，不要删除任何证据。</p></div>
-            <div class="emergency-actions"><a class="button button-accent" href="tel:12333"><svg class="icon"><use href="#i-phone"/></svg>12333 人社热线</a><button class="button button-ghost-light" data-toast="平台紧急专线：400-820-5533，正在为你转接">平台紧急专线</button></div>
+            <div class="emergency-actions"><a class="button button-accent" href="tel:12333"><svg class="icon"><use href="#i-phone"/></svg>12333 人社热线</a><a class="button button-ghost-light" href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-scale"/></svg>12315 投诉平台</a><button class="button button-ghost-light" data-toast="平台紧急专线：400-820-5533，正在为你转接">平台紧急专线</button></div>
           </section>
 
           <div class="channel-grid">
@@ -728,15 +728,15 @@
 
             <aside class="rights-aside">
               <section class="aside-card progress-card">
-                <div class="section-heading mini"><div><p class="eyebrow">CASE TRACKING</p><h3>我的维权进度</h3></div><span class="badge badge-green">处理中</span></div>
-                <div class="case-summary"><span>WQ20261018032</span><small>虚假岗位信息 · ¥300.00</small><div class="case-progress-bar"><span style="width:62%"></span></div></div>
-                <div class="timeline compact-timeline">
+                <div class="section-heading mini"><div><p class="eyebrow">CASE TRACKING</p><h3>我的维权进度</h3></div><span class="badge badge-green" id="caseStatusBadge">处理中</span></div>
+                <div class="case-summary"><span id="caseSummaryId">WQ20261018032</span><small id="caseSummaryMeta">虚假岗位信息 · ¥300.00</small><div class="case-progress-bar" id="caseProgressBar"><span style="width:62%"></span></div></div>
+                <div class="timeline compact-timeline" id="caseTimeline">
                   <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>申请已受理</strong><small>10 月 18 日 14:20</small></div></div>
                   <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>证据审核通过</strong><small>10 月 18 日 16:05</small></div></div>
                   <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>平台正在调解</strong><small>预计 10 月 21 日前反馈</small></div></div>
                   <div class="timeline-item"><span class="timeline-dot"></span><div><strong>处理完成</strong><small>等待更新</small></div></div>
                 </div>
-                <button class="text-link" data-toast="已进入工单详情页">查看完整记录 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></button>
+                <button type="button" class="text-link" data-open-record="case">查看完整记录 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></button>
               </section>
 
               <section class="aside-card knowledge-card">
@@ -849,7 +849,7 @@
                   <div class="timeline-item"><span class="timeline-dot"></span><div><strong>援助方案沟通</strong><small>审核通过后</small></div></div>
                   <div class="timeline-item"><span class="timeline-dot"></span><div><strong>援助执行</strong><small>双方确认后</small></div></div>
                 </div>
-                <div class="success-actions"><button class="button button-dark" data-page="rights">同步提交维权工单</button><button class="button button-light" id="newReliefButton">返回工作台</button></div>
+                <div class="success-actions"><button type="button" class="button button-dark" id="viewReliefRecord">查看申请详情</button><button type="button" class="button button-light" id="syncReliefToRights" data-page="rights">同步提交维权工单</button><button type="button" class="button button-light" id="newReliefButton">返回工作台</button></div>
                 <p class="success-note"><svg class="icon icon-sm"><use href="#i-lock"/></svg>所有材料已加密保存，仅授权援助顾问查看。</p>
               </div>
             </section>
@@ -880,11 +880,26 @@
             </aside>
           </div>
         </section>
+
+        <section class="page" id="page-record" data-title="记录详情">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow" id="recordEyebrow">CASE RECORD</p>
+              <h1 id="recordTitle">工单详情</h1>
+              <p class="page-subtitle" id="recordSubtitle">查看完整信息、证据材料与处理记录。</p>
+            </div>
+            <div class="heading-actions record-head-actions">
+              <button type="button" class="button button-light" id="recordBackButton"><svg class="icon"><use href="#i-arrow-left"/></svg>返回</button>
+              <span class="badge badge-green" id="recordStatusBadge">处理中</span>
+            </div>
+          </div>
+          <div id="recordDetail"></div>
+        </section>
       </main>
 
       <footer class="site-footer">
         <span>© 2026 青薪盾 · 让每一份青春劳动都被善待</span>
-        <span><a href="#rights">维权热线 400-820-5533</a><i>·</i><a href="#compliance">安全规则</a><i>·</i><a href="#dashboard">关于我们</a></span>
+        <span><a href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer">维权热线 12315</a><i>·</i><a href="#" data-modal="safetyModal">安全规则</a><i>·</i><a href="#" data-modal="aboutModal">关于我们</a></span>
       </footer>
     </div>
   </div>
@@ -894,7 +909,7 @@
       <span class="gate-icon"><svg class="icon"><use href="#i-alert"/></svg></span>
       <p class="eyebrow">IMPORTANT NOTICE</p>
       <h2 id="complianceGateTitle">重要风险提示</h2>
-      <p>青薪盾仅为兼职风险自查工具，仅逐条展示合同隐患，不对岗位、合同整体安全性做判定，不提供正式法律意见，最终决策由用户本人承担。</p>
+      <p>青薪盾使用 AI 大模型对文本做辅助风险检测，仅逐条展示合同隐患，不对岗位、合同整体安全性做判定，不提供正式法律意见，最终决策由用户本人承担。</p>
       <button type="button" class="button button-dark button-block" id="acceptComplianceGate">我已知晓</button>
     </div>
   </div>
@@ -903,6 +918,52 @@
     <div class="modal job-modal-panel">
       <button class="modal-close" data-close-modal="jobModal" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
       <div id="jobModalContent"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="safetyModal" role="dialog" aria-modal="true" aria-labelledby="safetyModalTitle">
+    <div class="modal info-modal">
+      <button class="modal-close" data-close-modal="safetyModal" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
+      <div class="modal-head">
+        <span class="modal-icon green"><svg class="icon"><use href="#i-shield"/></svg></span>
+        <div><p class="eyebrow">SAFETY RULES</p><h2 id="safetyModalTitle">兼职安全规则</h2></div>
+      </div>
+      <div class="info-modal-body">
+        <p>这份规则来自平台处理过的真实纠纷，逐条自查，能避开绝大多数兼职风险。</p>
+        <div class="rule-list">
+          <div class="rule-item"><span>01</span><div><strong>不交任何入职费用</strong><p>押金、保证金、服装费、培训费、平台费……凡是入职前要你先付钱的兼职，一律拒绝。</p></div></div>
+          <div class="rule-item"><span>02</span><div><strong>不向个人账户转账</strong><p>工资应由用工方对公账户或个人实名账户结算，任何“先垫付再报销”的要求都要警惕。</p></div></div>
+          <div class="rule-item"><span>03</span><div><strong>不交出证件与验证码</strong><p>不交身份证原件，不提供银行卡密码、短信验证码，不配合任何“刷脸认证”或“代注册”。</p></div></div>
+          <div class="rule-item"><span>04</span><div><strong>先看清条款再签字</strong><p>确认薪资标准、计价单位、结算周期、工作时间与解除条件，不接受空白合同和口头承诺。</p></div></div>
+          <div class="rule-item"><span>05</span><div><strong>全程保留证据</strong><p>聊天记录、排班表、考勤打卡、转账凭证、岗位截图都要留存，最好同步一份到云端。</p></div></div>
+          <div class="rule-item"><span>06</span><div><strong>遇险先止损再维权</strong><p>停止继续付款与沟通，保留证据后拨打 12315 投诉、12333 咨询劳动保障，或直接报警 110。</p></div></div>
+        </div>
+        <div class="info-modal-note"><svg class="icon"><use href="#i-alert"/></svg><span>任何“日入过千”“动动手指赚钱”“刷单返利”的兼职，基本可以判定为骗局。不要因为对方催促或承诺高回报而跳过以上任何一条。</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <div class="modal info-modal">
+      <button class="modal-close" data-close-modal="aboutModal" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
+      <div class="modal-head">
+        <span class="modal-icon green"><svg class="icon"><use href="#i-handshake"/></svg></span>
+        <div><p class="eyebrow">ABOUT US</p><h2 id="aboutModalTitle">关于青薪盾</h2></div>
+      </div>
+      <div class="info-modal-body">
+        <p>青薪盾是一个面向大学生的兼职风险自查与权益保障工具。我们想做的事很简单：让你在接一份兼职之前，能看懂条款、留好证据，遇到问题知道该找谁。</p>
+        <div class="about-stats">
+          <div class="about-stat"><strong>暂无</strong><span>已服务同学</span></div>
+          <div class="about-stat"><strong>暂无</strong><span>覆盖高校</span></div>
+          <div class="about-stat"><strong>6 类</strong><span>常见风险场景</span></div>
+        </div>
+        <div class="rule-list">
+          <div class="rule-item"><span><svg class="icon"><use href="#i-check"/></svg></span><div><strong>我们做什么</strong><p>合同与岗位风险自查、薪资约定存证、维权工单指引、被骗后的材料梳理与公益援助对接。</p></div></div>
+          <div class="rule-item"><span><svg class="icon"><use href="#i-info"/></svg></span><div><strong>我们不做什么</strong><p>不发布岗位、不撮合交易、不接触资金、不提供正式法律意见，也不对任何岗位作安全担保。</p></div></div>
+          <div class="rule-item"><span><svg class="icon"><use href="#i-phone"/></svg></span><div><strong>如何联系我们</strong><p>平台服务热线：暂无；紧急情况请优先拨打 110、12315 或 12333。</p></div></div>
+        </div>
+        <p class="about-footnote">当前为展示版本，所有检测结果与记录仅用于功能演示，不构成任何法律意见或用工承诺。</p>
+      </div>
     </div>
   </div>
 

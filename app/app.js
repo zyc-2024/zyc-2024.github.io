@@ -26,8 +26,25 @@
     wallet: '薪资存证',
     compliance: '合规检测',
     rights: '快捷维权',
-    relief: '被骗救济'
+    relief: '被骗救济',
+    record: '记录详情'
   };
+
+  /* ------------------------------------------------------------------
+   * AI 检测配置（DeepSeek）
+   * 注意：API Key 直接暴露在前端只适用于本次展示版本；
+   * 正式上线请改为由自己的后端服务转发请求。
+   * ------------------------------------------------------------------ */
+  const AI_CONFIG = {
+    endpoint: 'https://api.deepseek.com/chat/completions',
+    apiKey: 'sk-2d783da1bf534cc7979e9f4102221a8d',
+    model: 'deepseek-chat'
+  };
+
+  const CLOCK_RATE = 30;
+  const CLOCK_KEY = 'qxs_clock_v1';
+  const WALLET_KEY = 'qxs_wallet_v1';
+  const clock = { running: false, startAt: 0, finishedMs: 0, timer: null };
 
   const jobs = [
     {
@@ -246,8 +263,56 @@
   ];
 
   const initialReliefHistory = [
-    { id: 'AJ202609280126', type: '押金 / 保证金诈骗', amount: '¥199.00', status: '援助中', date: '2026-09-28' }
+    {
+      id: 'AJ202609280126',
+      type: '押金 / 保证金诈骗',
+      amount: '¥199.00',
+      status: '援助中',
+      date: '2026-09-28',
+      name: '马小满',
+      school: '山东大学',
+      phone: '138****6621',
+      merchant: '济南某咖啡店（个人微信收款）',
+      payment: '微信转账',
+      police: '未报警',
+      detail: '在校园群看到「周末咖啡店兼职」信息，对方要求先交 199 元服装押金，承诺入职当天退还。转账后对方以「排班还没确认」为由拖延，随后不再回复消息，岗位信息也被删除。',
+      files: ['聊天记录截图 · 5 张', '微信转账凭证 · 1 张', '岗位信息截图 · 2 张'],
+      timeline: [
+        { state: 'done', title: '申请已提交', note: '9 月 28 日 20:16' },
+        { state: 'done', title: '材料审核通过', note: '9 月 29 日 10:02' },
+        { state: 'active', title: '援助方案沟通', note: '顾问已联系，正在补充转账凭证' },
+        { state: '', title: '援助执行', note: '等待双方确认' }
+      ],
+      messages: [
+        { who: '援助顾问', text: '你好，材料已经收到。请补充一下转账对方的微信昵称和转账单号，我们会协助你向平台投诉。', time: '9 月 29 日 10:05' },
+        { who: '我', text: '好的，稍后上传。对方微信号是 coffee_hr2026，转账单号尾号 3721。', time: '9 月 29 日 10:21' }
+      ]
+    }
   ];
+
+  const defaultRightsCase = {
+    id: 'WQ20261018032',
+    type: '虚假岗位信息',
+    amount: '¥300.00',
+    date: '2026-10-18',
+    submittedAt: '2026-10-18 14:20',
+    status: '处理中',
+    merchant: '星启文化传媒有限公司',
+    phone: '138****6621',
+    detail: '10 月 17 日在兼职群看到「校园活动执行」岗位，对方承诺日结 300 元，要求先交 300 元「物料押金」。转账后对方以活动延期为由推脱，次日发现已被拉黑，岗位信息也已删除。',
+    files: ['聊天记录截图 · 6 张', '转账凭证 · 1 张', '岗位信息截图 · 2 张'],
+    timeline: [
+      { state: 'done', title: '申请已受理', note: '10 月 18 日 14:20' },
+      { state: 'done', title: '证据审核通过', note: '10 月 18 日 16:05' },
+      { state: 'active', title: '平台正在调解', note: '预计 10 月 21 日前反馈' },
+      { state: '', title: '处理完成', note: '等待更新' }
+    ],
+    handler: { name: '李调解员', meta: '平台维权中心 · 工号 0231', avatar: '李' },
+    messages: [
+      { who: '平台调解员', text: '你的工单已受理，证据材料完整。我们已经联系用工方核实岗位与押金情况，请保持电话畅通。', time: '10 月 18 日 16:10' },
+      { who: '我', text: '好的，如果需要补充聊天记录我随时上传。', time: '10 月 18 日 16:24' }
+    ]
+  };
 
   const state = {
     category: '全部',
@@ -257,8 +322,13 @@
     walletBalance: 1840,
     transactions: initialTransactions.slice(),
     merchantJobs: initialMerchantJobs.slice(),
+    reliefHistory: initialReliefHistory.slice(),
+    rightsCase: defaultRightsCase,
     reliefStep: 1,
-    scanTimers: []
+    recordReturn: 'rights',
+    recordNav: 'rights',
+    scanTimers: [],
+    scanning: false
   };
 
   function showToast(message, kind = 'success') {
@@ -443,6 +513,10 @@
     if (!pageTitles[page]) page = 'dashboard';
     $$('.page').forEach((section) => section.classList.toggle('active', section.id === `page-${page}`));
     $$('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.page === page));
+    if (page === 'record') {
+      $$('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.page === state.recordNav));
+      if (!$('#recordDetail')?.innerHTML.trim()) renderRightsRecord(state.rightsCase);
+    }
     const title = $('#topbarTitle');
     if (title) title.textContent = pageTitles[page];
     document.title = `${pageTitles[page]} · 青薪盾`;
@@ -452,7 +526,10 @@
       renderMerchantJobs();
       switchMerchantTab($('.merchant-panel.active')?.id.replace('merchant-panel-', '') || 'publish');
     }
-    if (page === 'relief') renderReliefHistory();
+    if (page === 'relief') {
+      resetReliefView();
+      renderReliefHistory();
+    }
     if (page === 'compliance') {
       window.setTimeout(() => {
         if (!$('#complianceGate')?.classList.contains('open')) openModal('complianceGate');
@@ -489,7 +566,82 @@
     }
   }
 
-  function updateClockUI() {
+  function saveWallet() {
+    try {
+      localStorage.setItem(WALLET_KEY, JSON.stringify({
+        balance: state.walletBalance,
+        transactions: state.transactions
+      }));
+    } catch (error) {
+      /* 忽略隐私模式下的存储异常 */
+    }
+  }
+
+  function restoreWallet() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(WALLET_KEY) || 'null');
+      if (saved && Array.isArray(saved.transactions) && saved.transactions.length) {
+        state.transactions = saved.transactions;
+        if (Number.isFinite(Number(saved.balance))) state.walletBalance = Number(saved.balance);
+      }
+    } catch (error) {
+      /* 忽略损坏的本地记录 */
+    }
+    renderWallet();
+  }
+
+  function exportRecords() {
+    const now = new Date();
+    const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+    const rows = [['日期 / 记录', '说明', '收支', '金额（元）', '状态']];
+    state.transactions.forEach((transaction) => {
+      const [datePart, ...noteParts] = String(transaction.meta || '').split(' · ');
+      rows.push([
+        datePart || '',
+        [transaction.title, ...noteParts].filter(Boolean).join(' · '),
+        transaction.type === 'out' ? '支出' : '收入',
+        formatMoney(transaction.amount),
+        transaction.status || '已确认'
+      ]);
+    });
+    rows.push(['合计', '当前存证金额', '收入', formatMoney(state.walletBalance), '']);
+
+    const csv = '\uFEFF' + rows
+      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+      .join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `青薪盾-薪资存证记录-${stamp}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+    showToast(`已导出 ${state.transactions.length} 条存证记录（CSV，可用 Excel 打开）`);
+  }
+
+  function formatDuration(ms) {
+    const total = Math.max(0, Math.floor(ms / 1000));
+    const hours = String(Math.floor(total / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((total % 3600) / 60)).padStart(2, '0');
+    const seconds = String(total % 60).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  function clockElapsed() {
+    return clock.running ? Date.now() - clock.startAt : clock.finishedMs;
+  }
+
+  function saveClock() {
+    try {
+      localStorage.setItem(CLOCK_KEY, JSON.stringify(clock.running ? { running: true, startAt: clock.startAt } : { running: false }));
+    } catch (error) {
+      /* 忽略隐私模式下的存储异常 */
+    }
+  }
+
+  function renderClock() {
     const clockCard = $('.clock-card');
     const display = $('#clockDisplay');
     const status = $('#clockStatusBadge');
@@ -497,12 +649,85 @@
     const earning = $('#clockEarning');
     const hint = $('#clockHint');
     if (!display) return;
-    clockCard?.classList.remove('running');
-    if (status) status.innerHTML = '<span class="status-dot"></span>未开始';
-    if (button) button.innerHTML = `${icon('clock')}开始工作`;
-    display.textContent = '00:00:00';
-    if (earning) earning.textContent = '¥0.00';
-    if (hint) hint.textContent = '开始打卡后自动计算工时';
+    const elapsed = clockElapsed();
+    display.textContent = formatDuration(elapsed);
+    if (earning) earning.textContent = `¥${formatMoney((elapsed / 3600000) * CLOCK_RATE)}`;
+    clockCard?.classList.toggle('running', clock.running);
+    if (clock.running) {
+      if (status) status.innerHTML = '<span class="status-dot"></span>工作中';
+      if (button) button.innerHTML = `${icon('check')}结束工作`;
+      if (hint) hint.textContent = '计时中 · 按 ¥30/小时计算预计收入';
+    } else {
+      if (status) status.innerHTML = `<span class="status-dot"></span>${clock.finishedMs ? '已结束' : '未开始'}`;
+      if (button) button.innerHTML = `${icon('clock')}开始工作`;
+      if (hint) hint.textContent = clock.finishedMs ? '本次工时已记录，可开始新一次打卡' : '开始打卡后自动计算工时';
+    }
+  }
+
+  function startClock() {
+    if (clock.running) return;
+    clock.running = true;
+    clock.startAt = Date.now();
+    clock.finishedMs = 0;
+    saveClock();
+    window.clearInterval(clock.timer);
+    clock.timer = window.setInterval(renderClock, 1000);
+    renderClock();
+    showToast('已开始计时，结束工作时会自动写入存证记录');
+  }
+
+  function stopClock() {
+    if (!clock.running) return;
+    const elapsed = Date.now() - clock.startAt;
+    clock.running = false;
+    clock.finishedMs = elapsed;
+    window.clearInterval(clock.timer);
+    clock.timer = null;
+    saveClock();
+    if (elapsed >= 5000) {
+      const amount = Math.round((elapsed / 3600000) * CLOCK_RATE * 100) / 100;
+      const now = new Date();
+      const dateText = `${now.getMonth() + 1} 月 ${now.getDate()} 日 ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      state.transactions.unshift({
+        type: 'in',
+        title: 'M Stand 咖啡 · 工时打卡',
+        meta: `${dateText} · 工时 ${formatDuration(elapsed)} · 待商家确认结算`,
+        amount,
+        status: '待确认'
+      });
+      state.walletBalance += amount;
+      saveWallet();
+      renderWallet();
+      showToast(`本次工时 ${formatDuration(elapsed)}，预计收入 ¥${formatMoney(amount)} 已写入存证记录`);
+    } else {
+      showToast('本次打卡时间太短，未生成存证记录', 'info');
+    }
+    renderClock();
+  }
+
+  function resetClock() {
+    window.clearInterval(clock.timer);
+    clock.running = false;
+    clock.timer = null;
+    clock.startAt = 0;
+    clock.finishedMs = 0;
+    saveClock();
+    renderClock();
+    showToast('打卡记录已重置', 'info');
+  }
+
+  function restoreClock() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CLOCK_KEY) || 'null');
+      if (saved?.running && Number(saved.startAt)) {
+        clock.running = true;
+        clock.startAt = Number(saved.startAt);
+        clock.timer = window.setInterval(renderClock, 1000);
+      }
+    } catch (error) {
+      /* 忽略损坏的本地记录 */
+    }
+    renderClock();
   }
 
   function switchMerchantTab(tab) {
@@ -544,17 +769,222 @@
   function renderReliefHistory() {
     const list = $('#reliefHistoryList');
     if (!list) return;
-    const history = initialReliefHistory;
+    const history = state.reliefHistory;
     if (!Array.isArray(history) || !history.length) {
       list.innerHTML = '<p style="font-size:9px;color:#9ba59f">暂无申请记录</p>';
       return;
     }
-    list.innerHTML = history.slice(0, 3).map((item) => `
-      <div class="relief-history-item">
-        <strong>${escapeHTML(item.id)} <span>${escapeHTML(item.status)}</span></strong>
+    list.innerHTML = history.slice(0, 4).map((item) => `
+      <button type="button" class="relief-history-item" data-open-record="relief" data-relief-id="${escapeHTML(item.id)}">
+        <strong>${escapeHTML(item.id)}<span>${escapeHTML(item.status)}</span></strong>
         <p>${escapeHTML(item.type)} · ${escapeHTML(item.amount)}</p>
+        <svg class="icon relief-history-arrow"><use href="#i-chevron-right"/></svg>
+      </button>
+    `).join('');
+  }
+
+  function timelineItemsHTML(items) {
+    return items.map((item) => `
+      <div class="timeline-item ${item.state || ''}">
+        <span class="timeline-dot"></span>
+        <div><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.note || '')}</small></div>
       </div>
     `).join('');
+  }
+
+  function recordTimelineHTML(items, compact = false) {
+    return `<div class="timeline ${compact ? 'compact-timeline' : ''}">${timelineItemsHTML(items)}</div>`;
+  }
+
+  function recordFilesHTML(files) {
+    return `<div class="record-files">${files.map((file) => `
+      <div class="record-file">${icon('file')}<span>${escapeHTML(file)}</span></div>
+    `).join('')}</div>`;
+  }
+
+  function recordMessagesHTML(messages) {
+    return `<div class="record-messages">${messages.map((message) => `
+      <div class="record-message">
+        <span class="record-msg-avatar">${escapeHTML(message.who === '我' ? '我' : '盾')}</span>
+        <div>
+          <strong>${escapeHTML(message.who)}</strong>
+          <p>${escapeHTML(message.text)}</p>
+          <small>${escapeHTML(message.time)}</small>
+        </div>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  function renderRightsRecord(record) {
+    const eyebrow = $('#recordEyebrow');
+    const title = $('#recordTitle');
+    const subtitle = $('#recordSubtitle');
+    const badge = $('#recordStatusBadge');
+    const container = $('#recordDetail');
+    if (!container) return;
+    if (eyebrow) eyebrow.textContent = 'CASE RECORD';
+    if (title) title.textContent = '维权工单详情';
+    if (subtitle) subtitle.textContent = '以下为该工单的完整信息、证据与处理记录，平台调解员会持续更新进度。';
+    if (badge) {
+      badge.textContent = record.status;
+      badge.className = `badge ${record.status === '处理完成' ? 'badge-green' : 'badge-sand'}`;
+    }
+    container.innerHTML = `
+      <div class="record-grid">
+        <div class="record-main">
+          <section class="table-card record-card">
+            <div class="record-summary">
+              <div><span>工单编号</span><strong>${escapeHTML(record.id)}</strong></div>
+              <div><span>维权类型</span><strong>${escapeHTML(record.type)}</strong></div>
+              <div><span>涉及金额</span><strong>${escapeHTML(record.amount)}</strong></div>
+              <div><span>提交时间</span><strong>${escapeHTML(record.submittedAt)}</strong></div>
+            </div>
+            <div class="record-block">
+              <h3>事情经过</h3>
+              <p>${escapeHTML(record.detail)}</p>
+            </div>
+            <div class="record-block">
+              <div class="record-block-head"><h3>证据材料</h3><span>${record.files.length} 份 · 已加密存证</span></div>
+              ${recordFilesHTML(record.files)}
+            </div>
+            <div class="record-block">
+              <h3>处理进度</h3>
+              ${recordTimelineHTML(record.timeline)}
+            </div>
+            <div class="record-block">
+              <h3>沟通记录</h3>
+              ${recordMessagesHTML(record.messages)}
+            </div>
+            <div class="record-actions">
+              <button type="button" class="button button-light" data-toast="补充材料入口已打开（展示版本）">${icon('upload')}补充证据</button>
+              <button type="button" class="button button-dark" data-toast="已提醒调解员尽快跟进">${icon('message')}催促进度</button>
+            </div>
+          </section>
+        </div>
+        <aside class="record-side">
+          <section class="aside-card">
+            <div class="section-heading mini"><div><p class="eyebrow">HANDLER</p><h3>处理人</h3></div></div>
+            <div class="record-handler">
+              <span class="avatar avatar-lin">${escapeHTML(record.handler.avatar)}</span>
+              <div><strong>${escapeHTML(record.handler.name)}</strong><small>${escapeHTML(record.handler.meta)}</small></div>
+            </div>
+            <div class="record-info-list">
+              <div><span>当前状态</span><strong>${escapeHTML(record.status)}</strong></div>
+              <div><span>涉事商家</span><strong>${escapeHTML(record.merchant)}</strong></div>
+              <div><span>联系电话</span><strong>${escapeHTML(record.phone)}</strong></div>
+              <div><span>响应时限</span><strong>24 小时内</strong></div>
+            </div>
+          </section>
+          <section class="aside-card record-tip-card">
+            <div class="section-heading mini"><div><p class="eyebrow">NEXT STEP</p><h3>下一步建议</h3></div></div>
+            <ul class="check-list">
+              <li><span>01</span>保持电话畅通，留意平台来电</li>
+              <li><span>02</span>补充证据可直接在工单内上传</li>
+              <li><span>03</span>协商不成可拨打 12315 投诉</li>
+            </ul>
+            <a class="button button-light button-block" href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer">${icon('scale')}前往 12315 投诉</a>
+          </section>
+        </aside>
+      </div>
+    `;
+  }
+
+  function renderReliefRecord(record) {
+    const eyebrow = $('#recordEyebrow');
+    const title = $('#recordTitle');
+    const subtitle = $('#recordSubtitle');
+    const badge = $('#recordStatusBadge');
+    const container = $('#recordDetail');
+    if (!container) return;
+    if (eyebrow) eyebrow.textContent = 'RELIEF RECORD';
+    if (title) title.textContent = '救济申请详情';
+    if (subtitle) subtitle.textContent = '以下为该申请的完整信息与援助进度，材料仅授权援助顾问查看。';
+    if (badge) {
+      badge.textContent = record.status;
+      badge.className = `badge ${record.status === '援助中' ? 'badge-sand' : 'badge-green'}`;
+    }
+    container.innerHTML = `
+      <div class="record-grid">
+        <div class="record-main">
+          <section class="table-card record-card">
+            <div class="record-summary">
+              <div><span>申请编号</span><strong>${escapeHTML(record.id)}</strong></div>
+              <div><span>被骗类型</span><strong>${escapeHTML(record.type)}</strong></div>
+              <div><span>被骗金额</span><strong>${escapeHTML(record.amount)}</strong></div>
+              <div><span>提交日期</span><strong>${escapeHTML(record.date)}</strong></div>
+            </div>
+            <div class="record-block">
+              <h3>申请人信息</h3>
+              <div class="record-info-grid">
+                <div><span>姓名</span><strong>${escapeHTML(record.name || '马小满')}</strong></div>
+                <div><span>就读院校</span><strong>${escapeHTML(record.school || '山东大学')}</strong></div>
+                <div><span>联系电话</span><strong>${escapeHTML(record.phone || '138****6621')}</strong></div>
+                <div><span>支付方式</span><strong>${escapeHTML(record.payment || '微信转账')}</strong></div>
+                <div><span>是否报警</span><strong>${escapeHTML(record.police || '未报警')}</strong></div>
+                <div><span>涉事商家</span><strong>${escapeHTML(record.merchant || '未填写')}</strong></div>
+              </div>
+            </div>
+            <div class="record-block">
+              <h3>事件经过</h3>
+              <p>${escapeHTML(record.detail)}</p>
+            </div>
+            <div class="record-block">
+              <div class="record-block-head"><h3>已提交材料</h3><span>${record.files.length} 份 · 加密存储</span></div>
+              ${recordFilesHTML(record.files)}
+            </div>
+            <div class="record-block">
+              <h3>援助进度</h3>
+              ${recordTimelineHTML(record.timeline)}
+            </div>
+            <div class="record-block">
+              <h3>沟通记录</h3>
+              ${recordMessagesHTML(record.messages)}
+            </div>
+            <div class="record-actions">
+              <button type="button" class="button button-light" data-toast="补充材料入口已打开（展示版本）">${icon('upload')}补充材料</button>
+              <button type="button" class="button button-dark" data-toast="已提醒援助顾问尽快跟进">${icon('message')}联系援助顾问</button>
+            </div>
+          </section>
+        </div>
+        <aside class="record-side">
+          <section class="aside-card">
+            <div class="section-heading mini"><div><p class="eyebrow">ADVISOR</p><h3>援助顾问</h3></div></div>
+            <div class="record-handler">
+              <span class="avatar avatar-lin">周</span>
+              <div><strong>周顾问</strong><small>青薪盾安心援助计划</small></div>
+            </div>
+            <div class="record-info-list">
+              <div><span>在线时间</span><strong>每日 09:00-21:00</strong></div>
+              <div><span>审核时限</span><strong>1 个工作日内</strong></div>
+              <div><span>申请状态</span><strong>${escapeHTML(record.status)}</strong></div>
+            </div>
+          </section>
+          <section class="aside-card record-tip-card">
+            <div class="section-heading mini"><div><p class="eyebrow">NOTICE</p><h3>材料说明</h3></div></div>
+            <p class="record-note">原始聊天记录和转账凭证请勿删除。截图仅作为辅助材料，原始记录更有法律效力。</p>
+            <button type="button" class="button button-light button-block" data-toast="已提醒援助顾问尽快跟进">${icon('message')}联系援助顾问</button>
+          </section>
+        </aside>
+      </div>
+    `;
+  }
+
+  function openRecord(kind, id) {
+    state.recordReturn = location.hash.replace('#', '') || 'rights';
+    if (kind === 'relief') {
+      const record = state.reliefHistory.find((item) => item.id === id) || state.reliefHistory[0];
+      if (!record) {
+        showToast('未找到申请记录', 'error');
+        return;
+      }
+      state.recordNav = 'relief';
+      renderReliefRecord(record);
+    } else {
+      state.recordNav = 'rights';
+      renderRightsRecord(state.rightsCase);
+    }
+    navigate('record');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const riskRules = [
@@ -686,138 +1116,315 @@
 四、兼职期间如发生意外伤害，由乙方自行承担，甲方不承担任何责任。
 五、本协议最终解释权归甲方所有，双方如有争议，以甲方认定为准。`;
 
-  const contractRisks = [
-    {
-      level: 'high',
-      clause: '乙方入职前需一次性缴纳服装费、培训费共 198 元，工作满 30 天后退还。',
-      explanation: '这是典型的入职前收费。很多兼职骗局会用“工作满一定天数后退还”诱导先付款，后续常以考核不合格等理由拒绝退款。',
-      law: '《劳动合同法》第九条：用人单位招用劳动者，不得要求劳动者提供担保或者以其他名义向劳动者收取财物。',
-      advice: '拒绝先行支付任何费用，并要求对方删除该项收费条款。',
-      script: '“我可以先确认工作内容和薪资，但入职前不缴纳任何服装费或培训费，我们按正规兼职协议执行。”'
-    },
-    {
-      level: 'high',
-      clause: '兼职工资统一于次月 30 日发放，若乙方中途离职，未结算工资不予支付。',
-      explanation: '“中途离职不结算”属于变相克扣劳动报酬。即使提前结束兼职，已经完成的工作也应当按约定支付工资。',
-      law: '《劳动法》第五十条：工资应当以货币形式按月支付给劳动者本人，不得克扣或者无故拖欠劳动者的工资。',
-      advice: '要求改为按实际完成工时结算，并在协议中写明具体结算节点。',
-      script: '“如果我只做了一部分，已完成的工时还是需要按约定结算，请把结算方式改成按实际工时计算。”'
-    },
-    {
-      level: 'medium',
-      clause: '甲方可根据经营需要随时调整乙方的工作内容和工作时长，乙方应无条件配合。',
-      explanation: '“随时调整、无条件配合”会让实际工作内容和时长与最初约定不一致，可能变相增加工作量。',
-      law: '《劳动合同法》第三十五条：用人单位与劳动者协商一致，可以变更劳动合同约定的内容。',
-      advice: '要求涉及工作内容和时长的调整需双方书面确认，删除“无条件配合”表述。',
-      script: '“工作内容或时间如果需要调整，我们可以提前沟通并书面确认，但不太能接受无条件变更。”'
-    },
-    {
-      level: 'high',
-      clause: '兼职期间如发生意外伤害，由乙方自行承担，甲方不承担任何责任。',
-      explanation: '此类“意外免责”并不能当然免除用工方责任，发生伤害时仍可能涉及赔偿责任，签署前应要求补充安全保障。',
-      law: '《民法典》第一千一百九十二条：个人之间形成劳务关系，提供劳务一方因劳务受到损害的，根据双方各自的过错承担相应的责任。',
-      advice: '要求明确工作场所安全责任，并确认商家是否购买相关保险。',
-      script: '“工作期间的安全保障需要在协议里写清楚，请补充意外险或明确安全责任。”'
-    },
-    {
-      level: 'medium',
-      clause: '本协议最终解释权归甲方所有，双方如有争议，以甲方认定为准。',
-      explanation: '“最终解释权归甲方”会削弱你的协商和维权空间，格式条款的解释不应由单方决定。',
-      law: '《民法典》第四百九十六条：采用格式条款订立合同的，应当遵循公平原则确定当事人之间的权利和义务。',
-      advice: '删除单方解释权条款，改为双方协商或依法处理。',
-      script: '“这条单方解释的约定不太公平，请改成双方协商解决。”'
-    }
-  ];
 
-  function runComplianceScan() {
+  /* ------------------------- AI 合同风险检测 ------------------------- */
+
+  const AI_SYSTEM_PROMPT = `你是「青薪盾」的兼职合同风险识别助手，服务对象是中国在校大学生。你的任务是逐条指出兼职协议、录用通知或招聘聊天记录中的风险条款，帮助同学保护自己。
+
+规则：
+1. 只做风险提示与沟通建议，不判定合同整体有效或无效，不给出“可以签 / 不能签”的结论，不冒充律师。
+2. 法条只引用你确定存在的条文；不确定时写“暂无明确法条，建议参考《民法典》合同编相关规定”，禁止编造条号。
+3. risks 至少 1 条、最多 8 条；即使文本没有明显风险，也要列出需要进一步确认的点。
+4. 每条 risks 必须包含：level（high / medium / low）、clause（原文片段）、type（风险类型）、explanation（大白话解读）、law（法律依据）、advice（应对建议）、script（可直接发给对方的话术）。
+5. score 为 0-100 的整数，表示安全程度，100 表示未发现风险。
+6. 语言简洁、口语化、面向大学生。
+7. 只输出合法 JSON，不要输出 Markdown 代码块、解释或多余文字。
+
+JSON 结构：
+{"score": 72, "level": "低风险|中风险|高风险", "overall": "一句话总体说明", "risks": [{"level": "high", "clause": "原文片段", "type": "收费风险", "explanation": "解读", "law": "法律依据", "advice": "建议", "script": "话术"}], "advice": ["整体建议1", "整体建议2"]}`;
+
+  const AI_LEVEL_META = {
+    high: { text: '高风险隐患', short: '高风险', badge: 'badge-coral', color: '#c5533c', verdict: '强烈建议先不要签署' },
+    medium: { text: '中风险隐患', short: '中风险', badge: 'badge-coral', color: '#d26a4c', verdict: '建议逐条协商后再决定' },
+    low: { text: '低风险提示', short: '低风险', badge: 'badge-green', color: '#3f7d57', verdict: '暂未发现明显高风险条款' }
+  };
+
+  function extractJson(raw) {
+    let text = String(raw || '').trim();
+    text = text.replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+    const start = text.indexOf('{');
+    const end = text.lastIndexOf('}');
+    if (start !== -1 && end > start) text = text.slice(start, end + 1);
+    return JSON.parse(text);
+  }
+
+  function normalizeAiResult(data) {
+    const risks = (Array.isArray(data.risks) ? data.risks : []).slice(0, 8).map((risk) => {
+      const level = ['high', 'medium', 'low'].includes(risk.level) ? risk.level : 'medium';
+      return {
+        level,
+        clause: String(risk.clause || '（未提供原文片段）').slice(0, 300),
+        type: String(risk.type || '风险条款').slice(0, 30),
+        explanation: String(risk.explanation || '该条款存在一定风险，建议与对方确认。'),
+        law: String(risk.law || '暂无明确法条，建议参考《民法典》合同编相关规定。'),
+        advice: String(risk.advice || '与对方书面确认后再决定是否签署。'),
+        script: String(risk.script || '这条表述我还需要再确认一下，能否改成更明确的书面约定？')
+      };
+    });
+
+    if (!risks.length) {
+      risks.push({
+        level: 'low',
+        clause: '（未识别到具体风险条款）',
+        type: '信息完整性',
+        explanation: '本次文本中未识别到明显的风险表述，但信息可能不完整。',
+        law: '暂无明确法条，建议参考《民法典》合同编相关规定。',
+        advice: '确认薪资标准、结算周期、工作内容与解除条件是否都已写入书面约定。',
+        script: '方便把薪资标准、结算时间和工作内容补充到书面协议里吗？'
+      });
+    }
+
+    let score = Number(data.score);
+    if (!Number.isFinite(score)) score = risks.some((risk) => risk.level === 'high') ? 45 : 70;
+    score = Math.max(0, Math.min(100, Math.round(score)));
+
+    const hasHigh = risks.some((risk) => risk.level === 'high');
+    const hasMedium = risks.some((risk) => risk.level === 'medium');
+    let level = 'low';
+    if (hasHigh || score < 45) level = 'high';
+    else if (hasMedium || score < 75) level = 'medium';
+
+    return {
+      score,
+      level,
+      overall: String(data.overall || '已完成条款风险识别，请逐条核对以下提示。').slice(0, 120),
+      risks,
+      advice: (Array.isArray(data.advice) ? data.advice : []).map(String).filter(Boolean).slice(0, 6)
+    };
+  }
+
+  async function requestAiScan(text) {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 45000);
+    try {
+      const response = await fetch(AI_CONFIG.endpoint, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${AI_CONFIG.apiKey}`
+        },
+        body: JSON.stringify({
+          model: AI_CONFIG.model,
+          messages: [
+            { role: 'system', content: AI_SYSTEM_PROMPT },
+            { role: 'user', content: `请检测以下兼职文本中的风险条款，并按 JSON 结构输出结果：\n"""\n${text}\n"""` }
+          ],
+          temperature: 0.3,
+          max_tokens: 1800,
+          response_format: { type: 'json_object' },
+          stream: false
+        })
+      });
+      if (!response.ok) {
+        const detail = await response.text().catch(() => '');
+        throw new Error(`接口返回 ${response.status}${detail ? `：${detail.slice(0, 80)}` : ''}`);
+      }
+      const payload = await response.json();
+      const content = payload?.choices?.[0]?.message?.content || '';
+      if (!content) throw new Error('AI 未返回有效内容');
+      return normalizeAiResult(extractJson(content));
+    } catch (error) {
+      if (error?.name === 'AbortError') throw new Error('请求超时，请稍后重试');
+      throw error;
+    } finally {
+      window.clearTimeout(timer);
+    }
+  }
+
+  function scoreGaugeHTML(score, color) {
+    return `<div class="score-gauge" style="--score:${score};--gauge-color:${color}"><div><strong>${score}</strong><span>风险评分</span></div></div>`;
+  }
+
+  function reportActionsHTML() {
+    return `
+      <div class="report-actions">
+        <button class="button button-light" data-rescan>重新检测</button>
+        <button class="button button-dark" data-toast="可带着合同问题咨询平台顾问">咨询平台顾问</button>
+      </div>
+    `;
+  }
+
+  function reportDisclaimerHTML(kind = 'ai') {
+    const text = kind === 'local'
+      ? '本结果由本地规则引擎生成，仅基于关键词与信息完整度做初步筛查，可能存在遗漏或误判；不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。'
+      : '本结果使用 AI 大模型（DeepSeek）辅助生成，仅识别展示合同风险隐患，AI 输出可能存在遗漏或误差；不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。';
+    return `
+      <div class="report-disclaimer">
+        <strong>【免责提示】</strong>
+        <p>${text}</p>
+      </div>
+    `;
+  }
+
+  function aiReportHTML(result) {
+    const counts = { high: 0, medium: 0, low: 0 };
+    result.risks.forEach((risk) => { counts[risk.level] += 1; });
+    const level = AI_LEVEL_META[result.level] || AI_LEVEL_META.medium;
+    return `
+      <div class="contract-report-head">
+        <div>
+          <p class="eyebrow">AI CLAUSE RISK LIST</p>
+          <h3>AI 合同风险逐条提示</h3>
+          <p>由 DeepSeek 大模型识别，共 ${result.risks.length} 条风险；仅作参考，不构成法律意见。</p>
+        </div>
+        <span class="badge ${level.badge}">${level.short}</span>
+      </div>
+      <div class="report-top">
+        ${scoreGaugeHTML(result.score, level.color)}
+        <div class="report-verdict">
+          <h3>${escapeHTML(result.overall)}</h3>
+          <p>AI 综合评估：${level.verdict}。请逐条核对下列条款，并保留协商记录。</p>
+        </div>
+      </div>
+      <div class="report-stats">
+        <div class="report-stat"><span>高风险条款</span><strong>${counts.high} 条</strong></div>
+        <div class="report-stat"><span>中风险条款</span><strong>${counts.medium} 条</strong></div>
+        <div class="report-stat"><span>低风险提示</span><strong>${counts.low} 条</strong></div>
+      </div>
+      <div class="contract-risk-list">
+        ${result.risks.map((risk, index) => `
+          <article class="contract-risk-item ${risk.level}">
+            <div class="contract-risk-head">
+              <span class="risk-level-pill ${risk.level}"><i></i>${AI_LEVEL_META[risk.level].text}</span>
+              <span class="risk-index">${escapeHTML(risk.type)} · 风险 ${String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="risk-clause-label">原文片段</div>
+            <blockquote class="risk-clause">${escapeHTML(risk.clause)}</blockquote>
+            <div class="risk-field-grid">
+              <div class="risk-field"><span>大白话解读</span><p>${escapeHTML(risk.explanation)}</p></div>
+              <div class="risk-field"><span>法条提示</span><p>${escapeHTML(risk.law)}</p></div>
+              <div class="risk-field"><span>应对建议</span><p>${escapeHTML(risk.advice)}</p></div>
+              <div class="risk-field script"><span>沟通话术</span><p>${escapeHTML(risk.script)}</p></div>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+      ${result.advice.length ? `<div class="report-advice"><strong>整体建议</strong><ul>${result.advice.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div>` : ''}
+      ${reportActionsHTML()}
+      ${reportDisclaimerHTML()}
+    `;
+  }
+
+  function localReportHTML(result, notice) {
+    const statusMeta = {
+      pass: { text: '通过', icon: 'check' },
+      warn: { text: '提醒', icon: 'info' },
+      fail: { text: '风险', icon: 'alert' }
+    };
+    return `
+      <div class="contract-report-head">
+        <div>
+          <p class="eyebrow">RULE BASED CHECK</p>
+          <h3>本地规则检测结果</h3>
+          <p>基于关键词与信息完整度的初步筛查，仅作参考。</p>
+        </div>
+        <span class="badge badge-sand">本地规则</span>
+      </div>
+      ${notice ? `<div class="ai-summary">${icon('info')}<p>${escapeHTML(notice)}</p></div>` : ''}
+      <div class="report-top">
+        ${scoreGaugeHTML(result.score, result.level.color)}
+        <div class="report-verdict">
+          <h3>${escapeHTML(result.level.verdict)}</h3>
+          <p>${escapeHTML(result.level.copy)}</p>
+        </div>
+      </div>
+      <div class="report-stats">
+        <div class="report-stat"><span>通过项</span><strong>${result.passCount} 项</strong></div>
+        <div class="report-stat"><span>提醒项</span><strong>${result.warnCount} 项</strong></div>
+        <div class="report-stat"><span>风险项</span><strong>${result.failCount} 项</strong></div>
+      </div>
+      <div class="report-checks">
+        ${result.checks.map((check) => `
+          <div class="report-check ${check.status}">
+            <span class="report-check-icon">${icon(statusMeta[check.status].icon)}</span>
+            <div><strong>${escapeHTML(check.name)}<em>${statusMeta[check.status].text}</em></strong><p>${escapeHTML(check.detail)}</p></div>
+          </div>
+        `).join('')}
+      </div>
+      ${result.riskWords.length ? `<div class="report-keywords">${result.riskWords.map((word) => `<span>${escapeHTML(word)}</span>`).join('')}</div>` : ''}
+      <div class="report-advice"><strong>处理建议</strong><ul>${result.advice.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div>
+      ${reportActionsHTML()}
+      ${reportDisclaimerHTML('local')}
+    `;
+  }
+
+  const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
+  async function runComplianceScan() {
+    if (state.scanning) return;
     const input = $('#complianceInput');
     const placeholder = $('#scanPlaceholder');
     const loading = $('#scanLoading');
     const report = $('#scanReport');
     const button = $('#runComplianceScan');
     const text = input?.value.trim() || '';
+
     if (text.length < 10) {
       showToast('请先粘贴至少 10 个字的合同内容', 'error');
       input?.focus();
       return;
     }
 
+    state.scanning = true;
     state.scanTimers.forEach((timer) => clearTimeout(timer));
     state.scanTimers = [];
     placeholder?.classList.add('hidden');
     report?.classList.remove('visible');
-    report && (report.innerHTML = '');
+    if (report) report.innerHTML = '';
     loading?.classList.add('visible');
     if (button) {
       button.disabled = true;
       button.style.opacity = '0.7';
-      button.innerHTML = `${icon('shield')}正在分析...`;
+      button.innerHTML = `${icon('sparkle')}AI 正在检测...`;
     }
 
     const phases = [
-      '扫描收费与押金相关表述...',
-      '识别结算、免责与解除条款...',
-      '整理风险依据与沟通建议...'
+      '正在将文本发送至 AI 检测服务...',
+      'AI 正在逐条比对收费、结算与免责条款...',
+      '正在整理风险等级与沟通建议...'
     ];
-    phases.forEach((phase, index) => {
-      const timer = window.setTimeout(() => {
-        const loadingText = $('#scanLoadingText');
-        if (loadingText) loadingText.textContent = phase;
-      }, 450 * (index + 1));
-      state.scanTimers.push(timer);
-    });
+    let phaseIndex = 0;
+    const setPhase = () => {
+      const loadingText = $('#scanLoadingText');
+      if (loadingText) loadingText.textContent = phases[phaseIndex % phases.length];
+      phaseIndex += 1;
+    };
+    setPhase();
+    const phaseTimer = window.setInterval(setPhase, 2200);
+    const startedAt = Date.now();
 
-    const finish = window.setTimeout(() => {
+    let html;
+    try {
+      try {
+        const result = await requestAiScan(text);
+        html = aiReportHTML(result);
+      } catch (error) {
+        console.error('[青薪盾] AI 检测失败：', error);
+        html = localReportHTML(scanText(text), `AI 检测服务暂时不可用（${error?.message || '网络异常'}）。已使用本地规则引擎生成参考结果，稍后可点击「重新检测」再试。`);
+        showToast('AI 服务暂不可用，已切换为本地规则检测', 'error');
+      }
+
+      await wait(Math.max(0, 900 - (Date.now() - startedAt)));
+      window.clearInterval(phaseTimer);
       loading?.classList.remove('visible');
       if (report) {
-        report.innerHTML = `
-          <div class="contract-report-head">
-            <div>
-              <p class="eyebrow">CLAUSE RISK LIST</p>
-              <h3>合同风险逐条提示</h3>
-              <p>以下仅对识别出的条款作风险展示，不对整份合同作安全性判断。</p>
-            </div>
-            <span class="badge badge-sand">演示样例</span>
-          </div>
-          <div class="contract-risk-list">
-            ${contractRisks.map((risk, index) => `
-              <article class="contract-risk-item ${risk.level}">
-                <div class="contract-risk-head">
-                  <span class="risk-level-pill ${risk.level}"><i></i>${risk.level === 'high' ? '高风险隐患' : '中等风险隐患'}</span>
-                  <span class="risk-index">风险 ${String(index + 1).padStart(2, '0')}</span>
-                </div>
-                <div class="risk-clause-label">原文片段</div>
-                <blockquote class="risk-clause">${escapeHTML(risk.clause)}</blockquote>
-                <div class="risk-field-grid">
-                  <div class="risk-field"><span>大白话解读</span><p>${escapeHTML(risk.explanation)}</p></div>
-                  <div class="risk-field"><span>法条提示</span><p>${escapeHTML(risk.law)}</p></div>
-                  <div class="risk-field"><span>应对建议</span><p>${escapeHTML(risk.advice)}</p></div>
-                  <div class="risk-field script"><span>沟通话术</span><p>${escapeHTML(risk.script)}</p></div>
-                </div>
-              </article>
-            `).join('')}
-          </div>
-          <div class="report-actions">
-            <button class="button button-light" data-rescan>重新检测</button>
-            <button class="button button-dark" data-toast="示例模式：可带着合同问题咨询平台顾问">咨询平台顾问</button>
-          </div>
-          <div class="report-disclaimer">
-            <strong>【免责提示】</strong>
-            <p>本工具仅识别展示合同风险隐患，仅作参考；不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。</p>
-          </div>
-        `;
+        report.innerHTML = html;
         report.classList.add('visible');
       }
+    } finally {
+      window.clearInterval(phaseTimer);
+      loading?.classList.remove('visible');
       if (button) {
         button.disabled = false;
         button.style.opacity = '';
-        button.innerHTML = `${icon('shield')}开始风险检测`;
+        button.innerHTML = `${icon('sparkle')}开始 AI 风险检测`;
       }
+      state.scanning = false;
       if (window.innerWidth < 700) {
         $('#scanResultCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 1650);
-    state.scanTimers.push(finish);
+    }
   }
 
   function validateReliefStep(step) {
@@ -925,18 +1532,231 @@
     }
   }
 
+  function collectFiles(inputId) {
+    const input = $(`#${inputId}`);
+    return Array.from(input?.files || []).map((file) => file.name);
+  }
+
+  function nowStamp() {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  }
+
+  function makeCaseId(prefix) {
+    const now = new Date();
+    const date = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+    return `${prefix}${date}${String(Math.floor(Math.random() * 900) + 100)}`;
+  }
+
+  function markInvalid(fields) {
+    let firstInvalid = null;
+    fields.forEach((field) => {
+      if (!field) return;
+      field.classList.remove('invalid');
+      const empty = field.type === 'checkbox' ? !field.checked : !String(field.value || '').trim();
+      if (empty) {
+        field.classList.add('invalid');
+        if (!firstInvalid) firstInvalid = field;
+      }
+    });
+    if (firstInvalid) {
+      showToast('请完善标记为必填的信息', 'error');
+      firstInvalid.focus();
+      return false;
+    }
+    return true;
+  }
+
+  function handleRightsSubmit(form) {
+    const fields = ['merchant', 'type', 'detail', 'phone'].map((name) => form.elements[name]);
+    fields.push(form.elements.truth);
+    if (!markInvalid(fields)) return;
+
+    const data = new FormData(form);
+    const amount = Number(data.get('amount') || 0);
+    const files = collectFiles('rightsFiles');
+    const record = {
+      id: makeCaseId('WQ'),
+      type: String(data.get('type') || '其他权益受损'),
+      amount: amount > 0 ? `¥${formatMoney(amount)}` : '不涉及金额',
+      date: String(data.get('date') || nowStamp().slice(0, 10)),
+      submittedAt: nowStamp(),
+      status: '已受理',
+      merchant: String(data.get('merchant') || ''),
+      phone: String(data.get('phone') || ''),
+      detail: String(data.get('detail') || ''),
+      files: files.length ? files : ['聊天记录截图 · 待补充', '转账凭证 · 待补充'],
+      timeline: [
+        { state: 'done', title: '申请已提交', note: '刚刚 · 平台已收到你的工单' },
+        { state: 'active', title: '材料审核', note: '预计 1 个工作日内完成' },
+        { state: '', title: '平台调解', note: '审核通过后启动' },
+        { state: '', title: '处理完成', note: '等待更新' }
+      ],
+      handler: { name: '李调解员', meta: '平台维权中心 · 工号 0231', avatar: '李' },
+      messages: [
+        { who: '平台调解员', text: '你的维权工单已受理，我们会在 24 小时内核实情况并与你联系，请保持电话畅通。', time: '刚刚' }
+      ]
+    };
+    state.rightsCase = record;
+
+    const summaryId = $('#caseSummaryId');
+    const summaryMeta = $('#caseSummaryMeta');
+    const statusBadge = $('#caseStatusBadge');
+    const timeline = $('#caseTimeline');
+    const progress = $('#caseProgressBar span');
+    const latest = $('#latestCaseNumber');
+    if (latest) latest.textContent = record.id;
+    if (summaryId) summaryId.textContent = record.id;
+    if (summaryMeta) summaryMeta.textContent = `${record.type} · ${record.amount}`;
+    if (statusBadge) {
+      statusBadge.textContent = '已受理';
+      statusBadge.className = 'badge badge-green';
+    }
+    if (timeline) timeline.innerHTML = timelineItemsHTML(record.timeline);
+    if (progress) progress.style.width = '18%';
+
+    form.reset();
+    const fileList = $('#rightsFileList');
+    if (fileList) fileList.innerHTML = '';
+    showToast(`提交成功，工单 ${record.id} 已受理`);
+    $('.progress-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function handlePublishSubmit(form) {
+    const fields = ['title', 'category', 'pay', 'settlement', 'location', 'schedule', 'description'].map((name) => form.elements[name]);
+    fields.push(form.elements.agreement);
+    if (!markInvalid(fields)) return;
+
+    const data = new FormData(form);
+    const tags = String(data.get('tags') || '')
+      .split(/[,，]/)
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+    state.merchantJobs.unshift({
+      id: `pos-${Date.now()}`,
+      title: String(data.get('title') || '新岗位'),
+      meta: `${String(data.get('location') || '')} · ${String(data.get('schedule') || '')}`,
+      pay: String(data.get('pay') || ''),
+      settlement: String(data.get('settlement') || ''),
+      riskCount: 0,
+      status: 'pending',
+      tags,
+      logo: 'M',
+      logoClass: 'logo-mstand'
+    });
+    renderMerchantJobs();
+    switchMerchantTab('manage');
+    form.reset();
+    showToast('提交成功，岗位已进入检测队列');
+  }
+
+  function handleReliefSubmit(form) {
+    for (let step = 1; step <= 3; step += 1) {
+      if (!validateReliefStep(step)) {
+        setReliefStep(step, false);
+        return;
+      }
+    }
+    const agreement = form.elements.reliefAgreement;
+    if (agreement) {
+      agreement.classList.remove('invalid');
+      if (!agreement.checked) {
+        agreement.classList.add('invalid');
+        showToast('请先勾选同意服务说明', 'error');
+        agreement.focus();
+        return;
+      }
+    }
+
+    const data = new FormData(form);
+    const amount = Number(data.get('amount') || 0);
+    const files = collectFiles('reliefFiles');
+    const record = {
+      id: makeCaseId('AJ'),
+      type: String(data.get('fraudType') || '其他类型'),
+      amount: amount > 0 ? `¥${formatMoney(amount)}` : '未填写',
+      status: '审核中',
+      date: String(data.get('date') || nowStamp().slice(0, 10)),
+      name: String(data.get('name') || ''),
+      school: String(data.get('school') || ''),
+      phone: String(data.get('phone') || ''),
+      merchant: String(data.get('merchant') || ''),
+      payment: String(data.get('payment') || ''),
+      police: String(data.get('police') || '未报警'),
+      detail: String(data.get('detail') || ''),
+      files: files.length ? files : ['聊天记录截图 · 待补充', '转账凭证 · 待补充'],
+      timeline: [
+        { state: 'done', title: '申请已提交', note: '刚刚 · 材料已加密保存' },
+        { state: 'active', title: '材料审核', note: '预计 1 个工作日内完成' },
+        { state: '', title: '援助方案沟通', note: '审核通过后由顾问联系' },
+        { state: '', title: '援助执行', note: '双方确认后启动' }
+      ],
+      messages: [
+        { who: '援助顾问', text: '申请已收到，我们会在 1 个工作日内完成材料审核并与你联系，请保持手机畅通。', time: '刚刚' }
+      ]
+    };
+    state.reliefHistory.unshift(record);
+    renderReliefHistory();
+
+    const numberEl = $('#reliefCaseNumber');
+    if (numberEl) numberEl.textContent = record.id;
+    const viewBtn = $('#viewReliefRecord');
+    if (viewBtn) viewBtn.dataset.reliefId = record.id;
+
+    const formEl = $('#reliefForm');
+    const stepper = $('#reliefStepper');
+    if (formEl) formEl.style.display = 'none';
+    if (stepper) stepper.style.display = 'none';
+    $('#reliefSuccess')?.classList.add('visible');
+    showToast('提交成功，援助顾问将在 1 个工作日内联系你');
+    $('#reliefFormCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function resetReliefView() {
+    const success = $('#reliefSuccess');
+    if (!success?.classList.contains('visible')) return;
+    const form = $('#reliefForm');
+    const stepper = $('#reliefStepper');
+    success.classList.remove('visible');
+    if (form) {
+      form.style.display = '';
+      form.reset();
+    }
+    if (stepper) stepper.style.display = '';
+    const fileList = $('#reliefFileList');
+    if (fileList) fileList.innerHTML = '';
+    state.reliefStep = 1;
+    setReliefStep(1, false);
+  }
+
   function wireEvents() {
     document.addEventListener('submit', (event) => {
-      if (event.target.id === 'heroSearchForm') return;
+      const form = event.target;
+      if (!form || form.id === 'heroSearchForm') return;
       event.preventDefault();
-      event.stopPropagation();
-      returnHome();
-    }, true);
+      if (form.id === 'rightsForm') handleRightsSubmit(form);
+      else if (form.id === 'publishJobForm') handlePublishSubmit(form);
+      else if (form.id === 'reliefForm') handleReliefSubmit(form);
+      else returnHome();
+    });
 
     document.addEventListener('click', (event) => {
       const jobCard = event.target.closest('.job-card');
       if (jobCard) {
         openJobModal(jobCard.dataset.jobId);
+        return;
+      }
+
+      const recordTrigger = event.target.closest('[data-open-record]');
+      if (recordTrigger) {
+        openRecord(recordTrigger.dataset.openRecord, recordTrigger.dataset.reliefId);
+        return;
+      }
+
+      const modalTrigger = event.target.closest('[data-modal]');
+      if (modalTrigger) {
+        event.preventDefault();
+        openModal(modalTrigger.dataset.modal);
         return;
       }
 
@@ -997,6 +1817,11 @@
 
       if (event.target.closest('[data-rescan]')) {
         runComplianceScan();
+        return;
+      }
+
+      if (event.target.closest('[data-export-records]')) {
+        exportRecords();
         return;
       }
 
@@ -1119,7 +1944,7 @@
       const count = $('#scanCharCount');
       if (count) count.textContent = String(event.target.value.length);
     });
-    $('#runComplianceScan')?.addEventListener('click', runComplianceScan);
+    $('#runComplianceScan')?.addEventListener('click', () => runComplianceScan());
     $('#clearCompliance')?.addEventListener('click', () => {
       const input = $('#complianceInput');
       if (input) {
@@ -1134,6 +1959,12 @@
 
     attachUploadPreview($('#rightsFiles'), $('#rightsFileList'));
     attachUploadPreview($('#reliefFiles'), $('#reliefFileList'));
+
+    $('#clockButton')?.addEventListener('click', () => {
+      if (clock.running) stopClock();
+      else startClock();
+    });
+    $('#resetClockButton')?.addEventListener('click', resetClock);
 
     $('#reliefNextButton')?.addEventListener('click', () => {
       if (!validateReliefStep(state.reliefStep)) return;
@@ -1152,6 +1983,29 @@
     });
 
     $('#newReliefButton')?.addEventListener('click', () => navigate('dashboard'));
+
+    $('#recordBackButton')?.addEventListener('click', () => {
+      navigate(state.recordReturn || state.recordNav || 'rights');
+    });
+
+    $('#viewReliefRecord')?.addEventListener('click', (event) => {
+      const id = event.currentTarget.dataset.reliefId || state.reliefHistory[0]?.id;
+      if (id) openRecord('relief', id);
+    });
+
+    $('#syncReliefToRights')?.addEventListener('click', () => {
+      const record = state.reliefHistory[0];
+      if (!record) return;
+      window.setTimeout(() => {
+        const form = $('#rightsForm');
+        if (!form) return;
+        form.elements.merchant.value = record.merchant || '';
+        form.elements.amount.value = String(record.amount || '').replace(/[^\d.]/g, '');
+        form.elements.type.value = '收取押金或培训费';
+        form.elements.detail.value = `【由救济申请 ${record.id} 同步】\n${record.detail || ''}`;
+        showToast('已带入救济申请信息，请补充后提交', 'info');
+      }, 180);
+    });
   }
 
   function setJobSearch(keyword) {
@@ -1170,8 +2024,8 @@
     const navBadge = $('#jobsNavBadge');
     if (navBadge) navBadge.textContent = String(jobs.length);
     renderMerchantJobs();
-    renderWallet();
-    updateClockUI();
+    restoreWallet();
+    restoreClock();
     renderReliefHistory();
 
     const initialPage = location.hash.replace('#', '') || 'dashboard';
