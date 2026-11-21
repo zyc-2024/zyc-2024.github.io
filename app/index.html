@@ -67,7 +67,7 @@
       <nav class="nav" aria-label="主导航">
         <p class="nav-label">工作空间</p>
         <a class="nav-item" data-page="dashboard" href="#dashboard"><svg class="icon"><use href="#i-grid"/></svg><span>工作台</span></a>
-        <a class="nav-item" data-page="jobs" href="#jobs"><svg class="icon"><use href="#i-briefcase"/></svg><span>岗位样本</span><span class="nav-badge" id="jobsNavBadge">8</span></a>
+        <a class="nav-item" data-page="jobs" href="#jobs"><svg class="icon"><use href="#i-briefcase"/></svg><span>岗位样本</span><span class="nav-badge" id="jobsNavBadge">11</span></a>
         <a class="nav-item" data-page="merchant" href="#merchant"><svg class="icon"><use href="#i-store"/></svg><span>商家自检</span></a>
         <a class="nav-item" data-page="profile" href="#profile"><svg class="icon"><use href="#i-trend"/></svg><span>个人画像</span></a>
 
@@ -76,6 +76,10 @@
         <a class="nav-item" data-page="compliance" href="#compliance"><svg class="icon"><use href="#i-shield"/></svg><span>合规检测</span><span class="nav-dot" title="新功能"></span></a>
         <a class="nav-item" data-page="rights" href="#rights"><svg class="icon"><use href="#i-scale"/></svg><span>快捷维权</span></a>
         <a class="nav-item" data-page="relief" href="#relief"><svg class="icon"><use href="#i-buoy"/></svg><span>被骗救济</span></a>
+
+        <p class="nav-label nav-label-spaced">平台信息</p>
+        <a class="nav-item" data-page="rules" href="#rules"><svg class="icon"><use href="#i-file"/></svg><span>规则库</span></a>
+        <a class="nav-item" data-page="business" href="#business"><svg class="icon"><use href="#i-handshake"/></svg><span>合作模式</span></a>
       </nav>
 
       <div class="sidebar-bottom">
@@ -102,7 +106,7 @@
           <div class="breadcrumb"><span>青薪盾</span><i>/</i><strong id="topbarTitle">工作台</strong></div>
         </div>
         <div class="topbar-right">
-          <span class="safe-status"><span class="pulse-dot"></span>安全护航中</span>
+          <span class="safe-status"><span class="status-dot"></span>风险自查工具</span>
           <div class="notification-wrap">
             <button class="icon-button notification-button" id="notificationButton" aria-label="查看通知">
               <svg class="icon"><use href="#i-bell"/></svg><span class="notification-dot"></span>
@@ -110,8 +114,8 @@
             <div class="notification-popover" id="notificationPopover">
               <div class="popover-head"><strong>消息通知</strong><button class="text-button" id="markRead">全部已读</button></div>
               <div class="notice-item"><span class="notice-icon green"><svg class="icon"><use href="#i-banknote"/></svg></span><div><strong>薪资记录已确认</strong><p>「校园新媒体运营」周结 ¥450 已由双方确认</p><small>10 分钟前</small></div></div>
-              <div class="notice-item"><span class="notice-icon amber"><svg class="icon"><use href="#i-shield"/></svg></span><div><strong>岗位核验提醒</strong><p>你关注的岗位样本已更新风险检测结果</p><small>2 小时前</small></div></div>
-              <div class="notice-item"><span class="notice-icon blue"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>维权进度更新</strong><p>工单 WQ20261018032 已进入平台调解</p><small>昨天</small></div></div>
+              <div class="notice-item"><span class="notice-icon amber"><svg class="icon"><use href="#i-shield"/></svg></span><div><strong>样本更新提醒</strong><p>你关注的岗位样本已更新风险检测结果</p><small>2 小时前</small></div></div>
+              <div class="notice-item"><span class="notice-icon blue"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>演示工单更新</strong><p>工单 WQ20261018032 已补充材料记录</p><small>昨天</small></div></div>
             </div>
           </div>
           <button class="user-chip" data-page="profile" aria-label="查看个人画像">
@@ -175,7 +179,7 @@
             </a>
             <a href="#rights" class="quick-card quick-sand">
               <span class="quick-icon"><svg class="icon"><use href="#i-scale"/></svg></span>
-              <div><strong>快捷维权</strong><p>欠薪纠纷，24 小时内响应</p></div>
+              <div><strong>快捷维权</strong><p>欠薪纠纷，获取维权步骤与证据清单</p></div>
               <span class="quick-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
             </a>
             <a href="#relief" class="quick-card quick-coral">
@@ -378,7 +382,7 @@
             </div>
             <div class="heading-actions verification-actions">
               <div class="verified-stack">
-                <span class="verified-note"><svg class="icon"><use href="#i-shield"/></svg>已认证商家 · 材料形式核验</span>
+                <span class="verified-note"><svg class="icon"><use href="#i-file"/></svg>已提交认证材料</span>
               </div>
             </div>
           </div>
@@ -397,8 +401,9 @@
                 <button class="chip" data-category="内容创作">内容创作</button>
                 <button class="chip" data-category="教育培训">教育培训</button>
                 <button class="chip" data-category="线上兼职">线上兼职</button>
+                <button class="chip" data-category="中介服务">中介服务</button>
               </div>
-              <span class="filter-result"><strong id="jobResultCount">8</strong> 个样本</span>
+              <span class="filter-result"><strong id="jobResultCount">11</strong> 个样本</span>
             </div>
           </div>
 
@@ -425,10 +430,10 @@
                 <a href="#compliance">检测一份我的岗位信息 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></a>
               </section>
               <section class="side-note side-note-blue">
-                <p class="eyebrow">需要帮助</p>
-                <h3>平台顾问在线帮你</h3>
-                <p>对样本中的条款有疑虑，随时联系我们协助解读。</p>
-                <button class="button button-light button-block" data-toast="平台顾问将在 1 分钟内接入">联系在线顾问</button>
+                <p class="eyebrow">自助资源</p>
+                <h3>先看清风险，再决定是否继续</h3>
+                <p>当前展示版不提供实时人工顾问，可先查看安全规则与合同自查示例。</p>
+                <button class="button button-light button-block" data-modal="safetyModal">查看安全规则</button>
               </section>
             </aside>
           </div>
@@ -627,7 +632,7 @@
               <h1>AI 合同风险检测</h1>
               <p class="page-subtitle">粘贴兼职合同或协议条款，逐条识别收费、结算、免责等风险隐患。</p>
             </div>
-            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-shield"/></svg>青薪盾 · 风险自查工具</span>
+            <span class="merchant-verified-pill" id="aiPageStatus"><svg class="icon"><use href="#i-info"/></svg>AI 检测暂停 · 本地规则可用</span>
           </div>
 
           <div class="scanner-grid">
@@ -636,9 +641,23 @@
               <p class="scanner-desc">将兼职协议、录用通知或聊天中的合同条款完整粘贴进来，系统会逐条展示风险提示，不对整份合同作安全性判断。</p>
               <textarea id="complianceInput" maxlength="1200" placeholder="例如：乙方入职前需一次性缴纳服装费、培训费共 198 元；工资于次月 30 日发放，中途离职不予结算……"></textarea>
               <div class="sample-row"><span>试试示例：</span><button class="sample-chip" data-sample="contract">填入风险合同示例</button><button class="text-button" id="clearCompliance">清空</button></div>
+              <div class="ai-key-panel">
+                <div class="ai-key-head">
+                  <span class="ai-key-state" id="aiKeyState">AI 检测已暂停</span>
+                  <span class="ai-key-current" id="aiKeyCurrent">未配置个人 API Key</span>
+                </div>
+                <p>因 AI 检测服务被滥用，当前默认关闭。你可以使用本地规则自查，或填入自己的 DeepSeek API Key 临时启用 AI 检测。</p>
+                <div class="ai-key-row">
+                  <input id="deepseekApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...（仅保存在当前页面内）" aria-label="DeepSeek API Key">
+                  <button type="button" class="button button-light button-sm" id="toggleAiKey">显示</button>
+                  <button type="button" class="button button-dark button-sm" id="saveAiKey">保存并启用</button>
+                  <button type="button" class="text-button" id="clearAiKey">清除</button>
+                </div>
+                <small>Key 仅保存在当前页面内存，不写入本地存储，也不会展示在检测报告中。请使用自己的密钥并留意额度。</small>
+              </div>
               <div class="scan-actions">
-                <span class="scan-privacy"><svg class="icon icon-sm"><use href="#i-lock"/></svg>文本将发送至 AI 模型检测，仅用于本次分析</span>
-                <button class="button button-dark" id="runComplianceScan"><svg class="icon"><use href="#i-sparkle"/></svg>开始 AI 风险检测</button>
+                <span class="scan-privacy"><svg class="icon icon-sm"><use href="#i-lock"/></svg>未启用 AI 时，文本仅在本页处理</span>
+                <button class="button button-dark" id="runComplianceScan"><svg class="icon"><use href="#i-shield"/></svg>使用本地规则自查</button>
               </div>
             </section>
 
@@ -646,7 +665,7 @@
               <div class="scan-placeholder" id="scanPlaceholder">
                 <div class="radar-visual"><span class="radar-ring ring-1"></span><span class="radar-ring ring-2"></span><span class="radar-ring ring-3"></span><span class="radar-sweep"></span><span class="radar-center"><svg class="icon"><use href="#i-shield"/></svg></span><span class="radar-point p1"></span><span class="radar-point p2"></span><span class="radar-point p3"></span></div>
                 <h3>等待检测</h3>
-                <p>粘贴合同条款后，点击「开始 AI 风险检测」<br>逐条查看风险提示与沟通建议。</p>
+                <p>粘贴合同条款后，点击「开始检测」<br>逐条查看风险提示与沟通建议。</p>
                 <div class="placeholder-tags"><span>收费条款</span><span>薪资结算</span><span>免责条款</span><span>争议解决</span></div>
               </div>
               <div class="scan-loading" id="scanLoading">
@@ -661,7 +680,7 @@
 
           <div class="ai-disclaimer-note">
             <strong>免责提示</strong>
-            <p>本工具使用 AI 大模型（DeepSeek）对粘贴文本进行辅助检测，仅识别并展示合同风险隐患，仅作参考；AI 输出可能存在遗漏或误差，不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。</p>
+            <p>本工具默认使用本地规则对粘贴文本做初步筛查；如您自行启用 AI 检测，文本将发送至您指定的 DeepSeek 服务。检测结果仅展示合同风险隐患，仅作参考，可能存在遗漏或误差；不属于法律鉴定意见，不能替代执业律师法律服务；是否签约由学生本人自行判断。</p>
           </div>
 
           <div class="scan-info-grid">
@@ -691,24 +710,29 @@
               <h1>快捷维权</h1>
               <p class="page-subtitle">欠薪、扣费、虚假岗位，不用一个人扛。平台陪你快速取证、协商解决。</p>
             </div>
-            <span class="response-pill"><span class="pulse-dot"></span>平均 12 分钟响应</span>
+            <span class="response-pill"><span class="status-dot"></span>演示版 · 服务资源规划中</span>
           </div>
 
           <section class="emergency-banner">
             <div class="emergency-icon"><svg class="icon"><use href="#i-phone"/></svg></div>
-            <div class="emergency-copy"><span>紧急维权通道 · 7×24 小时</span><h2>遇到人身安全威胁或大额诈骗，请立即联系我们。</h2><p>保留聊天记录、转账凭证与岗位信息截图，不要删除任何证据。</p></div>
-            <div class="emergency-actions"><a class="button button-accent" href="tel:12333"><svg class="icon"><use href="#i-phone"/></svg>12333 人社热线</a><a class="button button-ghost-light" href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-scale"/></svg>12315 投诉平台</a><button class="button button-ghost-light" data-toast="平台紧急专线：400-820-5533，正在为你转接">平台紧急专线</button></div>
+            <div class="emergency-copy"><span>公共维权指引 · 紧急情况优先报警</span><h2>遇到人身安全威胁或大额诈骗，请优先拨打 110、12315 或 12333。</h2><p>保留聊天记录、转账凭证与岗位信息截图，不要删除任何证据。</p></div>
+            <div class="emergency-actions"><a class="button button-accent" href="tel:12333"><svg class="icon"><use href="#i-phone"/></svg>12333 人社热线</a><a class="button button-ghost-light" href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-scale"/></svg>12315 投诉平台</a><button class="button button-ghost-light" data-toast="平台专属专线仍在规划中，紧急情况请拨打 110、12315 或 12333">平台专线 · 规划中</button></div>
           </section>
 
           <div class="channel-grid">
-            <div class="channel-card"><span class="channel-icon green"><svg class="icon"><use href="#i-message"/></svg></span><div><strong>平台先行调解</strong><p>平台介入沟通，平均 2 个工作日反馈</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
-            <div class="channel-card"><span class="channel-icon blue"><svg class="icon"><use href="#i-scale"/></svg></span><div><strong>法律援助咨询</strong><p>合作律师提供免费初步意见</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
-            <div class="channel-card"><span class="channel-icon amber"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>一键证据固化</strong><p>聊天、考勤、转账记录加密存证</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+            <div class="channel-card"><span class="channel-icon green"><svg class="icon"><use href="#i-message"/></svg></span><div><strong>平台调解机制 <small class="plan-tag">规划中</small></strong><p>拟由规则小组协助整理诉求，当前不提供实时调解服务</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+            <div class="channel-card"><span class="channel-icon blue"><svg class="icon"><use href="#i-scale"/></svg></span><div><strong>公益法律资源 <small class="plan-tag">规划中</small></strong><p>正在对接法律服务机构，当前不提供正式法律意见</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+            <div class="channel-card"><span class="channel-icon amber"><svg class="icon"><use href="#i-file"/></svg></span><div><strong>证据清单指引 <small class="plan-tag">演示</small></strong><p>提供材料准备清单与本地留存提示，正式存证能力规划中</p></div><span class="channel-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></span></div>
+          </div>
+
+          <div class="support-status-note">
+            <svg class="icon"><use href="#i-info"/></svg>
+            <p>当前为展示版本：平台调解、合作法律资源与专属专线均在规划中，工单仅保存在当前页面。紧急情况请直接拨打 110、12315 或 12333。</p>
           </div>
 
           <div class="rights-layout">
             <section class="form-card rights-form-card">
-              <div class="form-card-head"><div><p class="eyebrow">SUBMIT A CASE</p><h2>提交维权申请</h2></div><span class="case-number" id="latestCaseNumber">工单实时受理</span></div>
+              <div class="form-card-head"><div><p class="eyebrow">SUBMIT A CASE</p><h2>提交维权申请</h2></div><span class="case-number" id="latestCaseNumber">演示工单 · 本地记录</span></div>
               <form id="rightsForm" novalidate>
                 <div class="form-row">
                   <label class="field"><span>涉事商家 / 个人 <i>*</i></span><input name="merchant" type="text" placeholder="请填写用工方名称" required></label>
@@ -728,13 +752,13 @@
 
             <aside class="rights-aside">
               <section class="aside-card progress-card">
-                <div class="section-heading mini"><div><p class="eyebrow">CASE TRACKING</p><h3>我的维权进度</h3></div><span class="badge badge-green" id="caseStatusBadge">处理中</span></div>
-                <div class="case-summary"><span id="caseSummaryId">WQ20261018032</span><small id="caseSummaryMeta">虚假岗位信息 · ¥300.00</small><div class="case-progress-bar" id="caseProgressBar"><span style="width:62%"></span></div></div>
+                <div class="section-heading mini"><div><p class="eyebrow">CASE TRACKING</p><h3>示例工单进度</h3></div><span class="badge badge-green" id="caseStatusBadge">展示样例</span></div>
+                <div class="case-summary"><span id="caseSummaryId">WQ20261018032</span><small id="caseSummaryMeta">虚假岗位信息 · ¥300.00</small><div class="case-progress-bar" id="caseProgressBar"><span style="width:40%"></span></div></div>
                 <div class="timeline compact-timeline" id="caseTimeline">
-                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>申请已受理</strong><small>10 月 18 日 14:20</small></div></div>
-                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>证据审核通过</strong><small>10 月 18 日 16:05</small></div></div>
-                  <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>平台正在调解</strong><small>预计 10 月 21 日前反馈</small></div></div>
-                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>处理完成</strong><small>等待更新</small></div></div>
+                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>示例工单已生成</strong><small>10 月 18 日 14:20</small></div></div>
+                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>材料清单已展示</strong><small>10 月 18 日 16:05</small></div></div>
+                  <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>公共维权渠道待使用</strong><small>请拨打 12315 / 12333</small></div></div>
+                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>处理完成</strong><small>以真实渠道处理结果为准</small></div></div>
                 </div>
                 <button type="button" class="text-link" data-open-record="case">查看完整记录 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></button>
               </section>
@@ -759,9 +783,9 @@
             <div>
               <p class="eyebrow">RELIEF ASSISTANCE</p>
               <h1>被骗救济申请</h1>
-              <p class="page-subtitle">如果不慎落入兼职骗局，不要自责。提交材料，平台与公益伙伴一起帮你止损。</p>
+              <p class="page-subtitle">如果不慎落入兼职骗局，不要自责。整理材料、生成证据清单，并获取公共维权资源指引。</p>
             </div>
-            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-handshake"/></svg>青薪盾安心援助计划</span>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-handshake"/></svg>援助资源对接 · 规划中</span>
           </div>
 
           <div class="relief-layout">
@@ -783,7 +807,7 @@
 
               <form id="reliefForm" novalidate>
                 <div class="relief-step-panel active" data-relief-panel="1">
-                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-users"/></svg></span><div><h3>申请人信息</h3><p>信息将严格保密，仅用于援助审核与联系。</p></div></div>
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-users"/></svg></span><div><h3>申请人信息</h3><p>展示版信息仅保留在当前页面，不会上传至服务器，请勿填写真实敏感信息。</p></div></div>
                   <div class="form-row">
                     <label class="field"><span>真实姓名 <i>*</i></span><input name="name" type="text" placeholder="请输入真实姓名" required></label>
                     <label class="field"><span>就读院校 <i>*</i></span><input name="school" type="text" placeholder="例如：山东大学" required></label>
@@ -811,7 +835,7 @@
                 </div>
 
                 <div class="relief-step-panel" data-relief-panel="3">
-                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-upload"/></svg></span><div><h3>证据材料</h3><p>材料越完整，审核速度越快。所有文件均加密存储。</p></div></div>
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-upload"/></svg></span><div><h3>证据材料</h3><p>展示版仅记录文件名，用于演示材料清单，不会真实上传文件。</p></div></div>
                   <label class="upload-zone relief-upload" for="reliefFiles"><input id="reliefFiles" type="file" multiple hidden accept="image/*,.pdf,.doc,.docx"><span class="upload-icon"><svg class="icon"><use href="#i-upload"/></svg></span><strong>上传聊天记录、转账凭证、岗位信息截图等</strong><p>支持 JPG、PNG、PDF、DOC，单个文件不超过 20MB</p><span class="upload-button">选择文件</span></label>
                   <div class="file-list" id="reliefFileList"></div>
                   <div class="evidence-checks">
@@ -824,9 +848,9 @@
                 </div>
 
                 <div class="relief-step-panel" data-relief-panel="4">
-                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-check-circle"/></svg></span><div><h3>确认并提交</h3><p>请核对以下信息，提交后平台将在 1 个工作日内联系你。</p></div></div>
+                  <div class="form-section-title"><span class="form-section-icon"><svg class="icon"><use href="#i-check-circle"/></svg></span><div><h3>确认并提交</h3><p>请核对以下信息。展示版仅在本地生成记录，不会发送至真实平台或援助机构。</p></div></div>
                   <div class="review-card" id="reliefReview"></div>
-                  <div class="relief-policy"><strong>援助说明</strong><p>平台将根据材料完整度与事件性质评估援助方案，包括法律咨询、协商调解、证据整理及有限额应急援助。提交申请不代表承诺发放援助金。</p></div>
+                  <div class="relief-policy"><strong>援助说明</strong><p>当前展示版仅提供材料整理、证据清单与公共维权资源指引，不承诺资金援助或发放援助金。公益法律资源、援助金申请通道等能力均在规划中。</p></div>
                   <label class="consent-line"><input type="checkbox" name="reliefAgreement" required><span>我已阅读并同意《青薪盾救济援助服务说明》，确认所填信息真实有效。</span></label>
                 </div>
 
@@ -840,17 +864,17 @@
               <div class="relief-success" id="reliefSuccess">
                 <div class="success-visual"><span class="success-ring"></span><span class="success-icon"><svg class="icon"><use href="#i-check"/></svg></span></div>
                 <p class="eyebrow">APPLICATION RECEIVED</p>
-                <h2>申请已安全提交</h2>
-                <p>援助顾问将在 <strong>1 个工作日内</strong> 与你联系，请保持手机畅通。</p>
+                <h2>申请已记录</h2>
+                <p>展示版仅在当前页面生成记录，<strong>不会触发真实外部受理</strong>。如需正式维权，请优先联系 110、12315 或 12333。</p>
                 <div class="success-case"><span>申请编号</span><strong id="reliefCaseNumber">AJ202610200000</strong><button class="icon-button" id="copyReliefCase" aria-label="复制申请编号"><svg class="icon"><use href="#i-file"/></svg></button></div>
                 <div class="success-timeline">
-                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>申请已提交</strong><small>刚刚</small></div></div>
-                  <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>材料审核</strong><small>预计 1 个工作日内</small></div></div>
-                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>援助方案沟通</strong><small>审核通过后</small></div></div>
-                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>援助执行</strong><small>双方确认后</small></div></div>
+                  <div class="timeline-item done"><span class="timeline-dot"></span><div><strong>展示记录已生成</strong><small>刚刚 · 仅保存在当前页面</small></div></div>
+                  <div class="timeline-item active"><span class="timeline-dot"></span><div><strong>公共维权渠道</strong><small>请拨打 110、12315 或 12333</small></div></div>
+                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>公益资源对接</strong><small>规划中，当前不提供真实援助</small></div></div>
+                  <div class="timeline-item"><span class="timeline-dot"></span><div><strong>处理完成</strong><small>以真实渠道处理结果为准</small></div></div>
                 </div>
                 <div class="success-actions"><button type="button" class="button button-dark" id="viewReliefRecord">查看申请详情</button><button type="button" class="button button-light" id="syncReliefToRights" data-page="rights">同步提交维权工单</button><button type="button" class="button button-light" id="newReliefButton">返回工作台</button></div>
-                <p class="success-note"><svg class="icon icon-sm"><use href="#i-lock"/></svg>所有材料已加密保存，仅授权援助顾问查看。</p>
+                <p class="success-note"><svg class="icon icon-sm"><use href="#i-info"/></svg>展示版仅记录文件名，不会上传至真实服务器，也不代表已获得外部援助。</p>
               </div>
             </section>
 
@@ -858,20 +882,20 @@
               <section class="aside-card aid-card">
                 <span class="aid-icon"><svg class="icon"><use href="#i-handshake"/></svg></span>
                 <p class="eyebrow">QINGXIN CARE</p>
-                <h3>青薪盾安心援助计划</h3>
-                <p>由平台安全基金与公益法律伙伴共同支持，为受骗学生提供多维援助。</p>
+                <h3>青薪盾援助资源说明</h3>
+                <p>拟对接公益法律资源与援助金申请通道；相关合作仍在筹备中，当前不承诺资金发放。</p>
                 <ul class="check-list">
-                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>免费法律咨询与材料梳理</li>
-                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>平台调解与商家追责协助</li>
-                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>最高 2,000 元应急援助金</li>
-                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>心理支持与反诈陪伴</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>公益法律资源对接（规划中）</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>维权材料梳理与证据清单</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>援助金申请通道（规划中）</li>
+                  <li><span><svg class="icon icon-sm"><use href="#i-check"/></svg></span>反诈与心理支持资源（规划中）</li>
                 </ul>
               </section>
               <section class="aside-card relief-contact-card">
-                <div class="section-heading mini"><div><p class="eyebrow">NEED HELP</p><h3>申请遇到问题</h3></div></div>
-                <p>援助顾问在线时间：每日 09:00 - 21:00</p>
-                <button class="button button-light button-block" data-toast="正在为你接入援助顾问"><svg class="icon"><use href="#i-message"/></svg>联系援助顾问</button>
-                <a class="relief-hotline" href="tel:4008205533"><svg class="icon"><use href="#i-phone"/></svg>400-820-5533</a>
+                <div class="section-heading mini"><div><p class="eyebrow">PUBLIC RESOURCES</p><h3>公共维权资源</h3></div></div>
+                <p>平台援助顾问与专属专线仍在规划中。紧急情况请直接使用公共渠道。</p>
+                <button class="button button-light button-block" data-toast="请拨打 110、12315 或 12333；96110 为反诈专线"><svg class="icon"><use href="#i-info"/></svg>查看公共维权指引</button>
+                <a class="relief-hotline" href="tel:12315"><svg class="icon"><use href="#i-phone"/></svg>12315 · 96110 · 12333</a>
               </section>
               <section class="aside-card relief-history-card">
                 <div class="section-heading mini"><div><p class="eyebrow">HISTORY</p><h3>最近申请</h3></div></div>
@@ -879,6 +903,207 @@
               </section>
             </aside>
           </div>
+        </section>
+
+        <section class="page" id="page-rules" data-title="规则库">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">RULE LIBRARY</p>
+              <h1>规则库与数据来源</h1>
+              <p class="page-subtitle">规则库是青薪盾的核心资产：把兼职合同中的高频风险，沉淀成可解释、可复核的条目。</p>
+            </div>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-file"/></svg>v0.9 展示版 · 2026.10</span>
+          </div>
+
+          <section class="rule-hero">
+            <span class="rule-hero-orb"></span>
+            <div class="rule-hero-copy">
+              <span class="hero-eyebrow"><svg class="icon icon-sm"><use href="#i-shield"/></svg>规则驱动，而不是流量撮合</span>
+              <h2>把真实风险，<br><em>沉淀成可解释的规则。</em></h2>
+              <p>从收费、结算到免责与争议解决，每条规则都包含触发场景、风险解释、法条提示与沟通建议。</p>
+              <div class="rule-hero-actions">
+                <a class="button button-accent" href="#compliance">用规则自查 <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+                <button class="button button-ghost-light" data-modal="safetyModal">查看安全规则</button>
+              </div>
+            </div>
+            <div class="rule-hero-stats">
+              <div><strong>6</strong><span>风险场景</span></div>
+              <div><strong>23</strong><span>可解释规则</span></div>
+              <div><strong>3</strong><span>数据来源</span></div>
+              <div><strong>双周</strong><span>规划更新频率</span></div>
+            </div>
+          </section>
+
+          <div class="rules-content-grid">
+            <section class="chart-card rule-category-card">
+              <div class="chart-card-head">
+                <div><p class="eyebrow">RULE COVERAGE</p><h2>规则覆盖场景</h2><p>当前展示版整理 6 类风险场景，共 23 条规则</p></div>
+                <span class="badge badge-green">6 类 · 23 条</span>
+              </div>
+              <div class="rule-category-list">
+                <div class="rule-category-row">
+                  <span class="rule-category-index">01</span>
+                  <div><strong>收费与押金</strong><p>以服装费、培训费、押金、垫付等名义要求先付款。</p><div class="rule-example-tags"><span>FEE-01 入职前收费</span><span>FEE-03 押金不退</span></div></div>
+                  <span class="rule-count">5 条</span>
+                </div>
+                <div class="rule-category-row">
+                  <span class="rule-category-index">02</span>
+                  <div><strong>薪资与结算</strong><p>薪资口径不清、拖延结算、离职不结算等。</p><div class="rule-example-tags"><span>PAY-02 离职不结算</span><span>PAY-04 结算周期缺失</span></div></div>
+                  <span class="rule-count">5 条</span>
+                </div>
+                <div class="rule-category-row">
+                  <span class="rule-category-index">03</span>
+                  <div><strong>工作内容</strong><p>刷单、跑分、代注册、虚假岗位与岗位货不对板。</p><div class="rule-example-tags"><span>JOB-01 刷单返利</span><span>JOB-03 岗位信息不符</span></div></div>
+                  <span class="rule-count">4 条</span>
+                </div>
+                <div class="rule-category-row">
+                  <span class="rule-category-index">04</span>
+                  <div><strong>责任免除</strong><p>意外伤害免责、单方免责、要求放弃合法权利。</p><div class="rule-example-tags"><span>DUTY-01 意外免责</span><span>DUTY-02 单方免责</span></div></div>
+                  <span class="rule-count">3 条</span>
+                </div>
+                <div class="rule-category-row">
+                  <span class="rule-category-index">05</span>
+                  <div><strong>合同解除</strong><p>单方终止、违约金过高、试用期无薪等。</p><div class="rule-example-tags"><span>END-01 单方终止</span><span>END-02 试用期无薪</span></div></div>
+                  <span class="rule-count">3 条</span>
+                </div>
+                <div class="rule-category-row">
+                  <span class="rule-category-index">06</span>
+                  <div><strong>争议解决</strong><p>最终解释权归甲方、单方管辖、拒绝书面约定等。</p><div class="rule-example-tags"><span>DIS-01 最终解释权</span><span>DIS-02 单方管辖</span></div></div>
+                  <span class="rule-count">3 条</span>
+                </div>
+              </div>
+            </section>
+
+            <aside class="aside-card rule-source-card">
+              <div class="section-heading mini"><div><p class="eyebrow">DATA SOURCES</p><h3>数据从哪里来</h3></div><span class="badge badge-sand">3 类来源</span></div>
+              <div class="rule-source-item">
+                <span>法律法规</span>
+                <strong>法条原文整理</strong>
+                <p>《劳动合同法》《劳动法》《民法典》合同编等公开条文，用于法条提示与边界校对。</p>
+              </div>
+              <div class="rule-source-item">
+                <span>公开案例</span>
+                <strong>真实纠纷归纳</strong>
+                <p>公开维权报道、裁判文书与校园匿名反馈，经脱敏后用于补充风险场景与话术。</p>
+              </div>
+              <div class="rule-source-item">
+                <span>风险样本</span>
+                <strong>模拟合同样本</strong>
+                <p>平台整理的兼职广告与合同片段，仅用于规则演练与页面展示。</p>
+              </div>
+              <p class="rule-source-note">当前展示版未接入外部商业法律数据库，规则由人工整理。正式上线前将补充法律专业人士复核机制。</p>
+            </aside>
+          </div>
+
+          <div class="rules-lower-grid">
+            <section class="chart-card rule-gov-card">
+              <div class="chart-card-head"><div><p class="eyebrow">GOVERNANCE</p><h2>规则如何维护</h2><p>从采集到发布，每一步都可追溯</p></div><span class="badge badge-green">版本可追溯</span></div>
+              <div class="rule-process">
+                <div class="rule-process-item"><span>01</span><div><strong>采集</strong><p>跟踪法规更新、公开案例与校园匿名反馈。</p></div></div>
+                <div class="rule-process-item"><span>02</span><div><strong>标注</strong><p>拆解原文、风险解释、法条提示与沟通话术。</p></div></div>
+                <div class="rule-process-item"><span>03</span><div><strong>复核</strong><p>学生团队交叉检查；法律专业顾问复核机制规划中。</p></div></div>
+                <div class="rule-process-item"><span>04</span><div><strong>发布</strong><p>双周迭代（规划），保留版本号与变更说明。</p></div></div>
+              </div>
+            </section>
+            <aside class="aside-card rule-team-card">
+              <div class="section-heading mini"><div><p class="eyebrow">OWNERSHIP</p><h3>谁在维护</h3></div></div>
+              <div class="rule-team-list">
+                <div><span>核心</span><div><strong>青薪盾产品与规则小组</strong><p>负责规则采集、标签设计、文案与版本记录。</p></div></div>
+                <div><span>复核</span><div><strong>法律专业顾问</strong><p>规划中，负责法条引用与高风险规则复核。</p></div></div>
+                <div><span>共创</span><div><strong>学生反馈与匿名案例</strong><p>用于补充真实场景，不直接收录个人隐私信息。</p></div></div>
+              </div>
+              <p class="rule-team-note">当前由学生团队维护展示版规则库，未声称已获得律所或法律服务机构背书。</p>
+            </aside>
+          </div>
+
+          <div class="ai-disclaimer-note">
+            <strong>使用边界</strong>
+            <p>规则库用于辅助识别合同与岗位信息中的风险表述，不代表对合同效力、岗位真实性或法律责任的最终判断，也不替代律师意见。</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-business" data-title="合作模式">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">SUSTAINABILITY</p>
+              <h1>合作模式</h1>
+              <p class="page-subtitle">学生端不收费，收入来自商家工具、高校采购与持牌机构合作。</p>
+            </div>
+            <span class="merchant-verified-pill"><svg class="icon"><use href="#i-info"/></svg>商业化方案 · 规划中</span>
+          </div>
+
+          <section class="business-hero">
+            <div class="business-hero-copy">
+              <span class="hero-eyebrow"><svg class="icon icon-sm"><use href="#i-handshake"/></svg>学生端长期免费</span>
+              <h2>学生免费，<br><em>价值向 B 端与公共服务延伸。</em></h2>
+              <p>青薪盾不向学生收费、不做交易撮合、不接触资金。我们通过合规工具订阅、高校服务采购和持牌机构合作获得收入，维持规则库与产品迭代。</p>
+              <div class="business-principles">
+                <span><svg class="icon"><use href="#i-check"/></svg>不向学生收费</span>
+                <span><svg class="icon"><use href="#i-check"/></svg>不做资金池</span>
+                <span><svg class="icon"><use href="#i-check"/></svg>不替岗位担保</span>
+              </div>
+            </div>
+            <div class="business-scope-card">
+              <p class="eyebrow">REVENUE SNAPSHOT</p>
+              <div><span>当前收入</span><strong>¥0</strong><small>展示版</small></div>
+              <div><span>目标客户</span><strong>B 端 / 高校</strong><small>不向学生收费</small></div>
+              <div><span>当前阶段</span><strong>规则验证</strong><small>合作洽谈规划中</small></div>
+            </div>
+          </section>
+
+          <div class="business-model-grid">
+            <article class="business-model-card">
+              <div class="business-model-top"><span class="business-no">01</span><span class="business-state">试点规划</span></div>
+              <span class="business-icon"><svg class="icon"><use href="#i-store"/></svg></span>
+              <h3>商家岗位合规自检 SaaS</h3>
+              <p>向有兼职用工需求的商家提供岗位文案自查、合同条款提示与检测记录，承接现有商家自检中心。</p>
+              <div class="business-meta"><span>付费方</span><strong>商家</strong></div>
+              <div class="business-meta"><span>收费方式</span><strong>年度订阅 / 岗位包</strong></div>
+            </article>
+            <article class="business-model-card">
+              <div class="business-model-top"><span class="business-no">02</span><span class="business-state">采购规划</span></div>
+              <span class="business-icon"><svg class="icon"><use href="#i-cap"/></svg></span>
+              <h3>高校 / 团委风控服务</h3>
+              <p>面向高校就业中心、团委与学院提供学生兼职风险自查入口、反诈内容与年度风险报告。</p>
+              <div class="business-meta"><span>付费方</span><strong>高校 / 公共机构</strong></div>
+              <div class="business-meta"><span>收费方式</span><strong>年度服务采购</strong></div>
+            </article>
+            <article class="business-model-card">
+              <div class="business-model-top"><span class="business-no">03</span><span class="business-state">合规评估中</span></div>
+              <span class="business-icon"><svg class="icon"><use href="#i-scale"/></svg></span>
+              <h3>持牌机构合规转介</h3>
+              <p>与持牌保险、法律援助机构合作，在学生明确同意后进行资源转介，具体模式以合规评估为准。</p>
+              <div class="business-meta"><span>付费方</span><strong>持牌合作机构</strong></div>
+              <div class="business-meta"><span>收费方式</span><strong>有效转介服务费</strong></div>
+            </article>
+          </div>
+
+          <div class="business-bottom-grid">
+            <section class="chart-card business-roadmap-card">
+              <div class="chart-card-head"><div><p class="eyebrow">ROADMAP</p><h2>商业化阶段</h2><p>先用规则证明价值，再逐步验证收入</p></div><span class="badge badge-sand">当前：阶段 0</span></div>
+              <div class="business-roadmap">
+                <div class="roadmap-step active"><span>0</span><div><strong>展示版 · 规则验证</strong><p>不产生收入，验证规则准确率与用户理解成本。</p></div><em>现在</em></div>
+                <div class="roadmap-step"><span>1</span><div><strong>商家自检 SaaS 试点</strong><p>以少量商家验证订阅意愿和岗位检测使用频次。</p></div><em>规划</em></div>
+                <div class="roadmap-step"><span>2</span><div><strong>高校 / 团委采购</strong><p>形成可交付的风险自查服务包与年度报告。</p></div><em>规划</em></div>
+                <div class="roadmap-step"><span>3</span><div><strong>持牌机构合作</strong><p>在合规评估后开展法律援助或保险资源转介。</p></div><em>远期</em></div>
+              </div>
+            </section>
+            <aside class="aside-card business-why-card">
+              <div class="section-heading mini"><div><p class="eyebrow">WHY IT WORKS</p><h3>为什么闭环成立</h3></div></div>
+              <ul class="check-list">
+                <li><span>01</span>规则库是复用资产，服务越多，边际成本越低。</li>
+                <li><span>02</span>商家有合规自查与留痕需求，付费方明确。</li>
+                <li><span>03</span>高校有学生权益与反诈教育采购场景。</li>
+                <li><span>04</span>不向学生收费，避免影响自查工具的可信度。</li>
+              </ul>
+              <p class="business-note">以上为规划中的商业模式，当前展示版未产生真实收入或签署合作。</p>
+            </aside>
+          </div>
+
+          <section class="business-contact">
+            <div><p class="eyebrow">COOPERATION</p><h2>合作洽谈 · 规划中</h2><p>如果你代表高校、商家或持牌法律 / 保险机构，欢迎在正式版本上线后通过公开渠道联系。</p></div>
+            <button class="button button-accent" data-toast="合作洽谈通道规划中，当前展示版暂不收集商务联系方式">合作意向登记（规划中）</button>
+          </section>
         </section>
 
         <section class="page" id="page-record" data-title="记录详情">
@@ -899,7 +1124,7 @@
 
       <footer class="site-footer">
         <span>© 2026 青薪盾 · 让每一份青春劳动都被善待</span>
-        <span><a href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer">维权热线 12315</a><i>·</i><a href="#" data-modal="safetyModal">安全规则</a><i>·</i><a href="#" data-modal="aboutModal">关于我们</a></span>
+        <span><a href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer">维权热线 12315</a><i>·</i><a href="#rules">规则库</a><i>·</i><a href="#business">合作模式</a><i>·</i><a href="#" data-modal="aboutModal">关于我们</a></span>
       </footer>
     </div>
   </div>
@@ -909,7 +1134,7 @@
       <span class="gate-icon"><svg class="icon"><use href="#i-alert"/></svg></span>
       <p class="eyebrow">IMPORTANT NOTICE</p>
       <h2 id="complianceGateTitle">重要风险提示</h2>
-      <p>青薪盾使用 AI 大模型对文本做辅助风险检测，仅逐条展示合同隐患，不对岗位、合同整体安全性做判定，不提供正式法律意见，最终决策由用户本人承担。</p>
+      <p>青薪盾的 AI 检测当前默认关闭。本地规则自查与可选 AI 检测均只用于逐条提示合同隐患，不对岗位或合同整体安全性作判定，不提供正式法律意见，最终决策由用户本人承担。</p>
       <button type="button" class="button button-dark button-block" id="acceptComplianceGate">我已知晓</button>
     </div>
   </div>
@@ -953,14 +1178,18 @@
       <div class="info-modal-body">
         <p>青薪盾是一个面向大学生的兼职风险自查与权益保障工具。我们想做的事很简单：让你在接一份兼职之前，能看懂条款、留好证据，遇到问题知道该找谁。</p>
         <div class="about-stats">
-          <div class="about-stat"><strong>暂无</strong><span>已服务同学</span></div>
-          <div class="about-stat"><strong>暂无</strong><span>覆盖高校</span></div>
-          <div class="about-stat"><strong>6 类</strong><span>常见风险场景</span></div>
+          <div class="about-stat"><strong>3,000</strong><span>已服务同学（展示）</span></div>
+          <div class="about-stat"><strong>10</strong><span>覆盖高校（展示）</span></div>
+          <div class="about-stat"><strong>23</strong><span>展示规则条目</span></div>
         </div>
         <div class="rule-list">
-          <div class="rule-item"><span><svg class="icon"><use href="#i-check"/></svg></span><div><strong>我们做什么</strong><p>合同与岗位风险自查、薪资约定存证、维权工单指引、被骗后的材料梳理与公益援助对接。</p></div></div>
+          <div class="rule-item"><span><svg class="icon"><use href="#i-check"/></svg></span><div><strong>我们做什么</strong><p>合同与岗位风险自查、薪资约定存证、维权工单指引、被骗后的材料梳理与公共维权资源指引。</p></div></div>
           <div class="rule-item"><span><svg class="icon"><use href="#i-info"/></svg></span><div><strong>我们不做什么</strong><p>不发布岗位、不撮合交易、不接触资金、不提供正式法律意见，也不对任何岗位作安全担保。</p></div></div>
-          <div class="rule-item"><span><svg class="icon"><use href="#i-phone"/></svg></span><div><strong>如何联系我们</strong><p>平台服务热线：暂无；紧急情况请优先拨打 110、12315 或 12333。</p></div></div>
+          <div class="rule-item"><span><svg class="icon"><use href="#i-phone"/></svg></span><div><strong>服务与联系</strong><p>平台调解、专属专线与合作法律资源均在规划中；紧急情况请优先拨打 110、12315 或 12333。</p></div></div>
+        </div>
+        <div class="info-modal-links">
+          <a href="#rules" data-page="rules">查看规则库 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></a>
+          <a href="#business" data-page="business">了解合作模式 <svg class="icon icon-sm"><use href="#i-arrow-right"/></svg></a>
         </div>
         <p class="about-footnote">当前为展示版本，所有检测结果与记录仅用于功能演示，不构成任何法律意见或用工承诺。</p>
       </div>

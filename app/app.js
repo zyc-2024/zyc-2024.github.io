@@ -27,17 +27,13 @@
     compliance: '合规检测',
     rights: '快捷维权',
     relief: '被骗救济',
+    rules: '规则库',
+    business: '合作模式',
     record: '记录详情'
   };
 
-  /* ------------------------------------------------------------------
-   * AI 检测配置（DeepSeek）
-   * 注意：API Key 直接暴露在前端只适用于本次展示版本；
-   * 正式上线请改为由自己的后端服务转发请求。
-   * ------------------------------------------------------------------ */
   const AI_CONFIG = {
     endpoint: 'https://api.deepseek.com/chat/completions',
-    apiKey: 'sk-2d783da1bf534cc7979e9f4102221a8d',
     model: 'deepseek-chat'
   };
 
@@ -47,6 +43,60 @@
   const clock = { running: false, startAt: 0, finishedMs: 0, timer: null };
 
   const jobs = [
+    {
+      id: 'job-9',
+      title: '线上刷单返利',
+      merchant: '速赚联盟',
+      category: '线上兼职',
+      pay: '300',
+      unit: '元/单',
+      paySort: 300,
+      settlement: '日结',
+      location: '线上 · 群聊',
+      area: '线上',
+      distance: '远程沟通',
+      schedule: '时间不限 · 按单结算',
+      tags: ['高薪日结', '轻松操作', '手机可做'],
+      description: '客服称在指定平台垫付购买商品，完成后返还本金并支付 8%-15% 佣金。前期小额任务会正常返款，后续要求连续做大额任务，否则前期本金无法退回。',
+      requirements: ['需先垫付商品本金', '按客服指令下载指定 App', '不得向同学透露任务细节'],
+      highlight: '高危样本 · 典型刷单返利骗局'
+    },
+    {
+      id: 'job-10',
+      title: '配音培训包接单',
+      merchant: '声创未来学院',
+      category: '教育培训',
+      pay: '0',
+      unit: '元/单',
+      paySort: 0,
+      settlement: '培训后结算',
+      location: '济南 · 历下',
+      area: '历下',
+      distance: '距你 3.1km',
+      schedule: '先培训 4 周 · 承诺包接单',
+      tags: ['零基础', '包就业', '可分期'],
+      description: '机构承诺零基础学习配音，毕业后包接单、月入过万。面试后要求通过合作平台办理 6,980 元培训分期，并称可从后续接单收入中扣除。',
+      requirements: ['先办理培训分期', '完成 4 周课程', '接受机构统一安排接单'],
+      highlight: '高危样本 · 培训贷与虚假就业承诺'
+    },
+    {
+      id: 'job-11',
+      title: '名企内推文员',
+      merchant: '众合人力资源',
+      category: '中介服务',
+      pay: '280',
+      unit: '元/天',
+      paySort: 280,
+      settlement: '日结',
+      location: '济南 · 槐荫',
+      area: '槐荫',
+      distance: '写字楼面试',
+      schedule: '面试后立即上岗',
+      tags: ['名企直签', '高薪文员', '名额有限'],
+      description: '中介称缴纳 399 元内推服务费即可安排名企文员岗位。面试后发现实际为外包客服，工作地点与薪资均与承诺不一致，服务费不予退还。',
+      requirements: ['先缴纳内推服务费', '接受岗位调剂', '不签订书面协议'],
+      highlight: '高危样本 · 中介收费与岗位货不对板'
+    },
     {
       id: 'job-1',
       title: '周末咖啡店店员',
@@ -194,6 +244,21 @@
   ];
 
   const sampleRisks = {
+    'job-9': [
+      { level: 'high', label: '要求垫付本金' },
+      { level: 'high', label: '承诺高额返利' },
+      { level: 'high', label: '诱导下载陌生 App' }
+    ],
+    'job-10': [
+      { level: 'high', label: '诱导办理培训贷' },
+      { level: 'high', label: '承诺包就业接单' },
+      { level: 'high', label: '退费条件模糊' }
+    ],
+    'job-11': [
+      { level: 'high', label: '先收中介服务费' },
+      { level: 'high', label: '岗位信息与实际不符' },
+      { level: 'high', label: '不提供书面协议' }
+    ],
     'job-1': [
       { level: 'high', label: '薪资条款缺失' },
       { level: 'medium', label: '无书面合同' }
@@ -229,6 +294,9 @@
   };
 
   const sampleMeta = {
+    'job-9': { logo: '赚', logoClass: 'logo-coral' },
+    'job-10': { logo: '声', logoClass: 'logo-purple' },
+    'job-11': { logo: '众', logoClass: 'logo-sand' },
     'job-1': { logo: 'M', logoClass: 'logo-mstand' },
     'job-2': { logo: '知', logoClass: 'logo-blue' },
     'job-3': { logo: '澜', logoClass: 'logo-coral' },
@@ -267,7 +335,7 @@
       id: 'AJ202609280126',
       type: '押金 / 保证金诈骗',
       amount: '¥199.00',
-      status: '援助中',
+      status: '展示样例',
       date: '2026-09-28',
       name: '马小满',
       school: '山东大学',
@@ -278,14 +346,14 @@
       detail: '在校园群看到「周末咖啡店兼职」信息，对方要求先交 199 元服装押金，承诺入职当天退还。转账后对方以「排班还没确认」为由拖延，随后不再回复消息，岗位信息也被删除。',
       files: ['聊天记录截图 · 5 张', '微信转账凭证 · 1 张', '岗位信息截图 · 2 张'],
       timeline: [
-        { state: 'done', title: '申请已提交', note: '9 月 28 日 20:16' },
-        { state: 'done', title: '材料审核通过', note: '9 月 29 日 10:02' },
-        { state: 'active', title: '援助方案沟通', note: '顾问已联系，正在补充转账凭证' },
-        { state: '', title: '援助执行', note: '等待双方确认' }
+        { state: 'done', title: '展示样例已生成', note: '9 月 28 日 20:16' },
+        { state: 'active', title: '公共维权渠道待使用', note: '请拨打 110 / 12315 / 12333' },
+        { state: '', title: '公益资源对接', note: '规划中，当前不提供真实援助' },
+        { state: '', title: '处理完成', note: '以真实渠道处理结果为准' }
       ],
       messages: [
-        { who: '援助顾问', text: '你好，材料已经收到。请补充一下转账对方的微信昵称和转账单号，我们会协助你向平台投诉。', time: '9 月 29 日 10:05' },
-        { who: '我', text: '好的，稍后上传。对方微信号是 coffee_hr2026，转账单号尾号 3721。', time: '9 月 29 日 10:21' }
+        { who: '展示提示', text: '这是一条展示用沟通记录。当前版本不提供真实援助顾问服务，遇到诈骗请优先拨打 110 或 96110。', time: '9 月 29 日 10:05' },
+        { who: '我', text: '好的，我会保留原始聊天记录和转账凭证。', time: '9 月 29 日 10:21' }
       ]
     }
   ];
@@ -296,20 +364,20 @@
     amount: '¥300.00',
     date: '2026-10-18',
     submittedAt: '2026-10-18 14:20',
-    status: '处理中',
+    status: '展示样例',
     merchant: '星启文化传媒有限公司',
     phone: '138****6621',
     detail: '10 月 17 日在兼职群看到「校园活动执行」岗位，对方承诺日结 300 元，要求先交 300 元「物料押金」。转账后对方以活动延期为由推脱，次日发现已被拉黑，岗位信息也已删除。',
     files: ['聊天记录截图 · 6 张', '转账凭证 · 1 张', '岗位信息截图 · 2 张'],
     timeline: [
-      { state: 'done', title: '申请已受理', note: '10 月 18 日 14:20' },
-      { state: 'done', title: '证据审核通过', note: '10 月 18 日 16:05' },
-      { state: 'active', title: '平台正在调解', note: '预计 10 月 21 日前反馈' },
-      { state: '', title: '处理完成', note: '等待更新' }
+      { state: 'done', title: '示例工单已生成', note: '10 月 18 日 14:20' },
+      { state: 'done', title: '材料清单已展示', note: '10 月 18 日 16:05' },
+      { state: 'active', title: '公共维权渠道待使用', note: '请拨打 12315 / 12333' },
+      { state: '', title: '处理完成', note: '以真实渠道处理结果为准' }
     ],
-    handler: { name: '李调解员', meta: '平台维权中心 · 工号 0231', avatar: '李' },
+    handler: { name: '平台规则小组', meta: '展示样例 · 非真实调解人员', avatar: '盾' },
     messages: [
-      { who: '平台调解员', text: '你的工单已受理，证据材料完整。我们已经联系用工方核实岗位与押金情况，请保持电话畅通。', time: '10 月 18 日 16:10' },
+      { who: '展示提示', text: '这是一条展示用沟通记录。当前版本不提供真实平台调解，遇到权益受损请优先拨打 12315 或 12333。', time: '10 月 18 日 16:10' },
       { who: '我', text: '好的，如果需要补充聊天记录我随时上传。', time: '10 月 18 日 16:24' }
     ]
   };
@@ -328,7 +396,8 @@
     recordReturn: 'rights',
     recordNav: 'rights',
     scanTimers: [],
-    scanning: false
+    scanning: false,
+    aiApiKey: ''
   };
 
   function showToast(message, kind = 'success') {
@@ -353,10 +422,10 @@
             <span class="merchant-logo ${escapeHTML(job.logoClass || '')}">${escapeHTML(job.logo || job.merchant.slice(0, 1))}</span>
             <div>
               <strong>${escapeHTML(job.merchant)}</strong>
-              <span class="merchant-verified">${icon('check-circle')}已核验</span>
+              <span class="merchant-verified">${icon('file')}已提交材料</span>
             </div>
           </div>
-          <span class="sample-badge">待检岗位示例</span>
+          <span class="sample-badge ${highCount >= 2 ? 'danger' : ''}">${highCount >= 2 ? '高危样本' : '待检岗位示例'}</span>
         </div>
         <div class="job-card-body">
           <div class="job-title-row">
@@ -441,7 +510,7 @@
           <span class="merchant-logo ${escapeHTML(job.logoClass || '')}">${escapeHTML(job.logo)}</span>
           <div class="job-modal-title">
             <div class="merchant-line">
-              <div><strong>${escapeHTML(job.merchant)}</strong><span class="merchant-verified">${icon('check-circle')}资质材料已提交 · 形式核验</span></div>
+              <div><strong>${escapeHTML(job.merchant)}</strong><span class="merchant-verified">${icon('file')}已提交认证材料</span></div>
             </div>
             <h2 id="jobModalTitle">${escapeHTML(job.title)}</h2>
             <div class="job-meta">
@@ -450,7 +519,7 @@
               <span>${icon('alert')}风险项 ${job.risks.length} 个</span>
             </div>
           </div>
-          <span class="sample-badge modal-sample-badge">待检岗位示例</span>
+          <span class="sample-badge modal-sample-badge ${job.risks.filter((risk) => risk.level === 'high').length >= 2 ? 'danger' : ''}">${job.risks.filter((risk) => risk.level === 'high').length >= 2 ? '高危样本' : '待检岗位示例'}</span>
         </div>
         <div class="job-modal-badges">
           <span>${icon('file')}仅展示检测结果</span>
@@ -824,7 +893,7 @@
     if (!container) return;
     if (eyebrow) eyebrow.textContent = 'CASE RECORD';
     if (title) title.textContent = '维权工单详情';
-    if (subtitle) subtitle.textContent = '以下为该工单的完整信息、证据与处理记录，平台调解员会持续更新进度。';
+    if (subtitle) subtitle.textContent = '展示版工单详情：以下信息仅保存在当前页面，不代表真实平台调解受理。';
     if (badge) {
       badge.textContent = record.status;
       badge.className = `badge ${record.status === '处理完成' ? 'badge-green' : 'badge-sand'}`;
@@ -844,7 +913,7 @@
               <p>${escapeHTML(record.detail)}</p>
             </div>
             <div class="record-block">
-              <div class="record-block-head"><h3>证据材料</h3><span>${record.files.length} 份 · 已加密存证</span></div>
+              <div class="record-block-head"><h3>证据材料</h3><span>${record.files.length} 份 · 演示记录</span></div>
               ${recordFilesHTML(record.files)}
             </div>
             <div class="record-block">
@@ -872,15 +941,15 @@
               <div><span>当前状态</span><strong>${escapeHTML(record.status)}</strong></div>
               <div><span>涉事商家</span><strong>${escapeHTML(record.merchant)}</strong></div>
               <div><span>联系电话</span><strong>${escapeHTML(record.phone)}</strong></div>
-              <div><span>响应时限</span><strong>24 小时内</strong></div>
+              <div><span>调解服务</span><strong>规划中</strong></div>
             </div>
           </section>
           <section class="aside-card record-tip-card">
             <div class="section-heading mini"><div><p class="eyebrow">NEXT STEP</p><h3>下一步建议</h3></div></div>
             <ul class="check-list">
-              <li><span>01</span>保持电话畅通，留意平台来电</li>
-              <li><span>02</span>补充证据可直接在工单内上传</li>
-              <li><span>03</span>协商不成可拨打 12315 投诉</li>
+              <li><span>01</span>保留原始聊天记录与转账凭证</li>
+              <li><span>02</span>展示版不会上传文件，请勿填写真实敏感信息</li>
+              <li><span>03</span>紧急情况请拨打 110、12315 或 12333</li>
             </ul>
             <a class="button button-light button-block" href="https://www.12315.cn/" target="_blank" rel="noopener noreferrer">${icon('scale')}前往 12315 投诉</a>
           </section>
@@ -898,7 +967,7 @@
     if (!container) return;
     if (eyebrow) eyebrow.textContent = 'RELIEF RECORD';
     if (title) title.textContent = '救济申请详情';
-    if (subtitle) subtitle.textContent = '以下为该申请的完整信息与援助进度，材料仅授权援助顾问查看。';
+    if (subtitle) subtitle.textContent = '展示版申请详情：以下信息仅保存在当前页面，不代表已获得真实外部援助。';
     if (badge) {
       badge.textContent = record.status;
       badge.className = `badge ${record.status === '援助中' ? 'badge-sand' : 'badge-green'}`;
@@ -929,7 +998,7 @@
               <p>${escapeHTML(record.detail)}</p>
             </div>
             <div class="record-block">
-              <div class="record-block-head"><h3>已提交材料</h3><span>${record.files.length} 份 · 加密存储</span></div>
+              <div class="record-block-head"><h3>已提交材料</h3><span>${record.files.length} 份 · 演示记录</span></div>
               ${recordFilesHTML(record.files)}
             </div>
             <div class="record-block">
@@ -942,27 +1011,27 @@
             </div>
             <div class="record-actions">
               <button type="button" class="button button-light" data-toast="补充材料入口已打开（展示版本）">${icon('upload')}补充材料</button>
-              <button type="button" class="button button-dark" data-toast="已提醒援助顾问尽快跟进">${icon('message')}联系援助顾问</button>
+              <button type="button" class="button button-dark" data-toast="请拨打 110、12315 或 12333 获取公共维权帮助">${icon('phone')}公共维权渠道</button>
             </div>
           </section>
         </div>
         <aside class="record-side">
           <section class="aside-card">
-            <div class="section-heading mini"><div><p class="eyebrow">ADVISOR</p><h3>援助顾问</h3></div></div>
+            <div class="section-heading mini"><div><p class="eyebrow">RESOURCE STATUS</p><h3>援助资源状态</h3></div></div>
             <div class="record-handler">
-              <span class="avatar avatar-lin">周</span>
-              <div><strong>周顾问</strong><small>青薪盾安心援助计划</small></div>
+              <span class="avatar avatar-lin">盾</span>
+              <div><strong>援助资源对接</strong><small>规划中 · 非真实援助顾问</small></div>
             </div>
             <div class="record-info-list">
-              <div><span>在线时间</span><strong>每日 09:00-21:00</strong></div>
-              <div><span>审核时限</span><strong>1 个工作日内</strong></div>
+              <div><span>资源状态</span><strong>规划中</strong></div>
+              <div><span>公共渠道</span><strong>110 / 12315 / 12333</strong></div>
               <div><span>申请状态</span><strong>${escapeHTML(record.status)}</strong></div>
             </div>
           </section>
           <section class="aside-card record-tip-card">
             <div class="section-heading mini"><div><p class="eyebrow">NOTICE</p><h3>材料说明</h3></div></div>
             <p class="record-note">原始聊天记录和转账凭证请勿删除。截图仅作为辅助材料，原始记录更有法律效力。</p>
-            <button type="button" class="button button-light button-block" data-toast="已提醒援助顾问尽快跟进">${icon('message')}联系援助顾问</button>
+            <button type="button" class="button button-light button-block" data-toast="请拨打 110、12315 或 12333 获取公共维权帮助">${icon('phone')}公共维权渠道</button>
           </section>
         </aside>
       </div>
@@ -1119,7 +1188,7 @@
 
   /* ------------------------- AI 合同风险检测 ------------------------- */
 
-  const AI_SYSTEM_PROMPT = `你是「青薪盾」的兼职合同风险识别助手，服务对象是中国在校大学生。你的任务是逐条指出兼职协议、录用通知或招聘聊天记录中的风险条款，帮助同学保护自己。
+  const AI_SYSTEM_PROMPT = `你是「青薪盾」的兼职合同风险识别助手，服务对象是中国在校大学生。你的任务是逐条指出兼职协议、录用通知或兼职沟通记录中的风险条款，帮助同学保护自己。
 
 规则：
 1. 只做风险提示与沟通建议，不判定合同整体有效或无效，不给出“可以签 / 不能签”的结论，不冒充律师。
@@ -1158,7 +1227,7 @@ JSON 结构：
         explanation: String(risk.explanation || '该条款存在一定风险，建议与对方确认。'),
         law: String(risk.law || '暂无明确法条，建议参考《民法典》合同编相关规定。'),
         advice: String(risk.advice || '与对方书面确认后再决定是否签署。'),
-        script: String(risk.script || '这条表述我还需要再确认一下，能否改成更明确的书面约定？')
+        script: String(risk.script || '这条表述我还需要再确认一下，请改成更明确的书面约定。')
       };
     });
 
@@ -1170,7 +1239,7 @@ JSON 结构：
         explanation: '本次文本中未识别到明显的风险表述，但信息可能不完整。',
         law: '暂无明确法条，建议参考《民法典》合同编相关规定。',
         advice: '确认薪资标准、结算周期、工作内容与解除条件是否都已写入书面约定。',
-        script: '方便把薪资标准、结算时间和工作内容补充到书面协议里吗？'
+        script: '请把薪资标准、结算时间和工作内容补充到书面协议里。'
       });
     }
 
@@ -1193,7 +1262,24 @@ JSON 结构：
     };
   }
 
+  function updateAiUi() {
+    const enabled = Boolean(state.aiApiKey);
+    const pageStatus = $('#aiPageStatus');
+    const keyState = $('#aiKeyState');
+    const keyCurrent = $('#aiKeyCurrent');
+    const runButton = $('#runComplianceScan');
+    if (pageStatus) {
+      pageStatus.innerHTML = `${icon(enabled ? 'sparkle' : 'info')}${enabled ? 'AI 检测已临时启用' : 'AI 检测暂停 · 本地规则可用'}`;
+    }
+    if (keyState) keyState.textContent = enabled ? 'AI 检测已临时启用' : 'AI 检测已暂停';
+    if (keyCurrent) keyCurrent.textContent = enabled ? '已配置个人 Key（仅本次页面）' : '未配置个人 API Key';
+    if (runButton) {
+      runButton.innerHTML = `${icon(enabled ? 'sparkle' : 'shield')}${enabled ? '开始 AI 风险检测' : '使用本地规则自查'}`;
+    }
+  }
+
   async function requestAiScan(text) {
+    if (!state.aiApiKey) throw new Error('未配置个人 API Key');
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), 45000);
     try {
@@ -1202,7 +1288,7 @@ JSON 结构：
         signal: controller.signal,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${AI_CONFIG.apiKey}`
+          Authorization: `Bearer ${state.aiApiKey}`
         },
         body: JSON.stringify({
           model: AI_CONFIG.model,
@@ -1240,7 +1326,7 @@ JSON 结构：
     return `
       <div class="report-actions">
         <button class="button button-light" data-rescan>重新检测</button>
-        <button class="button button-dark" data-toast="可带着合同问题咨询平台顾问">咨询平台顾问</button>
+        <button class="button button-dark" data-modal="safetyModal">查看安全规则</button>
       </div>
     `;
   }
@@ -1359,6 +1445,7 @@ JSON 结构：
     const report = $('#scanReport');
     const button = $('#runComplianceScan');
     const text = input?.value.trim() || '';
+    const aiEnabled = Boolean(state.aiApiKey);
 
     if (text.length < 10) {
       showToast('请先粘贴至少 10 个字的合同内容', 'error');
@@ -1376,13 +1463,17 @@ JSON 结构：
     if (button) {
       button.disabled = true;
       button.style.opacity = '0.7';
-      button.innerHTML = `${icon('sparkle')}AI 正在检测...`;
+      button.innerHTML = `${icon(aiEnabled ? 'sparkle' : 'shield')}${aiEnabled ? 'AI 正在检测...' : '正在执行本地规则...'}`;
     }
 
-    const phases = [
+    const phases = aiEnabled ? [
       '正在将文本发送至 AI 检测服务...',
       'AI 正在逐条比对收费、结算与免责条款...',
       '正在整理风险等级与沟通建议...'
+    ] : [
+      '正在读取合同条款...',
+      '正在匹配本地风险规则...',
+      '正在整理风险提示与沟通建议...'
     ];
     let phaseIndex = 0;
     const setPhase = () => {
@@ -1396,13 +1487,17 @@ JSON 结构：
 
     let html;
     try {
-      try {
-        const result = await requestAiScan(text);
-        html = aiReportHTML(result);
-      } catch (error) {
-        console.error('[青薪盾] AI 检测失败：', error);
-        html = localReportHTML(scanText(text), `AI 检测服务暂时不可用（${error?.message || '网络异常'}）。已使用本地规则引擎生成参考结果，稍后可点击「重新检测」再试。`);
-        showToast('AI 服务暂不可用，已切换为本地规则检测', 'error');
+      if (aiEnabled) {
+        try {
+          const result = await requestAiScan(text);
+          html = aiReportHTML(result);
+        } catch (error) {
+          console.error('[青薪盾] AI 检测失败：', error);
+          html = localReportHTML(scanText(text), `AI 检测调用失败（${error?.message || '网络异常'}）。已切换为本地规则结果，请核对后再作判断。`);
+          showToast('AI 服务暂不可用，已切换为本地规则检测', 'error');
+        }
+      } else {
+        html = localReportHTML(scanText(text), 'AI 检测当前默认关闭，本次结果由本地规则引擎生成，仅作初步筛查。');
       }
 
       await wait(Math.max(0, 900 - (Date.now() - startedAt)));
@@ -1418,7 +1513,7 @@ JSON 结构：
       if (button) {
         button.disabled = false;
         button.style.opacity = '';
-        button.innerHTML = `${icon('sparkle')}开始 AI 风险检测`;
+        updateAiUi();
       }
       state.scanning = false;
       if (window.innerWidth < 700) {
@@ -1581,20 +1676,20 @@ JSON 结构：
       amount: amount > 0 ? `¥${formatMoney(amount)}` : '不涉及金额',
       date: String(data.get('date') || nowStamp().slice(0, 10)),
       submittedAt: nowStamp(),
-      status: '已受理',
+      status: '演示已记录',
       merchant: String(data.get('merchant') || ''),
       phone: String(data.get('phone') || ''),
       detail: String(data.get('detail') || ''),
       files: files.length ? files : ['聊天记录截图 · 待补充', '转账凭证 · 待补充'],
       timeline: [
-        { state: 'done', title: '申请已提交', note: '刚刚 · 平台已收到你的工单' },
-        { state: 'active', title: '材料审核', note: '预计 1 个工作日内完成' },
-        { state: '', title: '平台调解', note: '审核通过后启动' },
-        { state: '', title: '处理完成', note: '等待更新' }
+        { state: 'done', title: '演示工单已生成', note: '刚刚 · 仅保存在当前页面' },
+        { state: 'active', title: '公共维权指引', note: '请联系 12315 / 12333 或报警 110' },
+        { state: '', title: '调解资源对接', note: '规划中，当前不提供实时调解' },
+        { state: '', title: '处理完成', note: '以真实渠道处理结果为准' }
       ],
-      handler: { name: '李调解员', meta: '平台维权中心 · 工号 0231', avatar: '李' },
+      handler: { name: '平台规则小组', meta: '展示样例 · 非真实调解人员', avatar: '盾' },
       messages: [
-        { who: '平台调解员', text: '你的维权工单已受理，我们会在 24 小时内核实情况并与你联系，请保持电话畅通。', time: '刚刚' }
+        { who: '展示提示', text: '当前展示版仅在本地生成工单记录，不会发送至真实调解机构。紧急情况请拨打 110、12315 或 12333。', time: '刚刚' }
       ]
     };
     state.rightsCase = record;
@@ -1609,16 +1704,16 @@ JSON 结构：
     if (summaryId) summaryId.textContent = record.id;
     if (summaryMeta) summaryMeta.textContent = `${record.type} · ${record.amount}`;
     if (statusBadge) {
-      statusBadge.textContent = '已受理';
+      statusBadge.textContent = '演示已记录';
       statusBadge.className = 'badge badge-green';
     }
     if (timeline) timeline.innerHTML = timelineItemsHTML(record.timeline);
-    if (progress) progress.style.width = '18%';
+    if (progress) progress.style.width = '20%';
 
     form.reset();
     const fileList = $('#rightsFileList');
     if (fileList) fileList.innerHTML = '';
-    showToast(`提交成功，工单 ${record.id} 已受理`);
+    showToast(`演示工单 ${record.id} 已生成，未发送至外部机构`, 'info');
     $('.progress-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
@@ -1675,7 +1770,7 @@ JSON 结构：
       id: makeCaseId('AJ'),
       type: String(data.get('fraudType') || '其他类型'),
       amount: amount > 0 ? `¥${formatMoney(amount)}` : '未填写',
-      status: '审核中',
+      status: '演示记录',
       date: String(data.get('date') || nowStamp().slice(0, 10)),
       name: String(data.get('name') || ''),
       school: String(data.get('school') || ''),
@@ -1686,13 +1781,13 @@ JSON 结构：
       detail: String(data.get('detail') || ''),
       files: files.length ? files : ['聊天记录截图 · 待补充', '转账凭证 · 待补充'],
       timeline: [
-        { state: 'done', title: '申请已提交', note: '刚刚 · 材料已加密保存' },
-        { state: 'active', title: '材料审核', note: '预计 1 个工作日内完成' },
-        { state: '', title: '援助方案沟通', note: '审核通过后由顾问联系' },
-        { state: '', title: '援助执行', note: '双方确认后启动' }
+        { state: 'done', title: '展示记录已生成', note: '刚刚 · 仅保存在当前页面' },
+        { state: 'active', title: '公共维权指引', note: '请联系 110 / 12315 / 12333' },
+        { state: '', title: '公益资源对接', note: '规划中，当前不提供真实援助' },
+        { state: '', title: '处理完成', note: '以真实渠道处理结果为准' }
       ],
       messages: [
-        { who: '援助顾问', text: '申请已收到，我们会在 1 个工作日内完成材料审核并与你联系，请保持手机畅通。', time: '刚刚' }
+        { who: '展示提示', text: '展示版仅在当前页面生成记录，不会触发真实外部受理。紧急情况请拨打 110、12315 或 12333。', time: '刚刚' }
       ]
     };
     state.reliefHistory.unshift(record);
@@ -1708,7 +1803,7 @@ JSON 结构：
     if (formEl) formEl.style.display = 'none';
     if (stepper) stepper.style.display = 'none';
     $('#reliefSuccess')?.classList.add('visible');
-    showToast('提交成功，援助顾问将在 1 个工作日内联系你');
+    showToast('展示版记录已生成，不会触发真实外部受理', 'info');
     $('#reliefFormCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -1896,6 +1991,41 @@ JSON 结构：
       window.setTimeout(() => $('#complianceInput')?.focus(), 120);
     });
 
+    $('#saveAiKey')?.addEventListener('click', () => {
+      const input = $('#deepseekApiKey');
+      const key = String(input?.value || '').trim();
+      if (key.length < 10) {
+        showToast('请填写有效的 DeepSeek API Key', 'error');
+        input?.focus();
+        return;
+      }
+      state.aiApiKey = key;
+      if (input) input.value = '';
+      updateAiUi();
+      showToast('AI 检测已在当前页面临时启用');
+    });
+
+    $('#toggleAiKey')?.addEventListener('click', (event) => {
+      const input = $('#deepseekApiKey');
+      if (!input) return;
+      const showing = input.type === 'text';
+      input.type = showing ? 'password' : 'text';
+      event.currentTarget.textContent = showing ? '显示' : '隐藏';
+    });
+
+    $('#clearAiKey')?.addEventListener('click', () => {
+      state.aiApiKey = '';
+      const input = $('#deepseekApiKey');
+      if (input) {
+        input.value = '';
+        input.type = 'password';
+      }
+      const toggle = $('#toggleAiKey');
+      if (toggle) toggle.textContent = '显示';
+      updateAiUi();
+      showToast('已清除当前页面的 API Key', 'info');
+    });
+
     $('#heroSearchForm')?.addEventListener('submit', (event) => {
       event.preventDefault();
       setJobSearch($('#heroSearchInput')?.value || '');
@@ -2027,6 +2157,7 @@ JSON 结构：
     restoreWallet();
     restoreClock();
     renderReliefHistory();
+    updateAiUi();
 
     const initialPage = location.hash.replace('#', '') || 'dashboard';
     if (!location.hash) {
